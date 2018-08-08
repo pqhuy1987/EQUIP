@@ -1,0 +1,463 @@
+﻿@model Models.LLTCViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_Temp.cshtml";
+}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="font-size:16.5px">
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên Đội/Công Ty</th>
+                                <th>Giám Đốc</th>
+                                <th>Số Điện Thoại Giám Đốc</th>
+                                <th>Tổng Quân Có Thể Huy Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX">
+                                <td>@Model.SelectedLLTC.Main_Name_LLTC</td>
+                                <td>@Model.SelectedLLTC.Main_Name_Ower</td>
+                                <td>@Model.SelectedLLTC.Main_Number</td>
+                                <td>@Model.SelectedLLTC.Main_Total_Number</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover">
+                        @using (Ajax.BeginForm("DetailsGet", new { id = Model.SelectedLLTC.ID }, new AjaxOptions
+                                    {
+                                        HttpMethod = "Get",
+                                        InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                                    }))
+                        {
+                            <button type="submit" class="btn-sub btn-primary" style="margin-bottom:10px"> <b> +THÊM DỰ ÁN CHO ĐỘI </b></button>
+                        }
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Công Trường</th>
+                                <th>Quân Số Đăng Ký</th>
+                                <th>Công Việc Chi Tiết</th>
+                                <th>Đội Trưởng Tại Công Trường</th>
+                                <th>SĐT Đội Trưởng</th>
+                                <th>Ngày Bắt Đầu</th>
+                                <th>Ngày Kết Thúc</th>
+                                <th>Trạng Thái</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1; int j = 0;}
+                            @foreach (var item in Model.CS_tbLLTCTypeSub)
+                            {
+                                <tr class="odd gradeX">
+                                    <td>@i</td>
+                                    <td>@Html.DropDownListFor(model => Model.CS_tbLLTCTypeSub[j].CS_tbLLTCNameSiteID, new SelectList(Model.Project_Name_All, "Value", "Text", @Model.CS_tbLLTCTypeSub[j].CS_tbLLTCNameSiteID), "--- Không Có Công Trường ---", new { @class = "form-control" })</td>
+                                    <td>@item.CS_tbLLTCNumberRegisterSub</td>
+                                    <td>@Html.DropDownListFor(model => Model.CS_tbLLTCTypeSub[j].CS_tbLLTCNameJobDetailsSub, new SelectList(Model.WorkTypeDetails_All, "Value", "Text", @Model.CS_tbLLTCTypeSub[j].CS_tbLLTCNameJobDetailsSub), "--- Không Có Công Việc ---", new { @class = "form-control" })</td>
+                                    <td>@item.CS_tbLLTCNameSiteManagerSub</td>
+                                    <td>@item.CS_tbLLTCNameSiteManagerMobileSub</td>
+                                    <td>@(item.CS_tbLLTCStartDateSub.HasValue ? @item.CS_tbLLTCStartDateSub.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    <td>@(item.CS_tbLLTCEndDateSub.HasValue ? @item.CS_tbLLTCEndDateSub.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    <td>@item.CS_tbLLTCStatusSub</td>
+                                    <td>
+                                        @using (Ajax.BeginForm("DetailsEditGet", new { id = item.ID, LLTC_ID = item.CS_tbLLTC_ID }, new AjaxOptions
+                                    {
+                                        HttpMethod = "Get",
+                                        InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+
+                                    }))
+                                        {
+                                            <button type="submit" class="btn-sub btn-success"><b>Sửa</b></button>
+                                        }
+                                    </td>
+                                    <td>
+                                        @using (Ajax.BeginForm("DetailsDeleteGet", new { id = item.ID, LLTC_ID = item.CS_tbLLTC_ID }, new AjaxOptions
+                                    {
+                                        HttpMethod = "Get",
+                                        InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                                    }))
+                                        {
+                                            <button type="submit" class="btn-sub btn-block" disabled><b>Xóa</b></button>
+                                        }
+                                    </td>
+
+                                </tr>
+                                        i++;
+                                        j++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer"><b></b></div>
+            </div>
+        </div>
+        @{
+            if (Model.DisplayMode == "Index") //INDEX CREATE
+            {
+                using (Ajax.BeginForm("DetailsPost", new { LLTC_ID = Model.SelectedLLTC.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                }))
+                {
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Công Trường</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, Model.Project_Name_All, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Quân Số Đăng Ký</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Chi Tiết Công Việc</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, Model.WorkTypeDetails_All, "-- Chọn Công Việc --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">SĐT Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Trạng Thái</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, new List<SelectListItem>()
+                                                    {
+                                                         new SelectListItem(){ Text = "-- Chọn Trạng Thái --",   Value = ""},
+                                                         new SelectListItem(){ Text = "Hoạt Động",   Value = "Hoạt Động"},
+                                                         new SelectListItem(){ Text = "Đã Dừng", Value = "Đã Dừng"}
+                                                    }, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Bắt Đầu</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Kết Thúc</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">ID ĐỘI THI CÔNG</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID, new { @class = "form-control", Value = @Model.SelectedLLTC.ID, @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary btn-lg btn-block"><b>THÊM</b></button>
+                    </div>
+                }
+            }
+            else if (Model.DisplayMode == "Edit")
+            {
+                using (Ajax.BeginForm("DetailsEditPost", new { id = Model.CS_tbLLTCTypeSub_Select.ID, LLTC_ID = Model.SelectedLLTC.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                }))
+                {
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Công Trường</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, Model.Project_Name_All, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Quân Số Đăng Ký</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Chi Tiết Công Việc</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, Model.WorkTypeDetails_All, "-- Chọn Công Việc --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">SĐT Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Trạng Thái</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, new List<SelectListItem>()
+                                                    {
+                                                         new SelectListItem(){ Text = "-- Chọn Trạng Thái --",   Value = ""},
+                                                         new SelectListItem(){ Text = "Hoạt Động",   Value = "Hoạt Động"},
+                                                         new SelectListItem(){ Text = "Đã Dừng", Value = "Đã Dừng"}
+                                                    }, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Bắt Đầu</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Kết Thúc</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">ID ĐỘI THI CÔNG</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID, new { @class = "form-control", Value = @Model.SelectedLLTC.ID, @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" style=" margin-left:0px; margin-bottom:10px" class="btn btn-success btn-lg btn-block"><b>LƯU</b></button>
+                    </div>
+                }
+            }
+            else if (Model.DisplayMode == "Delete")
+            {
+                using (Ajax.BeginForm("DetailsDeletePost", new { id = Model.CS_tbLLTCTypeSub_Select.ID, LLTC_ID = Model.SelectedLLTC.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                }))
+                {
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Công Trường</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, Model.Project_Name_All, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Quân Số Đăng Ký</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Chi Tiết Công Việc</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, Model.WorkTypeDetails_All, "-- Chọn Công Việc --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">SĐT Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Trạng Thái</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, new List<SelectListItem>()
+                                                    {
+                                                         new SelectListItem(){ Text = "-- Chọn Trạng Thái --",   Value = ""},
+                                                         new SelectListItem(){ Text = "Hoạt Động",   Value = "Hoạt Động"},
+                                                         new SelectListItem(){ Text = "Đã Dừng", Value = "Đã Dừng"}
+                                                    }, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Bắt Đầu</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Kết Thúc</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">ID ĐỘI THI CÔNG</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID, new { @class = "form-control", Value = @Model.SelectedLLTC.ID, @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" style=" margin-left:0px; margin-bottom:10px" class="btn btn-danger btn-lg btn-block"><b>XÓA</b></button>
+                    </div>
+                }
+            }
+            else if (Model.DisplayMode == "Finish")
+            {
+                using (Ajax.BeginForm("DetailsPost", new { LLTC_ID = Model.SelectedLLTC.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                }))
+                {
+                    <div class="col-lg-12">
+                        <button type="submit" style=" margin-left:0px; margin-bottom:10px" class="btn btn-success btn-lg btn-block"><b>ĐÃ XÓA THÀNH CÔNG</b></button>
+                    </div>
+                }
+            }
+            else //INDEX CREATE
+            {
+                using (Ajax.BeginForm("DetailsPost", new { LLTC_ID = Model.SelectedLLTC.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                }))
+                {
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Công Trường</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, Model.Project_Name_All, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteID, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Quân Số Đăng Ký</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNumberRegisterSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Chi Tiết Công Việc</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, Model.WorkTypeDetails_All, "-- Chọn Công Việc --", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameJobDetailsSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">SĐT Đội Trưởng</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCNameSiteManagerMobileSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Trạng Thái</span>
+                                @Html.DropDownListFor(model => model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, new List<SelectListItem>()
+                                                    {
+                                                         new SelectListItem(){ Text = "-- Chọn Trạng Thái --",   Value = ""},
+                                                         new SelectListItem(){ Text = "Hoạt Động",   Value = "Hoạt Động"},
+                                                         new SelectListItem(){ Text = "Đã Dừng", Value = "Đã Dừng"}
+                                                    }, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStatusSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Bắt Đầu</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCStartDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">Ngày Kết Thúc</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTCEndDateSub, null, new { @class = "text-danger", style = "font-weight:bold" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">ID ĐỘI THI CÔNG</span>
+                                @Html.TextBoxFor(model => Model.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID, new { @class = "form-control", Value = @Model.SelectedLLTC.ID, @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary btn-lg btn-block"><b>THÊM</b></button>
+                    </div>
+                }
+            }
+        }
+    </div>
+

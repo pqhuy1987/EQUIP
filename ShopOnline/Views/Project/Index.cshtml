@@ -1,0 +1,108 @@
+﻿@model Models.ProjectViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function example_ajax_request() {
+        $('#example-placeholder').html('<p><img src="Assets/files/ajax-loader-2.gif" width="220" height="19" /></p>');
+    }
+</script>
+
+<div class="row">
+    <div class="col-lg-3">
+        <!-- /.panel-heading -->
+        <div class="panel-body-2">
+             <button type="submit" onclick=" window.open('/Project/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
+        </div>
+    </div>
+    <div class="col-lg-1">
+        <!-- /.panel-heading -->
+        <div class="panel-body-2">
+            @using (Html.BeginForm("Interop", "Project"))
+            {
+                <button id="interOpButton" type="submit" onclick="example_ajax_request()" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ XUẤT EXCEL REPORT</b></button>
+            }
+            <div id="example-placeholder">
+            </div>           
+        </div>
+    </div>
+    <div class="col-lg-1">
+        <!-- /.panel-heading -->
+        <div class="panel-body-2">
+            <div id="example-placeholder">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-size:16.5px"><b>DANH SÁCH CÔNG TRƯỜNG</b></div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên Công Trường</th>
+                            <th>Loại Công Trường</th>
+                            <th>Giám Đốc Dự Án</th>
+                            <th>Chỉ Huy Trưởng</th>
+                            <th>Địa Chỉ</th>
+                            <th>Giá Trị Tạm Tính</th>
+                            <th>Ngày Bắt Đầu</th>
+                            <th>Ngày Kết Thúc</th>
+                            <th>Trạng Thái Họat Động</th>
+                            <th>Khu Vực Thi Công</th>
+                            <th>Đội Thi Công</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                            <!-- <th>QR Code</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 1;}
+                        @foreach (var item in Model.Project)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.Project_Name</td>
+                                <td>@item.Site_Type</td>
+                                <td>@item.General_Director</td>
+                                <td>@item.Site_Manager</td>
+                                <td>@item.Site_Address</td>
+                                <td>@item.Value_Cost</td>
+                                <td>@(item.Start_Date.HasValue ? @item.Start_Date.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@(item.End_Date.HasValue ? @item.End_Date.Value.ToString("dd/MM/yyyy") : "")</td>
+                                <td>@item.Operation_Status</td>
+                                <td>@item.Site_Area</td>
+                                <td>
+                                    <button type="submit" onclick="window.open('/Project/Details/'+@item.ID , 'windowName_big', 'width=1300, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-info"><b>Thêm / Xem</b></button>
+                                </td>
+                                <td>
+                                    <button type="submit" onclick="window.open('/Project/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
+                                </td>
+                                <td>
+                                    <button type="submit" onclick="window.open('/Project/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
+                                </td>
+                                <!--
+                                <td>
+                                    <img src="@Url.Content("https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=trantrungkiet")" alt="IMAGES" />
+                                </td>
+                                -->
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer"><b></b></div>
+        </div>
+    </div>
+</div>
+
+
+

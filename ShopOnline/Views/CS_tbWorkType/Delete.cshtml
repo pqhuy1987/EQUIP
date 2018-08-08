@@ -1,0 +1,70 @@
+﻿@model Models.CS_tbWorkTypeViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout_Temp.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default-2">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @{
+                            if (Model == null)
+                            {
+                                using (Html.BeginForm("Delete", "CS_tbWorkType", new { id = Model.CS_tbWorkTypeSelect.ID }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <label style="background-color: #d9534f; color: white; border-radius: 5px; padding: 5px; display: block; "> CHỌN LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.CS_tbWorkTypeSelect.CoreWorkType, Model.WorkTypeMain_All, "-- Chọn Công Việc Chính --", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeSelect.CoreWorkType, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                    </div>
+                                    <label style="background-color: #d9534f; color: white; border-radius: 5px; padding: 5px; display: block; "> CÔNG VIỆC CHI TIẾT: </label>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CS_tbWorkTypeSelect.SubWorkType, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeSelect.SubWorkType, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                    </div>
+                                    <p>
+                                        <button type="submit" value="Thêm" class="btn btn-danger"> <b>XÓA</b> </button>
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("Delete", "CS_tbWorkType", new { id = Model.CS_tbWorkTypeSelect.ID }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <label style="background-color: #d9534f; color: white; border-radius: 5px; padding: 5px; display: block; ">  CHỌN LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.CS_tbWorkTypeSelect.CoreWorkType, Model.WorkTypeMain_All, "-- Chọn Công Việc Chính --", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeSelect.CoreWorkType, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                    </div>
+                                    <label style="background-color: #d9534f; color: white; border-radius: 5px; padding: 5px; display: block; "> CÔNG VIỆC CHI TIẾT: </label>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CS_tbWorkTypeSelect.SubWorkType, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeSelect.SubWorkType, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                    </div>
+                                    <p>
+                                        <button type="submit" value="Thêm" class="btn btn-danger"> <b>XÓA</b> </button>
+                                    </p>
+                                }
+                            }
+                        }
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

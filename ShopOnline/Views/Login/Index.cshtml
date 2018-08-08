@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+@model ShopOnline.Areas.Admin.Models.LoginModel
+
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://report.coteccons.vn/Account/Login -->
+<html lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="shortcut icon" href="/Assets/files/logo1.png">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>Đăng nhập hệ thống</title>
+    <link href="/Assets/files/login.css" rel="stylesheet">
+    <link href="/Assets/files/font-awesome.min.css" rel="stylesheet">
+    <script src="/Assets/files/jquery.min.js.download"></script>
+</head>
+<body class="login_page">
+    <div class="login-container">
+        <img src="/Assets/files/img-login.jpg" class="login-img" style="display: inline;">
+        <div style="clear:both"></div>
+        <div class="login-content">
+            <div class="login-logo">
+                <img src="/Assets/files/logo.png" width="100%">
+            </div>
+            <div class="login-form">
+                <p id="div-pthongbao"></p>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, null, new { @class = "alert alert-danger"})
+                    <div class="group">
+                        <div class="error">
+                            <span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+                        </div>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "input", @id = "Username", @name = "Username", @placeholder = "Tên đăng nhập", @type = "text" })
+                    </div>
+                    <div class="group">
+                        <div class="error">
+                            <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "input", @id = "Password", @name = "Password", @placeholder = "Mật khẩu", @type = "password" })
+                    </div>
+                    <div class="group">
+                        <input checked="checked" data-val="true" data-val-required="The Ghi nhớ? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true"><input name="RememberMe" type="hidden" value="false"> Ghi nhớ đăng nhập
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Đăng nhập">
+                    </div>
+                }
+            </div>
+            <div class="login-footer">
+                <p>
+                    © 2018 F.D.C (Coteccons Group)
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.login-img').fadeIn(1000);
+    </script>
+
+</body>
+</html>

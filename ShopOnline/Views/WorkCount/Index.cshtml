@@ -1,0 +1,221 @@
+﻿@model Models.WorkCountViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+
+                            @using (Html.BeginForm("Edit", "WorkCount", new { id = 1 }, FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                <label>TÊN CÔNG TRƯỜNG:</label>
+                                @Html.DropDownListFor(model => model.SelectedProject.Project_Name, Model.ProjectAll, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                 </div>
+                                <label>Từ Ngày:</label>
+                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.StartDate, null, new { @class = "danger" })
+                                <label>Đến Ngày:</label>
+                                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.EndDate, null, new { @class = "danger" })
+
+                                <p>
+                                    <button type="submit" class="btn btn-primary" value="Chọn" style="margin: 10px">Chọn</button>
+                                </p>
+                            }
+
+                            <div style="min-width: 1000px; max-width: 1200px; max-height: 700px; overflow: auto;">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <tbody id="myDIV">
+                                        @{
+                                            if (Model.SelectDate == null)
+                                            {
+                                                 <tr>
+                                                    <th>Tên Đội:</th>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                 <tr>
+                                                    <th>Tên Đội:</th>
+                                                    @for (int i = 0; i < Model.SelectDate.Count(); i++)
+                                                    {
+                                                        <th type="date"> @Model.SelectDate[i]</th>
+                                                    }
+                                                    
+                                                </tr>
+                                            }
+
+                                            <tr class="odd gradeX">
+                                                @if (Model.WorkCount == null)
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    for (int j = 0; j < Model.Number_Team_2; j++ )
+                                                    {
+                                                            <tr>
+                                                                 @{
+                                                                        if (Model.Catelory_Project[j].Status == "Hoạt Động")
+                                                                        {
+                                                                            <th> @Model.Catelory_Project[j].Unit_Name (@Model.Catelory_Project[j].Status - @Model.Catelory_Project[j].Job)</th>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <th style="color:red"> @Model.Catelory_Project[j].Unit_Name (@Model.Catelory_Project[j].Status - @Model.Catelory_Project[j].Job)</th>
+                                                                        }
+                                                                 }
+                                                                @{
+                                                                if (@Model.WorkCount_List_2 == null)
+                                                                {
+                                                                    ;
+                                                                }
+                                                                else
+                                                                {
+                                                                        foreach (var item_1 in @Model.WorkCount_List_2[j])
+                                                                        {
+                                                                            <th>
+                                                                                @item_1.Unit_Number/@Model.Catelory_Project[j].Person_Number Người
+                                                                            </th>
+                                                                        }
+                                                                }
+
+                                                                }
+                                                            </tr>
+                                                    }
+                                                    
+                                                 <tr>
+                                                 <th>Tổng Quân Số: Công Trường </th>
+                                                 @{
+                                                    if (Model.SelectDate == null)
+                                                    {
+                                                        ;
+                                                    }
+                                                    else
+                                                    {
+                                                        for (int i = 0; i < Model.SelectDate.Count(); i++)
+                                                        {
+                                                            <th type="date"> @Model.Total_number[i] Người</th>
+                                                        }   
+                                                    }
+                                                 }
+      
+                                                </tr>
+                                                    int temp_i = 0;
+                                                    int temp_j = 1;
+                                                    if (Model.List_Job == null)
+                                                    {
+                                                        ;
+                                                    } else
+                                                    {
+                                                        foreach (var item_1 in @Model.List_Job)
+                                                        {
+                                                            <tr>
+                                                                <th>Tổng Quân Số: @item_1 </th>
+                                                                @for (int i = 0; i < Model.SelectDate.Count(); i++)
+                                                                {
+                                                                    <th>@Model.Total_Job_number_2[temp_i]</th>
+                                                                    temp_i = (temp_i + 5);
+                                                                    if (temp_i < 0) { temp_i = 0; }
+                                                                }
+                                                            </tr>
+                                                            temp_i = temp_j;
+                                                            temp_j = temp_j + 1;
+                                                        } 
+                                                    }  
+                                        }
+
+                                    </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>TÊN CÔNG TRƯỜNG:</label>
+                                <th>@Model.Project[0].Project_Name</th>
+                            </div>
+                            <label>Ngày Tháng:</label>
+                            @using (Html.BeginForm("Create", "WorkCount", new { id = 1 }, FormMethod.Post))
+                            {
+                            @Html.TextBoxFor(model => model.SelectedWorkCount.CreateDate, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(model => model.DisplayMode, null, new { @class = "danger" })
+                            <div style="min-width: 1000px; max-height: 500px; overflow: auto;">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <tbody id="myDIV">
+                                        @{
+                                            <tr>
+                                                @foreach (var item in @Model.Catelory_Project)
+                                                {
+                                                    if (item.Status == "Hoạt Động")
+                                                    {
+                                                        <th type="date">@item.Unit_Name (@item.Status-@item.Job), Tổng: @item.Person_Number người</th>
+                                                    }
+                                                    else
+                                                    {
+                            
+                                                       <th type="date" style="color:red">@item.Unit_Name (@item.Status-@item.Job), Tổng: @item.Person_Number người</th>
+                                                    }
+
+                                                }
+                                            </tr>
+                                                     <tr class="odd gradeX">
+                                                
+                                                         @for (int i = 0; i < Model.Number_Team_2; i++)
+                                                         {
+                                                             <div class="form-group">
+                                                                <th type="number"> @Html.TextBoxFor(model => Model.Count_Number[i], new { @class = "form-control" })</th>
+                                                             </div>
+                                                         }
+                                                     </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                               </div>
+                                <p>
+                                    <button type="submit" class="btn btn-primary" value="Thêm" style="margin: 10px">THÊM</button>
+                                </p>
+                                }
+                           </div> 
+                    </div>
+
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

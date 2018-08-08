@@ -1,0 +1,296 @@
+﻿@model Models.ProjectViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+/*    var HideShow = 1;
+    $(document).ready(function () {
+            $("#hide").click(function () {
+                if (HideShow == 1) {
+                    Console.log("test1");
+                    $("#myDIV").hide();
+                    HideShow = 2;
+                } else if (HideShow == 2) {
+                    Console.log("test2");
+                    $("#myDIV").show();  
+                    HideShow = 1;
+                }
+            });
+    });
+*/
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @using (Html.BeginForm("Index", "Project", FormMethod.Post))
+                        {
+                            <button type="submit" style="margin-left:0px;margin-bottom:10px" class="btn btn-primary">THÊM MỚI DỰ ÁN</button>
+                        }
+                        @{
+                            if (Model.DisplayMode == "Edit")
+                            {
+                                if (Model.SelectedProject.ID == 123456789)
+                                {
+                                    using (Html.BeginForm("Create", "Project", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+
+                                        <label> NHẬP MỚI TÊN DỰ ÁN: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                        </div>
+                                        <p>
+                                            <input type="submit" value="Thêm" />
+                                        </p>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("Save", "Project", new { id = Model.SelectedProject.ID }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+
+                                        <label> NHẬP TÊN DỰ ÁN MUỐN CHỈNH SỬA: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                        </div>
+                                        <p>
+                                            <input type="submit" value="Lưu" />
+                                        </p>
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("Create", "Project", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+
+                                    <label> NHẬP MỚI TÊN DỰ ÁN: </label>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                    </div>
+                                    <p>
+                                        <input type="submit" value="Thêm" />
+                                    </p>
+                                }
+                            }
+                        }
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên Dự Án</th>
+                            <th>Chọn</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Project)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@item.ID</td>
+                                <td>@item.Project_Name</td>
+                                <td>
+
+                                    <form action="@Url.Action("Edit", "Project", new { id = @item.ID, number = 123 })" method="post">
+                                        <input type="submit" value="Select" />
+                                    </form>
+                                </td>
+                                <td>
+
+                                    <form action="@Url.Action("Edit", "Project", new { id = @item.ID })" method="post">
+                                        <input type="submit" value="Select" />
+                                    </form>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                 </table>
+
+                @{
+                    if (Model.Catelory == null)
+                    {
+
+                    }
+                    else
+                    {
+                        <h3>Danh sách đội</h3>
+                    }
+                }
+                
+                <div style="max-width: max; max-height: 500px; overflow: auto;">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <tbody id="myDIV">
+                                    @{
+                                        if (Model.Catelory == null)
+                                        {
+                                           
+                                        }
+                                        else
+                                        {
+                                             <th>Tổng Số Đội Thi Công/NTP:<b>@Model.SelectedProject.Number_Project</b></th>
+                                             <th>Tổng Số Quân:<b>@Model.SelectedProject.Number_Person</b></th>
+                                            <tr>
+                                                <th>Tên ĐTC/NTP</th>
+                                                <th>Người Đại Diện/Đội Trưởng/Giám Đốc</th>
+                                                <th>Điện Thoại</th>
+                                                <th>Email</th>
+                                                <th>Quân Số</th>
+                                                <th>Công Việc</th>
+                                                <th>Ngày Tạo</th>
+                                                <th>Tình Trạng</th>
+                                                <th>Khu Vực</th>
+                                                <th>Đánh Giá</th>
+                                                <th>Các Công Trình Đội Đang Thi Công</th>
+                                                <th>Chọn</th>
+                                                <th>Xóa</th>
+                                            </tr>
+                                            foreach (var item in Model.Catelory)
+                                            {
+                                                <tr class="odd gradeX">
+                                                    <td>@item.Unit_Name</td>
+                                                    <td>@item.Owner_Name</td>
+                                                    <td>@item.Phone_Number</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.Person_Number</td>
+                                                    <td>@item.Job</td>
+                                                    <td>@item.Create_Date</td>
+                                                    <td>@item.Status</td>
+                                                    <td>@item.Area</td>
+                                                    <td>@item.Rate</td>
+                                                    <td>
+                                                        <form action="@Url.Action("Edit", "Project",  new { id = Model.SelectedProject.ID, number = @item.Phone_Number })" method="post">
+                                                            <input type="submit" value="Hiện Danh Sách" />
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="@Url.Action("Edit", "Catelory",  new { id = @item.ID })" method="post">
+                                                            <input type="submit" value="Chọn" />
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="@Url.Action("Delete", "Catelory", new { id = @item.ID })" method="post">
+                                                            <input type="submit" value="Xóa" />
+                                                        </form>
+                                                    </td>
+                                                </tr>     
+                                            }                                            
+                                        }
+                                      
+                                    }
+                                </tbody>
+                            </table>
+                 </div>
+                
+                @{
+                    if (Model.Catelory_Project == null)
+                    {
+                        
+                    }
+                    else
+                    {
+                        <h3>Danh sách công trình của đội <b>@Model.Catelory_Project[0].Unit_Name :</b></h3>
+                    }
+                }
+                <div style="max-width: max; max-height: 500px; overflow: auto;">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <tbody id="myDIV">
+                            @{
+                                if (Model.Catelory_Project == null)
+                                {
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <th>Tên Dự Án</th>
+                                        <th>Tên ĐTC/NTP</th>
+                                        <th>Người Đại Diện/Đội Trưởng/Giám Đốc</th>
+                                        <th>Điện Thoại</th>
+                                        <th>Email</th>
+                                        <th>Quân Số</th>
+                                        <th>Công Việc</th>
+                                        <th>Ngày Tạo</th>
+                                        <th>Tình Trạng</th>
+                                        <th>Khu Vực</th>
+                                        <th>Đánh Giá</th>
+                                        <th>Chọn</th>
+                                        <th>Xóa</th>
+                                    </tr>
+                                    foreach (var item in Model.Catelory_Project)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@item.Prj_Name</td>
+                                            <td>@item.Unit_Name</td>
+                                            <td>@item.Owner_Name</td>
+                                            <td>@item.Phone_Number</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Person_Number</td>
+                                            <td>@item.Job</td>
+                                            <td>@item.Create_Date</td>
+                                            <td>@item.Status</td>
+                                            <td>@item.Area</td>
+                                            <td>@item.Rate</td>
+                                            <td>
+                                                <form action="@Url.Action("Edit", "Catelory",  new { id = @item.ID })" method="post">
+                                                    <input type="submit" value="Select" />
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="@Url.Action("Delete", "Catelory", new { id = @item.ID })" method="post">
+                                                    <input type="submit" value="Delete" />
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                        <!-- /.table-responsive -->
+                    </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+

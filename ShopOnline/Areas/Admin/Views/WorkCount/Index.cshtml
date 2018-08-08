@@ -1,0 +1,157 @@
+﻿@model Models.WorkCountViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+
+                            @using (Html.BeginForm("Edit", "WorkCount", new { id = 1 }, FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                <label>TÊN CÔNG TRƯỜNG:</label>
+                                @Html.DropDownListFor(model => model.SelectedProject.Project_Name, Model.ProjectAll, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                 </div>
+                                <label>Từ Ngày:</label>
+                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.StartDate, null, new { @class = "danger" })
+                                <label>Đến Ngày:</label>
+                                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessageFor(model => model.EndDate, null, new { @class = "danger" })
+
+                                <p>
+                                    <button type="submit" class="btn btn-primary" value="Chọn" style="margin: 10px">Chọn</button>
+                                </p>
+                            }
+
+                            <div style="min-width: 1000px; max-height: 500px; overflow: auto;">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <tbody id="myDIV">
+                                        @{
+                                            if (Model.SelectDate == null)
+                                            {
+                                                 <tr>
+                                                    <th>Tên Đội:</th>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                 <tr>
+                                                    <th>Tên Đội:</th>
+                                                    @for (int i = 0; i < Model.SelectDate.Count(); i++)
+                                                    {
+                                                        <th type="date"> @Model.SelectDate[i]</th>
+                                                    }
+                                                </tr>
+                                            }
+
+                                            <tr class="odd gradeX">
+                                                @if (Model.WorkCount == null)
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    int i = 0;
+                                                    for (int j = 0; j < Model.Number_Team_2; j++ )
+                                                    {
+                                                            <tr>
+                                                                <th> @Model.Catelory_Project[j].Unit_Name</th>
+                                                                @{
+                                                                    
+                                                                    for (int K = 0; K < (Model.WorkCount.Count() / Model.Number_Team_2); K++)
+                                                                    {
+                                                                        <th> @Model.WorkCount[i].Unit_Number</th>
+                                                                        i = i + (Model.WorkCount.Count() / Model.Number_Team_2);
+                                                                    }
+                                                                }
+
+                                                            </tr>
+                                                        i = j + 1;
+                                                    }
+                                                }
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>TÊN CÔNG TRƯỜNG:</label>
+                                <th>@Model.Project[0].Project_Name</th>
+                            </div>
+                            <label>Ngày Tháng:</label>
+                            @using (Html.BeginForm("Create", "WorkCount", new { id = 1 }, FormMethod.Post))
+                            {
+                            @Html.TextBoxFor(model => model.SelectedWorkCount.CreateDate, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(model => model.DisplayMode, null, new { @class = "danger" })
+                            <div style="min-width: 1000px; max-height: 500px; overflow: auto;">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <tbody id="myDIV">
+                                        @{
+                                            <tr>
+                                                @foreach (var item in @Model.Catelory_Project)
+                                                {
+                                                    <th type="date">Đội_Thi_Công: @item.Unit_Name</th>
+                                                }
+                                            </tr>
+                                                     <tr class="odd gradeX">
+                                                
+                                                         @for (int i = 0; i < Model.Number_Team_2; i++)
+                                                         {
+                                                             <div class="form-group">
+                                                                <th type="number"> @Html.TextBoxFor(model => Model.Count_Number[i], new { @class = "form-control" })</th>
+                                                             </div>
+                                                         }
+                                                     </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                               </div>
+                                <p>
+                                    <button type="submit" class="btn btn-primary" value="Thêm" style="margin: 10px">THÊM</button>
+                                </p>
+                                }
+                           </div> 
+                    </div>
+
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

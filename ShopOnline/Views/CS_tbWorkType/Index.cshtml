@@ -1,0 +1,74 @@
+﻿@model Models.CS_tbWorkTypeViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <!-- /.panel-heading -->
+        <div class="panel-body-2">
+            <button type="submit" onclick=" window.open('/CS_tbWorkType/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="font-size:16.5px"><b>HẠNG MỤC CÔNG VIỆC</b></div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="col-lg-6" style="padding-left:0px">
+                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> LỌC THEO DANH SÁCH CÔNG VIỆC CHÍNH: </label>
+                        <div class="form-group">
+                        @using (Ajax.BeginForm("Details", new AjaxOptions
+                        {
+                            HttpMethod = "Get",
+                            InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+                        }))
+                        {
+                            @Html.DropDownListFor(model => model.CS_tbWorkTypeSelect.CoreWorkType, Model.WorkTypeMain_All, "-- Chọn Công Việc Chính --", new { @class = "form-control", @onchange = "$(this.form).submit();" })
+                        }
+                        </div>
+                    </div>
+                        <div id="dvCategoryResults">
+                            <table width="100%" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Công Việc Chính</th>
+                                        <th>Công Việc Chi Tiết</th>
+                                        <th>Chọn</th>
+                                        <th>Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{int i = 1; int j = 0;}
+                                    @foreach (var item in Model.CS_tbWorkType)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@i</td>
+                                            <td>@Html.DropDownListFor(model => Model.CS_tbWorkType[j].CoreWorkType, new SelectList(Model.WorkTypeMain_All, "Value", "Text", @Model.CS_tbWorkType[j].CoreWorkType), new { @class = "form-control", @disabled = "disabled" })</td>
+                                            <td>@item.SubWorkType</td>
+                                            <td>
+                                                <button type="submit" onclick="window.open('/CS_tbWorkType/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
+                                            </td>
+                                            <td>
+                                                <button type="submit" onclick="window.open('/CS_tbWorkType/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
+                                            </td>
+                                        </tr>
+                                        i++;
+                                        j++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <div class="panel-footer"><b></b></div>
+            </div>
+        </div>
+</div>
+
+
