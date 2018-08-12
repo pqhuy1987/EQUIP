@@ -140,7 +140,7 @@
     <Compile Include="Controllers\CS_tbConstructionSiteTypeController.cs" />
     <Compile Include="Controllers\CS_tbWorkCountController.cs" />
     <Compile Include="Controllers\CS_tbWorkTypeController.cs" />
-    <Compile Include="Controllers\CS_tbWorkTypeMainController.cs" />
+    <Compile Include="Controllers\CS_tbViTriController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LLTCController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -495,6 +495,8 @@
     <Content Include="Assets\admin\bootstrap-select\sass\bootstrap-select.scss" />
     <Content Include="Assets\admin\bootstrap-select\sass\variables.scss" />
     <Content Include="Reports\Danh_sách_LLTC_theo_công_trường_ba_miền.xlsx" />
+    <Content Include="Reports\DANH_SACH_QR_CODE.xlsx" />
+    <None Include="Properties\PublishProfiles\Equip.pubxml" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
@@ -519,11 +521,11 @@
     <Content Include="Views\LLTC\Delete.cshtml" />
     <Content Include="Views\LLTC\Details.cshtml" />
     <Content Include="Views\LLTC\Finish.cshtml" />
-    <Content Include="Views\CS_tbWorkTypeMain\Index.cshtml" />
-    <Content Include="Views\CS_tbWorkTypeMain\Create.cshtml" />
-    <Content Include="Views\CS_tbWorkTypeMain\Edit.cshtml" />
-    <Content Include="Views\CS_tbWorkTypeMain\Delete.cshtml" />
-    <Content Include="Views\CS_tbWorkTypeMain\Finish.cshtml" />
+    <Content Include="Views\CS_tbViTri\Index.cshtml" />
+    <Content Include="Views\CS_tbViTri\Create.cshtml" />
+    <Content Include="Views\CS_tbViTri\Edit.cshtml" />
+    <Content Include="Views\CS_tbViTri\Delete.cshtml" />
+    <Content Include="Views\CS_tbViTri\Finish.cshtml" />
     <Content Include="Views\CS_tbWorkCount\Index.cshtml" />
     <Content Include="Views\CS_tbWorkCount\Create.cshtml" />
     <Content Include="Views\CS_tbWorkCount\Edit.cshtml" />
@@ -653,6 +655,29 @@
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
     <Content Include="Views\Project\Finish.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

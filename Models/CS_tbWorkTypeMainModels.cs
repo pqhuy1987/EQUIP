@@ -7,9 +7,9 @@ using Models.Framework;
 
 namespace Models
 {
-    public class CS_tbWorkTypeMainViewModel
+    public class CS_tbViTriViewModel
     {
-        public List<CS_tbWorkTypeMain>  CS_tbWorkTypeMain       { get; set; }
-        public CS_tbWorkTypeMain        CS_tbWorkTypeMainSelect { get; set; }
+        public List<CS_tbViTri>  CS_tbViTri       { get; set; }
+        public CS_tbViTri        CS_tbViTriSelect { get; set; }
     }
 }

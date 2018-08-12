@@ -1,4 +1,4 @@
-﻿@model Models.CS_tbWorkTypeMainViewModel
+﻿@model Models.CS_tbViTriViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -13,15 +13,15 @@
                         @{
                             if (Model == null)
                             {
-                                using (Html.BeginForm("Create", "CS_tbWorkTypeMain", FormMethod.Post))
+                                using (Html.BeginForm("Create", "CS_tbViTri", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true)
 
-                                    <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> NHẬP MỚI LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> NHẬP MỚI VỊ TRÍ: </label>
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        @Html.TextBoxFor(model => Model.CS_tbViTriSelect.CS_ViTri, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbViTriSelect.CS_ViTri, null, new { @class = "text-danger", style = "font-weight:bold" })
                                     </div>
                                     <p>
                                         <button type="submit" value="Thêm" class="btn btn-primary"> <b>THÊM</b> </button>
@@ -30,15 +30,15 @@
                             }
                             else
                             {
-                                using (Html.BeginForm("Create", "CS_tbWorkTypeMain", FormMethod.Post))
+                                using (Html.BeginForm("Create", "CS_tbViTri", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true)
 
-                                    <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">  NHẬP MỚI LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">  NHẬP MỚI VỊ TRÍ: </label>
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        @Html.TextBoxFor(model => Model.CS_tbViTriSelect.CS_ViTri, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbViTriSelect.CS_ViTri, null, new { @class = "text-danger", style = "font-weight:bold" })
                                     </div>
                                     <p>
                                         <button type="submit" value="Thêm" class="btn btn-primary"> <b>THÊM</b> </button>

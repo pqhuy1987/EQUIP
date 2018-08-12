@@ -28,15 +28,15 @@ namespace ShopOnline.Controllers
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for MainProjectName-------------------//
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.WorkTypeMain_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
-                foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                foreach (var CS_WorkType_Main in model.CS_tbViTri)
                 {
                     items.Add(new SelectListItem()
                     {
                         Value = CS_WorkType_Main.ID.ToString(),
-                        Text = CS_WorkType_Main.CS_WorkTypeMain,
+                        Text = CS_WorkType_Main.CS_ViTri,
                     });
                 }
                 model.WorkTypeMain_All = items;
@@ -551,15 +551,15 @@ namespace ShopOnline.Controllers
                 //--------Add Dropdown for MainProjectName-------------------//
 
                 //--------Add Dropdown for CoreJob--------------------------//
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.WorkTypeMain_All = new List<SelectListItem>();
                 var items_2 = new List<SelectListItem>();
-                foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                foreach (var CS_WorkType_Main in model.CS_tbViTri)
                 {
                     items_2.Add(new SelectListItem()
                     {
                         Value = CS_WorkType_Main.ID.ToString(),
-                        Text = CS_WorkType_Main.CS_WorkTypeMain,
+                        Text = CS_WorkType_Main.CS_ViTri,
                     });
                 }
                 model.WorkTypeMain_All = items_2;
@@ -611,15 +611,15 @@ namespace ShopOnline.Controllers
                     model.Project_Name_All = items;
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;
@@ -651,15 +651,15 @@ namespace ShopOnline.Controllers
                     model.Project_Name_All = items;
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;
@@ -699,15 +699,15 @@ namespace ShopOnline.Controllers
                 model.Project_Name_All = items;
 
                 //--------Add Dropdown for CoreJob--------------------------//
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.WorkTypeMain_All = new List<SelectListItem>();
                 var items_2 = new List<SelectListItem>();
-                foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                foreach (var CS_WorkType_Main in model.CS_tbViTri)
                 {
                     items_2.Add(new SelectListItem()
                     {
                         Value = CS_WorkType_Main.ID.ToString(),
-                        Text = CS_WorkType_Main.CS_WorkTypeMain,
+                        Text = CS_WorkType_Main.CS_ViTri,
                     });
                 }
                 model.WorkTypeMain_All = items_2;
@@ -761,15 +761,15 @@ namespace ShopOnline.Controllers
                     model.Project_Name_All = items;
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;
@@ -803,15 +803,15 @@ namespace ShopOnline.Controllers
                     model.Project_Name_All = items;
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;
@@ -851,15 +851,15 @@ namespace ShopOnline.Controllers
                 model.Project_Name_All = items;
 
                 //--------Add Dropdown for CoreJob--------------------------//
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.WorkTypeMain_All = new List<SelectListItem>();
                 var items_2 = new List<SelectListItem>();
-                foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                foreach (var CS_WorkType_Main in model.CS_tbViTri)
                 {
                     items_2.Add(new SelectListItem()
                     {
                         Value = CS_WorkType_Main.ID.ToString(),
-                        Text = CS_WorkType_Main.CS_WorkTypeMain,
+                        Text = CS_WorkType_Main.CS_ViTri,
                     });
                 }
                 model.WorkTypeMain_All = items_2;
@@ -887,15 +887,15 @@ namespace ShopOnline.Controllers
                     db.SaveChanges();
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;
@@ -929,15 +929,15 @@ namespace ShopOnline.Controllers
                     model.Project_Name_All = items;
 
                     //--------Add Dropdown for CoreJob--------------------------//
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.WorkTypeMain_All = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
-                    foreach (var CS_WorkType_Main in model.CS_tbWorkTypeMain)
+                    foreach (var CS_WorkType_Main in model.CS_tbViTri)
                     {
                         items_2.Add(new SelectListItem()
                         {
                             Value = CS_WorkType_Main.ID.ToString(),
-                            Text = CS_WorkType_Main.CS_WorkTypeMain,
+                            Text = CS_WorkType_Main.CS_ViTri,
                         });
                     }
                     model.WorkTypeMain_All = items_2;

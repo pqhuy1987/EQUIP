@@ -8,7 +8,7 @@ using Models.Framework;
 
 namespace ShopOnline.Controllers
 {
-    public class CS_tbWorkTypeMainController : Controller
+    public class CS_tbViTriController : Controller
     {
         //
         // GET: /CS_tbConstructionSiteType/
@@ -17,8 +17,8 @@ namespace ShopOnline.Controllers
         {
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
-                CS_tbWorkTypeMainViewModel model = new CS_tbWorkTypeMainViewModel();
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                CS_tbViTriViewModel model = new CS_tbViTriViewModel();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 return View(model);
             }
         }
@@ -43,15 +43,15 @@ namespace ShopOnline.Controllers
         // POST: /CS_tbConstructionSiteType/Create
 
         [HttpPost]
-        public ActionResult Create(CS_tbWorkTypeMainViewModel collection)
+        public ActionResult Create(CS_tbViTriViewModel collection)
         {
             try
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    CS_tbWorkTypeMain obj = new CS_tbWorkTypeMain();
-                    obj.CS_WorkTypeMain = collection.CS_tbWorkTypeMainSelect.CS_WorkTypeMain;
-                    db.CS_tbWorkTypeMain.Add(obj);
+                    CS_tbViTri obj = new CS_tbViTri();
+                    obj.CS_ViTri = collection.CS_tbViTriSelect.CS_ViTri;
+                    db.CS_tbViTri.Add(obj);
                     db.SaveChanges();
 
                     return RedirectToAction("Create");
@@ -70,9 +70,9 @@ namespace ShopOnline.Controllers
         {
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
-                CS_tbWorkTypeMainViewModel model = new CS_tbWorkTypeMainViewModel();
+                CS_tbViTriViewModel model = new CS_tbViTriViewModel();
 
-                model.CS_tbWorkTypeMainSelect = db.CS_tbWorkTypeMain.Find(id);
+                model.CS_tbViTriSelect = db.CS_tbViTri.Find(id);
 
                 return View("Edit", model);
             }
@@ -82,19 +82,19 @@ namespace ShopOnline.Controllers
         // POST: /CS_tbConstructionSiteType/Edit/5
 
         [HttpPost]
-        public ActionResult Save(int id, CS_tbWorkTypeMainViewModel collection)
+        public ActionResult Save(int id, CS_tbViTriViewModel collection)
         {
             try
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    CS_tbWorkTypeMainViewModel model = new CS_tbWorkTypeMainViewModel();
+                    CS_tbViTriViewModel model = new CS_tbViTriViewModel();
 
-                    model.CS_tbWorkTypeMainSelect = db.CS_tbWorkTypeMain.Find(id);
+                    model.CS_tbViTriSelect = db.CS_tbViTri.Find(id);
 
-                    CS_tbWorkTypeMain Exsiting_Main_Job = db.CS_tbWorkTypeMain.Find(id);
+                    CS_tbViTri Exsiting_Main_Job = db.CS_tbViTri.Find(id);
 
-                    Exsiting_Main_Job.CS_WorkTypeMain = collection.CS_tbWorkTypeMainSelect.CS_WorkTypeMain;
+                    Exsiting_Main_Job.CS_ViTri = collection.CS_tbViTriSelect.CS_ViTri;
                     db.SaveChanges();
 
                     return View("Edit", model);
@@ -113,9 +113,9 @@ namespace ShopOnline.Controllers
         {
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
-                CS_tbWorkTypeMainViewModel model = new CS_tbWorkTypeMainViewModel();
+                CS_tbViTriViewModel model = new CS_tbViTriViewModel();
 
-                model.CS_tbWorkTypeMainSelect = db.CS_tbWorkTypeMain.Find(id);
+                model.CS_tbViTriSelect = db.CS_tbViTri.Find(id);
 
                 return View("Delete", model);
             }
@@ -131,10 +131,10 @@ namespace ShopOnline.Controllers
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    CS_tbWorkTypeMainViewModel model = new CS_tbWorkTypeMainViewModel();
+                    CS_tbViTriViewModel model = new CS_tbViTriViewModel();
 
-                    CS_tbWorkTypeMain Exsiting_Main_Job = db.CS_tbWorkTypeMain.Find(id);
-                    db.CS_tbWorkTypeMain.Remove(Exsiting_Main_Job);
+                    CS_tbViTri Exsiting_Main_Job = db.CS_tbViTri.Find(id);
+                    db.CS_tbViTri.Remove(Exsiting_Main_Job);
                     db.SaveChanges();
 
                     return View("Finish", model);

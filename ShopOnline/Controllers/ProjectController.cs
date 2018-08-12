@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using Models;
 using Models.Framework;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
+using Microsoft.Office.Core;
 
 namespace ShopOnline.Controllers
 {
@@ -58,7 +60,7 @@ namespace ShopOnline.Controllers
                 model.LLTC              = db.LLTCs.OrderBy(m => m.ID).ToList();
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID}).ToList();
                 model.CS_tbWorkType     = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.Project           = db.Projects.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for LLTCName-------------------//
@@ -92,12 +94,12 @@ namespace ShopOnline.Controllers
                 //--------Add Dropdown for Core Job-------------------//
                 model.WorkTypeCore_All = new List<SelectListItem>();
                 var items_3 = new List<SelectListItem>();
-                foreach (var CS_CoreJob in model.CS_tbWorkTypeMain)
+                foreach (var CS_CoreJob in model.CS_tbViTri)
                 {
                     items_3.Add(new SelectListItem()
                     {
                         Value = CS_CoreJob.ID.ToString(),
-                        Text = CS_CoreJob.CS_WorkTypeMain,
+                        Text = CS_CoreJob.CS_ViTri,
                     });
                 }
                 model.WorkTypeCore_All = items_3;
@@ -136,7 +138,7 @@ namespace ShopOnline.Controllers
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                 model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
-                model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.Project = db.Projects.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for LLTCName-------------------//
@@ -170,12 +172,12 @@ namespace ShopOnline.Controllers
                 //--------Add Dropdown for Core Job-------------------//
                 model.WorkTypeCore_All = new List<SelectListItem>();
                 var items_3 = new List<SelectListItem>();
-                foreach (var CS_CoreJob in model.CS_tbWorkTypeMain)
+                foreach (var CS_CoreJob in model.CS_tbViTri)
                 {
                     items_3.Add(new SelectListItem()
                     {
                         Value = CS_CoreJob.ID.ToString(),
-                        Text = CS_CoreJob.CS_WorkTypeMain,
+                        Text = CS_CoreJob.CS_ViTri,
                     });
                 }
                 model.WorkTypeCore_All = items_3;
@@ -373,7 +375,7 @@ namespace ShopOnline.Controllers
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.Project = db.Projects.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
@@ -407,12 +409,12 @@ namespace ShopOnline.Controllers
                     //--------Add Dropdown for Core Job-------------------//
                     model.WorkTypeCore_All = new List<SelectListItem>();
                     var items_3 = new List<SelectListItem>();
-                    foreach (var CS_CoreJob in model.CS_tbWorkTypeMain)
+                    foreach (var CS_CoreJob in model.CS_tbViTri)
                     {
                         items_3.Add(new SelectListItem()
                         {
                             Value = CS_CoreJob.ID.ToString(),
-                            Text = CS_CoreJob.CS_WorkTypeMain,
+                            Text = CS_CoreJob.CS_ViTri,
                         });
                     }
                     model.WorkTypeCore_All = items_3;
@@ -512,7 +514,7 @@ namespace ShopOnline.Controllers
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
-                    model.CS_tbWorkTypeMain = db.CS_tbWorkTypeMain.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                     model.Project = db.Projects.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
@@ -546,12 +548,12 @@ namespace ShopOnline.Controllers
                     //--------Add Dropdown for Core Job-------------------//
                     model.WorkTypeCore_All = new List<SelectListItem>();
                     var items_3 = new List<SelectListItem>();
-                    foreach (var CS_CoreJob in model.CS_tbWorkTypeMain)
+                    foreach (var CS_CoreJob in model.CS_tbViTri)
                     {
                         items_3.Add(new SelectListItem()
                         {
                             Value = CS_CoreJob.ID.ToString(),
-                            Text = CS_CoreJob.CS_WorkTypeMain,
+                            Text = CS_CoreJob.CS_ViTri,
                         });
                     }
                     model.WorkTypeCore_All = items_3;
@@ -939,59 +941,133 @@ namespace ShopOnline.Controllers
             //Microsoft.Office.Interop.Excel.Workbook workbook;
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
 
-            DataTable employeeTable = Load_LLTC_Excel_Report();
-
-            //Create a DataSet with the existing DataTables
-            DataSet dataSet = new DataSet("Organization");
-            dataSet.Tables.Add(employeeTable);
-
-            //List Area
-            DataTable myResult = dataSet.Tables[0].DefaultView.ToTable(true, "Project_Name");
-
-            //Creating Object of Microsoft.Office.Interop.Excel and creating a Workbook
             var excelApp = new Excel.Application();
 
             //specify the file name where its actually exist  
-            string filepath = Server.MapPath(@"~/Reports/Danh_sách_LLTC_theo_công_trường_ba_miền.xlsx");
+            string filepath = Server.MapPath(@"~/Reports/DANH_SACH_QR_CODE.xlsx");
             string filepathSave = Server.MapPath(@"~/Reports/");
+            string filepathImageLogo = Server.MapPath(@"~/Assets/files/logo.png");
 
             List<int> Section_RowNum = new List<int>();
 
-            int current_rownum = 4;
+            int current_rownum_right = 5;
+            int current_rownum_left = 5;
+            int Card_number = 15;
             Excel.Workbook WB = excelApp.Workbooks.Open(filepath);
             oSheet = (Microsoft.Office.Interop.Excel._Worksheet)WB.ActiveSheet;
 
-            //A - MIỀN BẮC
-
-            oSheet.Range["A" + current_rownum, "G" + current_rownum].Interior.Color = System.Drawing.Color.FromArgb(255, 165, 0);
-            oSheet.Range["A" + current_rownum, "G" + current_rownum].Font.Bold = true;
-            oSheet.Cells[current_rownum, 1] = " ";
-            oSheet.Cells[current_rownum, 2] = "MIỀN BẮC";
-            Section_RowNum.Add(current_rownum);
-            current_rownum++;
-
             Excel.Worksheet workSheet = (Excel.Worksheet)excelApp.Worksheets[1]; //creating excel worksheet
-            workSheet.Name = "LLTC_Export"; //name of excel file
+            workSheet.Name = "QR_Code_Export"; //name of excel file
 
-            //LINQ to get Column of dataset table
-            var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>()
-                                 .Select(x => x.ColumnName)
-                                 .ToArray();
-            int i = 0;
-            //Adding column name to worksheet
-            foreach (var col in columnName)
+            for (int i = 0; i < Card_number; i++)
             {
-                i++;
-                workSheet.Cells[5, i] = col;
-            }
-
-            //Adding records to worksheet
-            int j;
-            for (i = 5; i < dataSet.Tables[0].Rows.Count; i++)
-            {
-                for (j = 0; j < dataSet.Tables[0].Columns.Count; j++)
+                if (i % 2 == 0)
                 {
-                    workSheet.Cells[i + 2, j + 1] = Convert.ToString(dataSet.Tables[0].Rows[i][j]);
+                    //------------------------------QR_CARD_RIGHT------------------------------//
+                    current_rownum_right++;
+
+                    workSheet.get_Range("B" + current_rownum_right, "B" + (current_rownum_right + 2)).Merge();
+                    workSheet.get_Range("B" + current_rownum_right, "B" + (current_rownum_right + 2)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 2];
+                    float Left_logo = (float)((double)oRange_logo.Left);
+                    float Top_logo = (float)((double)oRange_logo.Top);
+                    const float ImageSize_logo_W = 90;
+                    const float ImageSize_logo_H = 32;
+                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo+3, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+
+                    workSheet.get_Range("C" + current_rownum_right, "D" + (current_rownum_right + 2)).Merge();
+                    workSheet.get_Range("C" + current_rownum_right, "D" + (current_rownum_right + 2)).BorderAround2();
+                    oSheet.Cells[current_rownum_right, 3] = "TEM THIẾT BỊ VĂN PHÒNG";
+                    oSheet.Cells[current_rownum_right, 3].Font.Bold = true;
+
+                    current_rownum_right = current_rownum_right + 3;
+                    workSheet.get_Range("D" + current_rownum_right, "D" + (current_rownum_right + 3)).Merge();
+                    workSheet.get_Range("D" + current_rownum_right, "D" + (current_rownum_right + 3)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 4];
+                    float Left = (float)((double)oRange.Left);
+                    float Top = (float)((double)oRange.Top);
+                    const float ImageSize = 48;
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=PHAMQUANGHUY", MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+
+                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 3)))
+                    {
+                        cell.BorderAround2();
+                    }
+
+                    oSheet.Cells[current_rownum_right, 2] = "Tên Thiết bị:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "Bàn làm việc 0.6x1.2";
+                    current_rownum_right++;
+
+                    oSheet.Cells[current_rownum_right, 2] = "Ngày cấp:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "08-08-2018";
+                    current_rownum_right++;
+
+                    oSheet.Cells[current_rownum_right, 2] = "Phòng/Ban:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "Phòng Tổng Hợp";
+                    current_rownum_right++;
+
+                    oSheet.Cells[current_rownum_right, 2] = "Mã Thiết bị:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "BAN_0.6x1.2_001";
+                    current_rownum_right++;
+                    //------------------------------QR_CARD_RIGHT------------------------------//
+                }
+                else
+                {
+                    //------------------------------QR_CARD_LEFT------------------------------//
+                    current_rownum_left++;
+
+                    workSheet.get_Range("G" + current_rownum_left, "G" + (current_rownum_left + 2)).Merge();
+                    workSheet.get_Range("G" + current_rownum_left, "G" + (current_rownum_left + 2)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 7];
+                    float Left_logo = (float)((double)oRange_logo.Left);
+                    float Top_logo = (float)((double)oRange_logo.Top);
+                    const float ImageSize_logo_W = 90;
+                    const float ImageSize_logo_H = 32;
+                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 3, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+
+                    workSheet.get_Range("H" + current_rownum_left, "I" + (current_rownum_left + 2)).Merge();
+                    workSheet.get_Range("H" + current_rownum_left, "I" + (current_rownum_left + 2)).BorderAround2();
+                    oSheet.Cells[current_rownum_left, 8] = "TEM THIẾT BỊ VĂN PHÒNG";
+                    oSheet.Cells[current_rownum_left, 8].Font.Bold = true;
+
+                    current_rownum_left = current_rownum_left + 3;
+                    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 3)).Merge();
+                    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 3)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 9];
+                    float Left = (float)((double)oRange.Left);
+                    float Top = (float)((double)oRange.Top);
+                    const float ImageSize = 48;
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=PHAMQUANGHUY", MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+
+                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("G" + current_rownum_left, "H" + (current_rownum_left + 3)))
+                    {
+                        cell.BorderAround2();
+                    }
+
+                    oSheet.Cells[current_rownum_left, 7] = "Tên Thiết bị:";
+                    oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
+                    oSheet.Cells[current_rownum_left, 8] = "Bàn làm việc 0.6x1.2";
+                    current_rownum_left++;
+
+                    oSheet.Cells[current_rownum_left, 7] = "Ngày cấp:";
+                    oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
+                    oSheet.Cells[current_rownum_left, 8] = "08-08-2018";
+                    current_rownum_left++;
+
+                    oSheet.Cells[current_rownum_left, 7] = "Phòng/Ban:";
+                    oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
+                    oSheet.Cells[current_rownum_left, 8] = "Phòng Tổng Hợp";
+                    current_rownum_left++;
+
+                    oSheet.Cells[current_rownum_left, 7] = "Mã Thiết bị:";
+                    oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
+                    oSheet.Cells[current_rownum_left, 8] = "BAN_0.6x1.2_001";
+                    current_rownum_left++;
+                    //------------------------------QR_CARD_LEFT------------------------------//
                 }
             }
 
@@ -1003,7 +1079,7 @@ namespace ShopOnline.Controllers
 
             try
             {
-                string XlsPath = Server.MapPath(@"~/Reports/LLTC_Export.xlsx");
+                string XlsPath = Server.MapPath(@"~/Reports/QR_Code_Export.xlsx");
                 FileInfo fileDet = new System.IO.FileInfo(XlsPath);
                 Response.Clear();
                 Response.Charset = "UTF-8";

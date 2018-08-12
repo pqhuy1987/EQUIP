@@ -20,7 +20,7 @@ namespace Models.Framework
         public virtual DbSet<WorkCount> WorkCounts { get; set; }
         public virtual DbSet<CS_tbConstructionSiteType> CS_tbConstructionSiteType { get; set; }
         public virtual DbSet<CS_tbWorkType> CS_tbWorkType { get; set; }
-        public virtual DbSet<CS_tbWorkTypeMain> CS_tbWorkTypeMain { get; set; }
+        public virtual DbSet<CS_tbViTri> CS_tbViTri { get; set; }
         public virtual DbSet<CS_tbLLTCTypeSub> CS_tbLLTCTypeSub { get; set; }
         public virtual DbSet<CS_tbWorkCount> CS_tbWorkCount { get; set; }
         public virtual DbSet<CS_tbWorkCount_Sub> CS_tbWorkCount_Sub { get; set; }

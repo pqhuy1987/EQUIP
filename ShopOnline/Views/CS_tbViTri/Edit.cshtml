@@ -1,4 +1,4 @@
-﻿@model Models.CS_tbWorkTypeMainViewModel
+﻿@model Models.CS_tbViTriViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -14,15 +14,15 @@
                         @{
                             if (Model == null)
                             {
-                                using (Html.BeginForm("Save", "CS_tbWorkTypeMain", new { id = Model.CS_tbWorkTypeMainSelect.ID }, FormMethod.Post))
+                                using (Html.BeginForm("Save", "CS_tbViTri", new { id = Model.CS_tbViTriSelect.ID }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true)
 
-                                    <label style="background-color: #5cb85c; color: white; border-radius: 5px; padding: 5px; display: block;"> SỬA LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <label style="background-color: #5cb85c; color: white; border-radius: 5px; padding: 5px; display: block;"> SỬA VỊ TRÍ: </label>
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        @Html.TextBoxFor(model => Model.CS_tbViTriSelect.CS_ViTri, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbViTriSelect.CS_ViTri, null, new { @class = "text-danger", style = "font-weight:bold" })
                                     </div>
                                     <p>
                                         <button type="submit" value="Thêm" class="btn btn-success"> <b>LƯU</b> </button>
@@ -31,15 +31,15 @@
                             }
                             else
                             {
-                                using (Html.BeginForm("Save", "CS_tbWorkTypeMain", new { id = Model.CS_tbWorkTypeMainSelect.ID }, FormMethod.Post))
+                                using (Html.BeginForm("Save", "CS_tbViTri", new { id = Model.CS_tbViTriSelect.ID }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true)
 
-                                    <label style="background-color: #5cb85c; color: white; border-radius: 5px; padding: 5px; display: block;"> SỬA LOẠI CÔNG VIỆC CHÍNH: </label>
+                                    <label style="background-color: #5cb85c; color: white; border-radius: 5px; padding: 5px; display: block;"> SỬA VỊ TRÍ: </label>
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => Model.CS_tbWorkTypeMainSelect.CS_WorkTypeMain, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        @Html.TextBoxFor(model => Model.CS_tbViTriSelect.CS_ViTri, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.CS_tbViTriSelect.CS_ViTri, null, new { @class = "text-danger", style = "font-weight:bold" })
                                     </div>
                                     <p>
                                         <button type="submit" value="Thêm" class="btn btn-success"> <b>LƯU</b> </button>

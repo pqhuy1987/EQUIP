@@ -19,7 +19,7 @@ namespace Models
         public List<LLTC>                       LLTC                        { get; set; }
         public LLTC                             LLTC_Select                 { get; set; }
         public List<CS_tbWorkType>              CS_tbWorkType               { get; set; }
-        public List<CS_tbWorkTypeMain>          CS_tbWorkTypeMain           { get; set; }
+        public List<CS_tbViTri>          CS_tbViTri           { get; set; }
 
         public string DisplayMode                                           { get; set; }
         public int DisplayModeSub                                           { get; set; }

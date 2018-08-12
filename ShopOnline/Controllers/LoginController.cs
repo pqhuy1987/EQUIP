@@ -17,6 +17,7 @@ namespace ShopOnline.Controllers
 {
     public class LoginController : Controller
     {
+        HttpCookie cookie = new HttpCookie("login");
         public static string result;
         //
         // GET: /Admin/Login/
@@ -46,7 +47,9 @@ namespace ShopOnline.Controllers
                         using (var userPrinc = UserPrincipal.FindByIdentity(context, IdentityType.SamAccountName, model.UserName))
                         {
                             result = userPrinc.Name;
-                            Session["Name"] = result;
+                            cookie.Values["username"] = result;
+                            cookie.Expires = DateTime.Now.AddDays(7);
+                            Response.Cookies.Add(cookie);
                         }
                     }
                     catch (Exception ex)

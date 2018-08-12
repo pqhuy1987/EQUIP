@@ -1,8 +1,11 @@
 ﻿@using ShopOnline.Controllers
 @{
     Layout = null;
+    
 }
-
+@{
+    HttpCookie cookie = Request.Cookies["login"]; 
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +56,7 @@
                    
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <b>@Session["Name"] </b><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <b>@cookie.Values["username"].ToString() </b><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
