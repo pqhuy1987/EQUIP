@@ -131,26 +131,12 @@
                                             @Html.TextBoxFor(model => model.SelectedProject.End_Date, new { @class = "form-control", @type = "date" })
                                             @Html.ValidationMessageFor(model => model.SelectedProject.End_Date, null, new { @class = "text-danger", style = "font-weight:bold" })
                                         </div>
-                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> TRẠNG THÁI HOẠT ĐỘNG: </label>
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> HÌNH ẢNH CÔNG CỤ / DỤNG CỤ: </label>
                                         <div class="form-group">
-                                            @Html.DropDownListFor(model => model.SelectedProject.Operation_Status, new List<SelectListItem>()
-                                            {
-                                                 new SelectListItem(){ Text = "-- Chọn Trạng Thái --",   Value = ""},
-                                                 new SelectListItem(){ Text = "Hoạt Động",   Value = "Hoạt Động"},
-                                                 new SelectListItem(){ Text = "Đã Dừng", Value = "Đã Dừng"}
-                                            }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Operation_Status, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                            <img src="@Url.Content("~/Assets/images/image1.jpg")" alt="IMAGES" style="width: 150px; height: 150px;" />
                                         </div>
-                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">KHU VỰC THI CÔNG:</label>
                                         <div class="form-group">
-                                            @Html.DropDownListFor(model => model.SelectedProject.Site_Area, new List<SelectListItem>()
-                                            {
-                                                 new SelectListItem(){ Text = "-- Chọn Khu Vực --",   Value = ""},
-                                                 new SelectListItem(){ Text = "Miền Nam",   Value = "Miền Nam"},
-                                                 new SelectListItem(){ Text = "Miền Trung", Value = "Miền Trung"},
-                                                 new SelectListItem(){ Text = "Miền Bắc",   Value = "Miền Bắc"}
-                                            }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Site_Area, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                            <input type="file" name="ImageFile" class="btn btn-primary"> 
                                         </div>
                                         <p>
                                             <button type="submit" value="Thêm" class="btn btn-primary"> <b>THÊM</b> </button>

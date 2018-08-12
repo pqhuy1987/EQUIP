@@ -470,6 +470,8 @@
     <Content Include="Assets\admin\vendor\raphael\raphael.js" />
     <Content Include="Assets\admin\vendor\raphael\raphael.min.js" />
     <Content Include="Assets\files\logo1.png" />
+    <Content Include="Assets\images\image1.jpg" />
+    <Content Include="Assets\images\NoImage.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Assets\admin\bootstrap-select\bower.json" />
     <Content Include="Assets\admin\bootstrap-select\CHANGELOG.md" />

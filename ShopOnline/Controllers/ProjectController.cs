@@ -15,7 +15,6 @@ using Microsoft.Office.Core;
 
 namespace ShopOnline.Controllers
 {
-    [Authorize]
     public class ProjectController : Controller
     {
         //
@@ -1095,7 +1094,7 @@ namespace ShopOnline.Controllers
                 throw ex;
             }
             killExcel();
-            return RedirectToAction("Index");
+            return RedirectToAction("LLTC", "Index");
 
         }
 
