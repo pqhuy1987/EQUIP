@@ -112,7 +112,7 @@ namespace ShopOnline.Controllers
                     items_4.Add(new SelectListItem()
                     {
                         Value = CS_Project.ID.ToString(),
-                        Text = CS_Project.Project_Name ,
+                        Text = CS_Project.Ten_Thiet_Bi ,
                     });
                 }
                 model.Project_All = items_4;
@@ -190,7 +190,7 @@ namespace ShopOnline.Controllers
                     items_4.Add(new SelectListItem()
                     {
                         Value = CS_Project.ID.ToString(),
-                        Text = CS_Project.Project_Name,
+                        Text = CS_Project.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_All = items_4;
@@ -427,7 +427,7 @@ namespace ShopOnline.Controllers
                         items_4.Add(new SelectListItem()
                         {
                             Value = CS_Project.ID.ToString(),
-                            Text = CS_Project.Project_Name,
+                            Text = CS_Project.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_All = items_4;
@@ -566,7 +566,7 @@ namespace ShopOnline.Controllers
                         items_4.Add(new SelectListItem()
                         {
                             Value = CS_Project.ID.ToString(),
-                            Text = CS_Project.Project_Name,
+                            Text = CS_Project.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_All = items_4;
@@ -646,8 +646,11 @@ namespace ShopOnline.Controllers
                 ProjectViewModel model = new ProjectViewModel();
                 model.Project = db.Projects.OrderBy(m => m.ID).ToList();
                 model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.Project_Type_All = new List<SelectListItem>();
+                model.Vi_Tri_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
 
                 foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
                 {
@@ -659,6 +662,19 @@ namespace ShopOnline.Controllers
                 }
 
                 model.Project_Type_All = items;
+
+                foreach (var CS_ViTri in model.CS_tbViTri)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = CS_ViTri.CS_ViTri,
+                        Text = CS_ViTri.CS_ViTri,
+                    });
+                }
+
+                model.Project_Type_All = items;
+                model.Vi_Tri_All = items_2;
+
                 return View(model);
                 //--------Add Dropdown for Type-------------------//
             }
@@ -668,24 +684,35 @@ namespace ShopOnline.Controllers
         // POST: /Admin/Project/Create
 
         [HttpPost]
-        public ActionResult Create(ProjectViewModel collection)
+        public ActionResult Create(ProjectViewModel collection, HttpPostedFileBase uploadfile)
         {
             try
             {
                     using (OnlineShopDbContext db = new OnlineShopDbContext())
                     {
                         Project obj             = new Project();
-                        obj.Project_Name        = collection.SelectedProject.Project_Name;
-                        obj.Site_Type           = collection.SelectedProject.Site_Type;
-                        obj.General_Director    = collection.SelectedProject.General_Director;
-                        obj.Site_Manager        = collection.SelectedProject.Site_Manager;
-                        obj.Site_Address        = collection.SelectedProject.Site_Address;
-                        obj.Value_Cost          = collection.SelectedProject.Value_Cost;
-                        obj.Start_Date          = collection.SelectedProject.Start_Date;
-                        obj.End_Date            = collection.SelectedProject.End_Date;
-                        obj.Operation_Status    = collection.SelectedProject.Operation_Status;
-                        obj.Site_Area           = collection.SelectedProject.Site_Area;
+                        obj.Ten_Thiet_Bi        = collection.SelectedProject.Ten_Thiet_Bi;
+                        obj.Phong_Ban           = collection.SelectedProject.Phong_Ban;
+                        obj.Vi_Tri              = collection.SelectedProject.Vi_Tri;
 
+
+
+                        if (uploadfile == null)
+                        {
+                            string _FileName = "NoImage.jpg";
+                            //string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
+                            //uploadfile.SaveAs(_path);
+                            obj.Site_Manager = _FileName;
+                        }
+                        else
+                        {
+                            string _FileName = Path.GetFileName(uploadfile.FileName);
+                            string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
+                            uploadfile.SaveAs(_path);
+                            obj.Site_Manager = _FileName;
+                        }
+
+                        obj.Site_Address = collection.SelectedProject.Site_Address;
                         db.Projects.Add(obj);
                         db.SaveChanges();
 
@@ -693,8 +720,11 @@ namespace ShopOnline.Controllers
                         ProjectViewModel model = new ProjectViewModel();
                         model.Project = db.Projects.OrderBy(m => m.ID).ToList();
                         model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                        model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                         model.Project_Type_All = new List<SelectListItem>();
+                        model.Vi_Tri_All = new List<SelectListItem>();
                         var items = new List<SelectListItem>();
+                        var items_2 = new List<SelectListItem>();
 
                         foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
                         {
@@ -705,6 +735,17 @@ namespace ShopOnline.Controllers
                             });
                         }
                         model.Project_Type_All = items;
+
+                        foreach (var CS_ViTri in model.CS_tbViTri)
+                        {
+                            items_2.Add(new SelectListItem()
+                            {
+                                Value = CS_ViTri.CS_ViTri,
+                                Text = CS_ViTri.CS_ViTri,
+                            });
+                        }
+                        model.Vi_Tri_All = items_2;
+
                         return RedirectToAction("Create", model);
                         //--------Add Dropdown for Type-------------------//
                     }
@@ -718,7 +759,11 @@ namespace ShopOnline.Controllers
                     model.Project = db.Projects.OrderBy(m => m.ID).ToList();
                     model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
                     model.Project_Type_All = new List<SelectListItem>();
+                    model.Vi_Tri_All = new List<SelectListItem>();
+
                     var items = new List<SelectListItem>();
+                    var items_2 = new List<SelectListItem>();
+
 
                     foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
                     {
@@ -730,6 +775,17 @@ namespace ShopOnline.Controllers
                     }
 
                     model.Project_Type_All = items;
+
+                    foreach (var CS_ViTri in model.CS_tbViTri)
+                    {
+                        items_2.Add(new SelectListItem()
+                        {
+                            Value = CS_ViTri.CS_ViTri,
+                            Text = CS_ViTri.CS_ViTri,
+                        });
+                    }
+                    model.Vi_Tri_All = items_2;
+
                     return View(model);
                     //--------Add Dropdown for Type-------------------//
                 }
@@ -750,8 +806,12 @@ namespace ShopOnline.Controllers
                 //--------Model để phía trên----------------------//
                 model.Project = db.Projects.OrderBy(m => m.ID).ToList();
                 model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
                 model.Project_Type_All = new List<SelectListItem>();
+                model.Vi_Tri_All = new List<SelectListItem>();
+
                 var items = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
 
                 foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
                 {
@@ -762,29 +822,53 @@ namespace ShopOnline.Controllers
                     });
                 }
                 model.Project_Type_All = items;
+
+
+                foreach (var CS_ViTri in model.CS_tbViTri)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = CS_ViTri.CS_ViTri,
+                        Text = CS_ViTri.CS_ViTri,
+                    });
+                }
+                model.Vi_Tri_All = items_2;
+
                 return View("Edit", model);
                 //--------Add Dropdown for Type-------------------//
             }
         }
 
         [HttpPost]
-        public ActionResult Save(int id, ProjectViewModel collection)
+        public ActionResult Save(int id, ProjectViewModel collection, HttpPostedFileBase uploadfile)
         {
             try
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 { 
                     Project Exsiting_Project = db.Projects.Find(id);
-                    Exsiting_Project.Project_Name = collection.SelectedProject.Project_Name;
-                    Exsiting_Project.Site_Type = collection.SelectedProject.Site_Type;
-                    Exsiting_Project.General_Director = collection.SelectedProject.General_Director;
-                    Exsiting_Project.Site_Manager = collection.SelectedProject.Site_Manager;
-                    Exsiting_Project.Site_Address = collection.SelectedProject.Site_Address;
-                    Exsiting_Project.Value_Cost = collection.SelectedProject.Value_Cost;
-                    Exsiting_Project.Start_Date = collection.SelectedProject.Start_Date;
-                    Exsiting_Project.End_Date = collection.SelectedProject.End_Date;
-                    Exsiting_Project.Operation_Status = collection.SelectedProject.Operation_Status;
-                    Exsiting_Project.Site_Area = collection.SelectedProject.Site_Area;
+
+                    Exsiting_Project.Ten_Thiet_Bi = collection.SelectedProject.Ten_Thiet_Bi;
+                    Exsiting_Project.Phong_Ban = collection.SelectedProject.Phong_Ban;
+                    Exsiting_Project.Vi_Tri = collection.SelectedProject.Vi_Tri;
+
+                    if (uploadfile == null)
+                    {
+                        string _FileName = Exsiting_Project.Site_Manager;
+                        //string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
+                        //uploadfile.SaveAs(_path);
+                        Exsiting_Project.Site_Manager = _FileName;
+                    }
+                    else
+                    {
+                        string _FileName = Path.GetFileName(uploadfile.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
+                        uploadfile.SaveAs(_path);
+                        Exsiting_Project.Site_Manager = _FileName;
+                    }
+
+
+ 
                     db.SaveChanges();
 
                     //--------Add Dropdown for Type-------------------//
@@ -793,9 +877,15 @@ namespace ShopOnline.Controllers
                         model.SelectedProject = db.Projects.Find(id);
                         //--------Select ID trả kết quả về View-----------//
                     model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+
                     model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                    model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
+
                     model.Project_Type_All = new List<SelectListItem>();
+                    model.Vi_Tri_All = new List<SelectListItem>();
+
                     var items = new List<SelectListItem>();
+                    var items_2 = new List<SelectListItem>();
 
                     foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
                     {
@@ -807,6 +897,17 @@ namespace ShopOnline.Controllers
                     }
 
                     model.Project_Type_All = items;
+
+                    foreach (var CS_ViTri in model.CS_tbViTri)
+                    {
+                        items_2.Add(new SelectListItem()
+                        {
+                            Value = CS_ViTri.CS_ViTri,
+                            Text = CS_ViTri.CS_ViTri,
+                        });
+                    }
+                    model.Vi_Tri_All = items_2;
+
                     return View("Edit", model);
                     //--------Add Dropdown for Type-------------------//              
                 }
@@ -951,7 +1052,16 @@ namespace ShopOnline.Controllers
 
             int current_rownum_right = 5;
             int current_rownum_left = 5;
-            int Card_number = 15;
+            int Card_number;
+            ProjectViewModel model = new ProjectViewModel();
+
+            using (OnlineShopDbContext db = new OnlineShopDbContext())
+            {
+                //--------Add Dropdown for Type-------------------//
+                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                Card_number = db.Projects.OrderBy(m => m.ID).Count();
+            }
+
             Excel.Workbook WB = excelApp.Workbooks.Open(filepath);
             oSheet = (Microsoft.Office.Interop.Excel._Worksheet)WB.ActiveSheet;
 
@@ -970,9 +1080,9 @@ namespace ShopOnline.Controllers
                     Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 2];
                     float Left_logo = (float)((double)oRange_logo.Left);
                     float Top_logo = (float)((double)oRange_logo.Top);
-                    const float ImageSize_logo_W = 90;
-                    const float ImageSize_logo_H = 32;
-                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo+3, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+                    const float ImageSize_logo_W = 45;
+                    const float ImageSize_logo_H = 24;
+                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 9, Top_logo + 8, ImageSize_logo_W, ImageSize_logo_H);
 
                     workSheet.get_Range("C" + current_rownum_right, "D" + (current_rownum_right + 2)).Merge();
                     workSheet.get_Range("C" + current_rownum_right, "D" + (current_rownum_right + 2)).BorderAround2();
@@ -986,7 +1096,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 48;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=PHAMQUANGHUY", MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 3)))
                     {
@@ -995,17 +1105,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 2] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 3] = "Bàn làm việc 0.6x1.2";
+                    oSheet.Cells[current_rownum_right, 3] = model.Project[i].Ten_Thiet_Bi;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 2] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 3] = "08-08-2018";
+                    oSheet.Cells[current_rownum_right, 3] = "13-08-2018";
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 2] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 3] = "Phòng Tổng Hợp";
+                    oSheet.Cells[current_rownum_right, 3] = model.Project[i].Phong_Ban;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 2] = "Mã Thiết bị:";
@@ -1024,9 +1134,9 @@ namespace ShopOnline.Controllers
                     Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 7];
                     float Left_logo = (float)((double)oRange_logo.Left);
                     float Top_logo = (float)((double)oRange_logo.Top);
-                    const float ImageSize_logo_W = 90;
-                    const float ImageSize_logo_H = 32;
-                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 3, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+                    const float ImageSize_logo_W = 45;
+                    const float ImageSize_logo_H = 24;
+                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 9, Top_logo + 8, ImageSize_logo_W, ImageSize_logo_H);
 
                     workSheet.get_Range("H" + current_rownum_left, "I" + (current_rownum_left + 2)).Merge();
                     workSheet.get_Range("H" + current_rownum_left, "I" + (current_rownum_left + 2)).BorderAround2();
@@ -1040,7 +1150,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 48;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=PHAMQUANGHUY", MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("G" + current_rownum_left, "H" + (current_rownum_left + 3)))
                     {
@@ -1049,17 +1159,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 7] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 8] = "Bàn làm việc 0.6x1.2";
+                    oSheet.Cells[current_rownum_left, 8] = model.Project[i].Ten_Thiet_Bi;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 7] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 8] = "08-08-2018";
+                    oSheet.Cells[current_rownum_left, 8] = "13-08-2018";
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 7] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 8] = "Phòng Tổng Hợp";
+                    oSheet.Cells[current_rownum_left, 8] = model.Project[i].Phong_Ban;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 7] = "Mã Thiết bị:";

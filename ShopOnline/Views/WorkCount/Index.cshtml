@@ -18,7 +18,7 @@
                             {
                                 <div class="form-group">
                                 <label>TÊN CÔNG TRƯỜNG:</label>
-                                @Html.DropDownListFor(model => model.SelectedProject.Project_Name, Model.ProjectAll, "-- Chọn Công Trường --", new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.SelectedProject.Ten_Thiet_Bi, Model.ProjectAll, "-- Chọn Công Trường --", new { @class = "form-control" })
                                  </div>
                                 <label>Từ Ngày:</label>
                                 @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date" })
@@ -163,7 +163,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label>TÊN CÔNG TRƯỜNG:</label>
-                                <th>@Model.Project[0].Project_Name</th>
+                                <th>@Model.Project[0].Ten_Thiet_Bi</th>
                             </div>
                             <label>Ngày Tháng:</label>
                             @using (Html.BeginForm("Create", "WorkCount", new { id = 1 }, FormMethod.Post))

@@ -11,44 +11,44 @@
     {
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Project_Name { get; set; }
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        public string Ten_Thiet_Bi { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Site_Type { get; set; }
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        public string Phong_Ban { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string General_Director { get; set; }
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        public string Vi_Tri    { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
         public string Site_Manager { get; set; }
 
         public string Site_Address { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
         public string Value_Cost { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
         [Column(TypeName = "date")]
         [DataType(DataType.Date)]
         public DateTime? Start_Date { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         public DateTime? End_Date { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
         public string Operation_Status { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống nội dung này")]
-        [StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
+        //[Required(ErrorMessage = "Không được để trống nội dung này")]
+        //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
         public string Site_Area { get; set; }
 
         public int Number_Person;

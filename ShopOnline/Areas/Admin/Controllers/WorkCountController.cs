@@ -29,14 +29,14 @@ namespace ShopOnline.Areas.Admin.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = project.Project_Name,
-                        Text = project.Project_Name,
+                        Value = project.Ten_Thiet_Bi,
+                        Text = project.Ten_Thiet_Bi,
                     });
                 }
 
                 model.ProjectAll = items;
 
-                var Check = model.Project[0].Project_Name;
+                var Check = model.Project[0].Ten_Thiet_Bi;
 
                 model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -83,14 +83,14 @@ namespace ShopOnline.Areas.Admin.Controllers
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = project.Project_Name,
-                            Text = project.Project_Name,
+                            Value = project.Ten_Thiet_Bi,
+                            Text = project.Ten_Thiet_Bi,
                         });
                     }
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Project_Name;
+                    var Check = model.Project[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -111,7 +111,7 @@ namespace ShopOnline.Areas.Admin.Controllers
 
                         model.WorkCount = db.WorkCounts.Where(i => i.CreateDate == collection.SelectedWorkCount.CreateDate).ToList();
 
-                        obj.Project_Name = Check;
+                        obj.Ten_Thiet_Bi = Check;
                         obj.Unit_Name = model.Catelory_Project[j].Unit_Name;
                         obj.CreateDate = collection.SelectedWorkCount.CreateDate;
                         obj.Unit_Number = item;
@@ -159,21 +159,21 @@ namespace ShopOnline.Areas.Admin.Controllers
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = project.Project_Name,
-                            Text = project.Project_Name,
+                            Value = project.Ten_Thiet_Bi,
+                            Text = project.Ten_Thiet_Bi,
                         });
                     }
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Project_Name;
+                    var Check = model.Project[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
                     model.Number_Team_2 = model.Catelory_Project.Count();
                     model.SelectedProject = null;
 
-                    model.WorkCount = db.WorkCounts.Where(i => i.Project_Name == collection.SelectedProject.Project_Name && i.CreateDate >= collection.StartDate && i.CreateDate <= collection.EndDate).ToList();
+                    model.WorkCount = db.WorkCounts.Where(i => i.Ten_Thiet_Bi == collection.SelectedProject.Ten_Thiet_Bi && i.CreateDate >= collection.StartDate && i.CreateDate <= collection.EndDate).ToList();
 
                     var dates = new List<DateTime>();
 

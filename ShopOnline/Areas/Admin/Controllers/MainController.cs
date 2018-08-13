@@ -30,8 +30,8 @@ namespace ShopOnline.Areas.Admin.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = project.Project_Name,
-                        Text = project.Project_Name,
+                        Value = project.Ten_Thiet_Bi,
+                        Text = project.Ten_Thiet_Bi,
                     });
                 }
 

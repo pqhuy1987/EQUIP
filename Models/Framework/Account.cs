@@ -17,6 +17,6 @@ namespace Models.Framework
         public string Password { get; set; }
 
         [StringLength(100)]
-        public string Project_Name { get; set; }
+        public string Ten_Thiet_Bi { get; set; }
     }
 }

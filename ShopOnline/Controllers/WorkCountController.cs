@@ -29,14 +29,14 @@ namespace ShopOnline.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = project.Project_Name,
-                        Text = project.Project_Name,
+                        Value = project.Ten_Thiet_Bi,
+                        Text = project.Ten_Thiet_Bi,
                     });
                 }
 
                 model.ProjectAll = items;
 
-                var Check = model.Project[0].Project_Name;
+                var Check = model.Project[0].Ten_Thiet_Bi;
 
                 model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -83,14 +83,14 @@ namespace ShopOnline.Controllers
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = project.Project_Name,
-                            Text = project.Project_Name,
+                            Value = project.Ten_Thiet_Bi,
+                            Text = project.Ten_Thiet_Bi,
                         });
                     }
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Project_Name;
+                    var Check = model.Project[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -115,7 +115,7 @@ namespace ShopOnline.Controllers
 
                         model.WorkCount = db.WorkCounts.Where(i => i.CreateDate == collection.SelectedWorkCount.CreateDate).ToList();
 
-                        obj.Project_Name = Check;
+                        obj.Ten_Thiet_Bi = Check;
                         obj.Unit_Name = model.Catelory_Project[j].Unit_Name;
                         obj.Unit_Job = model.Catelory_Project[j].Job;
 
@@ -136,7 +136,7 @@ namespace ShopOnline.Controllers
                             
                             foreach (var item_3 in Date_Temp)
                             {
-                                obj_temp.Project_Name = Check;
+                                obj_temp.Ten_Thiet_Bi = Check;
                                 obj_temp.Unit_Name = model.Catelory_Project[j].Unit_Name;
                                 obj_temp.Unit_Job = model.Catelory_Project[j].Job;
                                 obj_temp.CreateDate = item_3;
@@ -194,14 +194,14 @@ namespace ShopOnline.Controllers
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = project.Project_Name,
-                            Text = project.Project_Name,
+                            Value = project.Ten_Thiet_Bi,
+                            Text = project.Ten_Thiet_Bi,
                         });
                     }
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Project_Name;
+                    var Check = model.Project[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -231,7 +231,7 @@ namespace ShopOnline.Controllers
                         DateTime Date_Temp_Test = Convert.ToDateTime(Date[temp_test]);
                         dates.Add(Date_Temp_Test);
 
-                        model.WorkCount = db.WorkCounts.Where(i => i.Project_Name == collection.SelectedProject.Project_Name && i.CreateDate == Date_Temp_Test).ToList();
+                        model.WorkCount = db.WorkCounts.Where(i => i.Ten_Thiet_Bi == collection.SelectedProject.Ten_Thiet_Bi && i.CreateDate == Date_Temp_Test).ToList();
                         myList.Add(model.WorkCount);
 
                         int temp_all_number = 0;
@@ -269,7 +269,7 @@ namespace ShopOnline.Controllers
 
                     foreach(var item in collection.Catelory_Project)
                     {
-                        model.WorkCount_Temp_2 = db.WorkCounts.Where(i => i.Project_Name == collection.SelectedProject.Project_Name && i.Unit_Name == item.Unit_Name && i.CreateDate>= collection.StartDate && i.CreateDate <= collection.EndDate).OrderBy(i => i.CreateDate).ToList();
+                        model.WorkCount_Temp_2 = db.WorkCounts.Where(i => i.Ten_Thiet_Bi == collection.SelectedProject.Ten_Thiet_Bi && i.Unit_Name == item.Unit_Name && i.CreateDate>= collection.StartDate && i.CreateDate <= collection.EndDate).OrderBy(i => i.CreateDate).ToList();
                         myList_2.Add(model.WorkCount_Temp_2);
                     }
 

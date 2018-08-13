@@ -44,8 +44,8 @@
 
                                         <label> NHẬP MỚI TÊN DỰ ÁN: </label>
                                         <div class="form-group">
-                                            @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ten_Thiet_Bi, null, new { @class = "danger" })
                                         </div>
                                         <p>
                                             <input type="submit" value="Thêm" />
@@ -61,8 +61,8 @@
 
                                         <label> NHẬP TÊN DỰ ÁN MUỐN CHỈNH SỬA: </label>
                                         <div class="form-group">
-                                            @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ten_Thiet_Bi, null, new { @class = "danger" })
                                         </div>
                                         <p>
                                             <input type="submit" value="Lưu" />
@@ -80,8 +80,8 @@
 
                                     <label> NHẬP MỚI TÊN DỰ ÁN: </label>
                                     <div class="form-group">
-                                        @Html.TextBoxFor(model => Model.SelectedProject.Project_Name, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => Model.SelectedProject.Project_Name, null, new { @class = "danger" })
+                                        @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => Model.SelectedProject.Ten_Thiet_Bi, null, new { @class = "danger" })
                                     </div>
                                     <p>
                                         <input type="submit" value="Thêm" />
@@ -120,7 +120,7 @@
                         {
                             <tr class="odd gradeX">
                                 <td>@item.ID</td>
-                                <td>@item.Project_Name</td>
+                                <td>@item.Ten_Thiet_Bi</td>
                                 <td>
 
                                     <form action="@Url.Action("Edit", "Project", new { id = @item.ID, number = 123 })" method="post">

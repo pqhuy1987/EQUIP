@@ -71,7 +71,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -119,7 +119,7 @@ namespace ShopOnline.Controllers
                     items.Add(new SelectListItem()
                     {
                         Value = CS_Project_Name.ID.ToString(),
-                        Text = CS_Project_Name.Project_Name,
+                        Text = CS_Project_Name.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_Name_All = items;
@@ -167,7 +167,7 @@ namespace ShopOnline.Controllers
                     items.Add(new SelectListItem()
                     {
                         Value = CS_Project_Name.ID.ToString(),
-                        Text = CS_Project_Name.Project_Name,
+                        Text = CS_Project_Name.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_Name_All = items;
@@ -232,7 +232,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -278,7 +278,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -345,7 +345,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -392,7 +392,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -451,7 +451,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -498,7 +498,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -543,7 +543,7 @@ namespace ShopOnline.Controllers
                     items.Add(new SelectListItem()
                     {
                         Value = CS_Project_Name.ID.ToString(),
-                        Text = CS_Project_Name.Project_Name,
+                        Text = CS_Project_Name.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_Name_All = items;
@@ -605,7 +605,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -645,7 +645,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -693,7 +693,7 @@ namespace ShopOnline.Controllers
                     items.Add(new SelectListItem()
                     {
                         Value = CS_Project_Name.ID.ToString(),
-                        Text = CS_Project_Name.Project_Name,
+                        Text = CS_Project_Name.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_Name_All = items;
@@ -755,7 +755,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -797,7 +797,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;
@@ -845,7 +845,7 @@ namespace ShopOnline.Controllers
                     items.Add(new SelectListItem()
                     {
                         Value = CS_Project_Name.ID.ToString(),
-                        Text = CS_Project_Name.Project_Name,
+                        Text = CS_Project_Name.Ten_Thiet_Bi,
                     });
                 }
                 model.Project_Name_All = items;
@@ -923,7 +923,7 @@ namespace ShopOnline.Controllers
                         items.Add(new SelectListItem()
                         {
                             Value = CS_Project_Name.ID.ToString(),
-                            Text = CS_Project_Name.Project_Name,
+                            Text = CS_Project_Name.Ten_Thiet_Bi,
                         });
                     }
                     model.Project_Name_All = items;

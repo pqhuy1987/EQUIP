@@ -14,7 +14,7 @@
     <div class="col-lg-3">
         <!-- /.panel-heading -->
         <div class="panel-body-2">
-             <button type="submit" onclick=" window.open('/Project/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
+             <button type="submit" onclick="window.open('/Project/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
         </div>
     </div>
     <div class="col-lg-1">
@@ -29,24 +29,20 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
-            <div class="panel-heading" style="font-size:16.5px"><b>DANH SÁCH THIẾT BỊ/DỤNG CỤ</b></div>
+            <div class="panel-heading" style="font-size:16.5px"><b>DANH SÁCH THIẾT BỊ / DỤNG CỤ</b></div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Hình Ảnh</th>
                             <th>Tên Thiết Bị/Dụng Cụ</th>
                             <th>Mã Thiết Bị</th>
-                            <th>Hình Ảnh</th>
                             <th>Phòng Ban</th>
-                            <th>Vị Trí</th>
+                            <th>Vị Trí</th>                         
                             <th>Ghi Chú 1</th>
-                            <th>Ghi Chú 2</th>
-                            <th>Ngày Kết Thúc</th>
-                            <th>Trạng Thái</th>
-                            <th>QR_CODE</th>
-                            <th>Đội Thi Công</th>
+                            <th>Ghi Chú 2</th>                           
                             <th>Sửa</th>
                             <th>Xóa</th>
                             <!-- <th>QR Code</th> -->
@@ -58,30 +54,19 @@
                         {
                             <tr class="odd gradeX">
                                 <td>@i</td>
-                                <td>@item.Project_Name</td>
-                                <td>@item.Site_Type</td>
-                                <td>@item.General_Director</td>
-                                <td>@item.Site_Manager</td>
+                                <td><img src="@Url.Content("~/Assets/images/" + item.Site_Manager)" alt="IMAGES" style="width: 50px; height: 50px; display: block; margin: 0 auto; " /></td>
+                                <td>@item.Ten_Thiet_Bi</td>
                                 <td>@item.Site_Address</td>
-                                <td>@item.Value_Cost</td>
-                                <td>@(item.Start_Date.HasValue ? @item.Start_Date.Value.ToString("dd/MM/yyyy") : "")</td>
-                                <td>@(item.End_Date.HasValue ? @item.End_Date.Value.ToString("dd/MM/yyyy") : "")</td>
-                                <td>@item.Operation_Status</td>
+                                <td>@item.Phong_Ban</td>
+                                <td>@item.Vi_Tri</td>
                                 <td>@item.Site_Area</td>
-                                <td>
-                                    <button type="submit" onclick="window.open('/Project/Details/'+@item.ID , 'windowName_big', 'width=1300, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-info"><b>Thêm / Xem</b></button>
-                                </td>
+                                <td>@item.Site_Area</td>
                                 <td>
                                     <button type="submit" onclick="window.open('/Project/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
                                 </td>
                                 <td>
                                     <button type="submit" onclick="window.open('/Project/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
                                 </td>
-                                <!--
-                                <td>
-                                    <img src="@Url.Content("https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=trantrungkiet")" alt="IMAGES" />
-                                </td>
-                                -->
                             </tr>
                             i++;
                         }

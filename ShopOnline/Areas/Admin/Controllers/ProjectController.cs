@@ -54,7 +54,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                     using (OnlineShopDbContext db = new OnlineShopDbContext())
                     {
                         Project obj = new Project();
-                        obj.Project_Name = collection.SelectedProject.Project_Name;
+                        obj.Ten_Thiet_Bi = collection.SelectedProject.Ten_Thiet_Bi;
                         db.Projects.Add(obj);
                         db.SaveChanges();
 
@@ -97,12 +97,12 @@ namespace ShopOnline.Areas.Admin.Controllers
                 {
                     Project exsiting = db.Projects.Find(id);
                     List<Catelory> exsiting_2;
-                    exsiting_2 = db.Catelories.Where(i => i.Prj_Name == exsiting.Project_Name).ToList();
+                    exsiting_2 = db.Catelories.Where(i => i.Prj_Name == exsiting.Ten_Thiet_Bi).ToList();
                     foreach (var item1 in exsiting_2)
                     {
-                        item1.Prj_Name = collection.SelectedProject.Project_Name;
+                        item1.Prj_Name = collection.SelectedProject.Ten_Thiet_Bi;
                     }
-                    exsiting.Project_Name = collection.SelectedProject.Project_Name;
+                    exsiting.Ten_Thiet_Bi = collection.SelectedProject.Ten_Thiet_Bi;
                     db.SaveChanges();
 
                     ProjectViewModel model1 = new ProjectViewModel();

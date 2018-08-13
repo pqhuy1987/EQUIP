@@ -19,7 +19,7 @@ namespace Models
         public List<LLTC>                       LLTC                        { get; set; }
         public LLTC                             LLTC_Select                 { get; set; }
         public List<CS_tbWorkType>              CS_tbWorkType               { get; set; }
-        public List<CS_tbViTri>          CS_tbViTri           { get; set; }
+        public List<CS_tbViTri>                 CS_tbViTri                  { get; set; }
 
         public string DisplayMode                                           { get; set; }
         public int DisplayModeSub                                           { get; set; }
@@ -27,6 +27,7 @@ namespace Models
         public List<CS_tbConstructionSiteType>  CS_tbConstructionSiteType   { get; set; }
 
         public List<SelectListItem>             Project_Type_All            { get; set; }
+        public List<SelectListItem>             Vi_Tri_All                  { get; set; }
         public List<SelectListItem>             Project_All                 { get; set; }
         public List<SelectListItem>             LLTC_Name_All               { get; set; }
         public List<SelectListItem>             WorkTypeDetails_All         { get; set; }

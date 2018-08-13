@@ -14,7 +14,7 @@ namespace Models.Framework
         [Column(TypeName = "date")]
         public DateTime? CreateDate { get; set; }
 
-        public string Project_Name { get; set; }
+        public string Ten_Thiet_Bi { get; set; }
 
         public string Unit_Name { get; set; }
 
