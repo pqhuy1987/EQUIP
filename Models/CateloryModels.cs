@@ -13,7 +13,7 @@ namespace Models
     public class CateloryViewModel
     {
         public List<Catelory>   Catelory            { get; set; }
-        public List<Project>    Project             { get; set; }
+        public List<Thiet_Bi>    Thiet_Bi             { get; set; }
         public List<LLTC>       LLTC                { get; set; }
         public List<Catelory>   Catelory_Project    { get; set; }
 

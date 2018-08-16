@@ -20,13 +20,13 @@ namespace ShopOnline.Areas.Admin.Controllers
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 CateloryViewModel model = new CateloryViewModel();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
 
                 model.ProjectAll = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
 
-                foreach (var project in model.Project)
+                foreach (var project in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {

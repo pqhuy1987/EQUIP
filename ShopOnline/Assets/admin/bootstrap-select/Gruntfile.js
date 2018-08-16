@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
   };
 
-  // Project configuration.
+  // Thiet_Bi configuration.
   grunt.initConfig({
 
     // Metadata.

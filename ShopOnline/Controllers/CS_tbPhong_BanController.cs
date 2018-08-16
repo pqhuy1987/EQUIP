@@ -8,23 +8,23 @@ using Models.Framework;
 
 namespace ShopOnline.Controllers
 {
-    public class CS_tbConstructionSiteTypeController : Controller
+    public class CS_tbPhong_BanController : Controller
     {
         //
-        // GET: /CS_tbConstructionSiteType/
+        // GET: /CS_tbPhong_Ban/
 
         public ActionResult Index()
         {
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 CS_tbConstructioSiteTypeViewModel model = new CS_tbConstructioSiteTypeViewModel();
-                model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 return View(model);
             }
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Details/5
+        // GET: /CS_tbPhong_Ban/Details/5
 
         public ActionResult Details(int id)
         {
@@ -32,7 +32,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Create
+        // GET: /CS_tbPhong_Ban/Create
 
         public ActionResult Create()
         {
@@ -40,7 +40,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Create
+        // POST: /CS_tbPhong_Ban/Create
 
         [HttpPost]
         public ActionResult Create(CS_tbConstructioSiteTypeViewModel collection)
@@ -49,9 +49,9 @@ namespace ShopOnline.Controllers
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    CS_tbConstructionSiteType obj = new CS_tbConstructionSiteType();
+                    CS_tbPhong_Ban obj = new CS_tbPhong_Ban();
                     obj.Type = collection.CS_tbConstructionSiteType_Select.Type;
-                    db.CS_tbConstructionSiteType.Add(obj);
+                    db.CS_tbPhong_Ban.Add(obj);
                     db.SaveChanges();
 
                     return RedirectToAction("Create");
@@ -64,7 +64,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Edit/5
+        // GET: /CS_tbPhong_Ban/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -72,14 +72,14 @@ namespace ShopOnline.Controllers
             {
                 CS_tbConstructioSiteTypeViewModel model = new CS_tbConstructioSiteTypeViewModel();
 
-                model.CS_tbConstructionSiteType_Select = db.CS_tbConstructionSiteType.Find(id);
+                model.CS_tbConstructionSiteType_Select = db.CS_tbPhong_Ban.Find(id);
 
                 return View("Edit",model);
             }
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Edit/5
+        // POST: /CS_tbPhong_Ban/Edit/5
 
         [HttpPost]
         public ActionResult Save(int id, CS_tbConstructioSiteTypeViewModel collection)
@@ -90,9 +90,9 @@ namespace ShopOnline.Controllers
                 {
                     CS_tbConstructioSiteTypeViewModel model = new CS_tbConstructioSiteTypeViewModel();
 
-                    model.CS_tbConstructionSiteType_Select = db.CS_tbConstructionSiteType.Find(id);
+                    model.CS_tbConstructionSiteType_Select = db.CS_tbPhong_Ban.Find(id);
 
-                    CS_tbConstructionSiteType Exsiting_Type = db.CS_tbConstructionSiteType.Find(id);
+                    CS_tbPhong_Ban Exsiting_Type = db.CS_tbPhong_Ban.Find(id);
 
                     Exsiting_Type.Type = collection.CS_tbConstructionSiteType_Select.Type;
                     db.SaveChanges();
@@ -107,7 +107,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Delete/5
+        // GET: /CS_tbPhong_Ban/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -115,14 +115,14 @@ namespace ShopOnline.Controllers
             {
                 CS_tbConstructioSiteTypeViewModel model = new CS_tbConstructioSiteTypeViewModel();
 
-                model.CS_tbConstructionSiteType_Select = db.CS_tbConstructionSiteType.Find(id);
+                model.CS_tbConstructionSiteType_Select = db.CS_tbPhong_Ban.Find(id);
 
                 return View("Delete", model);
             }
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Delete/5
+        // POST: /CS_tbPhong_Ban/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
@@ -133,8 +133,8 @@ namespace ShopOnline.Controllers
                 {
                     CS_tbConstructioSiteTypeViewModel model = new CS_tbConstructioSiteTypeViewModel();
 
-                    CS_tbConstructionSiteType Exsiting_Type = db.CS_tbConstructionSiteType.Find(id);
-                    db.CS_tbConstructionSiteType.Remove(Exsiting_Type);
+                    CS_tbPhong_Ban Exsiting_Type = db.CS_tbPhong_Ban.Find(id);
+                    db.CS_tbPhong_Ban.Remove(Exsiting_Type);
                     db.SaveChanges();
 
                     return View("Finish",model);

@@ -1,0 +1,141 @@
+﻿@model Models.ProjectViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout_Temp.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default-2">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @{
+                            if (Model == null)
+                            {
+                                using (Html.BeginForm("Create", "Thiet_Bi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> HÌNH ẢNH THỰC TẾ THIẾT BỊ / DỤNG CỤ: </label>
+                                        <div class="form-group">
+                                            <input type="file" name="uploadfile" id="image" > 
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">TÊN THIẾT BỊ / DỤNG CỤ:  </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ten_Thiet_Bi, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                         <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">MÃ THIẾT BỊ: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ma_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Vi_Tri, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                         <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">ĐƠN GIÁ: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Don_Gia, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Phong_Ban, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>    
+                                                                              
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">PHÒNG / BAN: </label>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => Model.SelectedProject.Phong_Ban, Model.Phong_Ban_All, "-- Chọn Phòng / Ban --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Phong_Ban, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                                                   
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">VỊ TRÍ: </label>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => Model.SelectedProject.Vi_Tri, Model.Vi_Tri_All, "-- Chọn Vị Trí --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Vi_Tri, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> GHI CHÚ 1: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_1, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ghi_Chu_1, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> GHI CHÚ 2: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_2, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ghi_Chu_2, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                                        <p>
+                                            <button type="submit" value="Thêm" class="btn btn-primary" > <b>THÊM</b> </button>
+                                        </p>                                    
+                                }
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("Create", "Thiet_Bi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> HÌNH ẢNH THỰC TẾ THIẾT BỊ / DỤNG CỤ: </label>
+                                        <div class="form-group">
+                                            <input type="file" name="uploadfile" id="image" > 
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">TÊN THIẾT BỊ / DỤNG CỤ:  </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ten_Thiet_Bi, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                         <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">MÃ THIẾT BỊ: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ma_Thiet_Bi, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Vi_Tri, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                         <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">ĐƠN GIÁ: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Don_Gia, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Phong_Ban, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>    
+                                                                              
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">PHÒNG / BAN: </label>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => Model.SelectedProject.Phong_Ban, Model.Phong_Ban_All, "-- Chọn Phòng / Ban --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Phong_Ban, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                                                   
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; ">VỊ TRÍ: </label>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => Model.SelectedProject.Vi_Tri, Model.Vi_Tri_All, "-- Chọn Vị Trí --", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Vi_Tri, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> GHI CHÚ 1: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_1, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ghi_Chu_1, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                            
+                                        <label style="background-color: #07347E; color: white; border-radius: 5px; padding: 5px; display: block; "> GHI CHÚ 2: </label>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_2, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => Model.SelectedProject.Ghi_Chu_2, null, new { @class = "text-danger", style = "font-weight:bold" })
+                                        </div>
+                                        <p>
+                                            <button type="submit" value="Thêm" class="btn btn-primary" > <b>THÊM</b> </button>
+                                        </p>                                    
+                                }
+                            }
+                        }
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

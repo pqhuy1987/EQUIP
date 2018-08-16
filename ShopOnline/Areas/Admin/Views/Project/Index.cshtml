@@ -28,7 +28,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        @using (Html.BeginForm("Index", "Project", FormMethod.Post))
+                        @using (Html.BeginForm("Index", "Thiet_Bi", FormMethod.Post))
                         {
                             <button type="submit" style="margin-left:0px;margin-bottom:10px" class="btn btn-primary">THÊM MỚI DỰ ÁN</button>
                         }
@@ -37,7 +37,7 @@
                             {
                                 if (Model.SelectedProject.ID == 123456789)
                                 {
-                                    using (Html.BeginForm("Create", "Project", FormMethod.Post))
+                                    using (Html.BeginForm("Create", "Thiet_Bi", FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.ValidationSummary(true)
@@ -54,7 +54,7 @@
                                 }
                                 else
                                 {
-                                    using (Html.BeginForm("Save", "Project", new { id = Model.SelectedProject.ID }, FormMethod.Post))
+                                    using (Html.BeginForm("Save", "Thiet_Bi", new { id = Model.SelectedProject.ID }, FormMethod.Post))
                                     {
                                         @Html.AntiForgeryToken()
                                         @Html.ValidationSummary(true)
@@ -73,7 +73,7 @@
                             }
                             else
                             {
-                                using (Html.BeginForm("Create", "Project", FormMethod.Post))
+                                using (Html.BeginForm("Create", "Thiet_Bi", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true)
@@ -116,20 +116,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Project)
+                        @foreach (var item in Model.Thiet_Bi)
                         {
                             <tr class="odd gradeX">
                                 <td>@item.ID</td>
                                 <td>@item.Ten_Thiet_Bi</td>
                                 <td>
 
-                                    <form action="@Url.Action("Edit", "Project", new { id = @item.ID, number = 123 })" method="post">
+                                    <form action="@Url.Action("Edit", "Thiet_Bi", new { id = @item.ID, number = 123 })" method="post">
                                         <input type="submit" value="Select" />
                                     </form>
                                 </td>
                                 <td>
 
-                                    <form action="@Url.Action("Edit", "Project", new { id = @item.ID })" method="post">
+                                    <form action="@Url.Action("Edit", "Thiet_Bi", new { id = @item.ID })" method="post">
                                         <input type="submit" value="Select" />
                                     </form>
                                 </td>
@@ -191,7 +191,7 @@
                                                     <td>@item.Area</td>
                                                     <td>@item.Rate</td>
                                                     <td>
-                                                        <form action="@Url.Action("Edit", "Project",  new { id = Model.SelectedProject.ID, number = @item.Phone_Number })" method="post">
+                                                        <form action="@Url.Action("Edit", "Thiet_Bi",  new { id = Model.SelectedProject.ID, number = @item.Phone_Number })" method="post">
                                                             <input type="submit" value="Hiện Danh Sách" />
                                                         </form>
                                                     </td>

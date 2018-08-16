@@ -9,7 +9,7 @@
     <div class="col-lg-3">
         <!-- /.panel-heading -->
         <div class="panel-body-2">
-            <button type="submit" onclick=" window.open('/CS_tbConstructionSiteType/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
+            <button type="submit" onclick=" window.open('/CS_tbPhong_Ban/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
         </div>
     </div>
 </div>
@@ -31,16 +31,16 @@
                     </thead>
                     <tbody>
                         @{int i = 1;}
-                        @foreach (var item in Model.CS_tbConstructionSiteType )
+                        @foreach (var item in Model.CS_tbPhong_Ban )
                         {
                             <tr class="odd gradeX">
                                 <td>@i</td>
                                 <td>@item.Type</td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/CS_tbConstructionSiteType/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
+                                    <button type="submit" onclick="window.open('/CS_tbPhong_Ban/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
                                 </td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/CS_tbConstructionSiteType/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
+                                    <button type="submit" onclick="window.open('/CS_tbPhong_Ban/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
                                 </td>
                             </tr>
                             i++;

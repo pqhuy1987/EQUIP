@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class CS_tbConstructionSiteType
+    public partial class CS_tbPhong_Ban
     {
 
         public int ID { get; set; }

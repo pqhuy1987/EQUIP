@@ -6,8 +6,8 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Project")]
-    public partial class Project
+    [Table("Thiet_Bi")]
+    public partial class Thiet_Bi
     {
         public int ID { get; set; }
 
@@ -25,13 +25,13 @@
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Site_Manager { get; set; }
+        public string Hinh_Anh { get; set; }
 
-        public string Site_Address { get; set; }
+        public string Ma_Thiet_Bi { get; set; }
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Value_Cost { get; set; }
+        public string Ghi_Chu_1 { get; set; }
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         [Column(TypeName = "date")]
@@ -45,11 +45,11 @@
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Operation_Status { get; set; }
+        public string Ghi_Chu_2 { get; set; }
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Site_Area { get; set; }
+        public string Don_Gia { get; set; }
 
         public int Number_Person;
         public int Number_Project;

@@ -16,9 +16,9 @@ namespace Models.Framework
         public virtual DbSet<Catelory> Catelories { get; set; }
         public virtual DbSet<LLTC> LLTCs { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Thiet_Bi> Thiet_Bis { get; set; }
         public virtual DbSet<WorkCount> WorkCounts { get; set; }
-        public virtual DbSet<CS_tbConstructionSiteType> CS_tbConstructionSiteType { get; set; }
+        public virtual DbSet<CS_tbPhong_Ban> CS_tbPhong_Ban { get; set; }
         public virtual DbSet<CS_tbWorkType> CS_tbWorkType { get; set; }
         public virtual DbSet<CS_tbViTri> CS_tbViTri { get; set; }
         public virtual DbSet<CS_tbLLTCTypeSub> CS_tbLLTCTypeSub { get; set; }

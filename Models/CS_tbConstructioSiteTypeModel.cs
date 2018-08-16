@@ -9,7 +9,7 @@ namespace Models
 {
     public class CS_tbConstructioSiteTypeViewModel
     {
-        public List<CS_tbConstructionSiteType>  CS_tbConstructionSiteType { get; set; }
-        public CS_tbConstructionSiteType        CS_tbConstructionSiteType_Select { get; set; }
+        public List<CS_tbPhong_Ban>  CS_tbPhong_Ban { get; set; }
+        public CS_tbPhong_Ban        CS_tbConstructionSiteType_Select { get; set; }
     }
 }

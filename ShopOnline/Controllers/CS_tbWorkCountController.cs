@@ -18,11 +18,11 @@ namespace ShopOnline.Controllers
                 model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for ProjectName-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Project_Name_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
 
-                foreach (var CS_Project_Name in model.Project)
+                foreach (var CS_Project_Name in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -126,10 +126,10 @@ namespace ShopOnline.Controllers
                 model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for ProjectName-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Project_Name_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
-                foreach (var CS_Project_Name in model.Project)
+                foreach (var CS_Project_Name in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -190,10 +190,10 @@ namespace ShopOnline.Controllers
                     }
                     //--------Add Dropdown for ProjectName-------------------//
                     model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -215,10 +215,10 @@ namespace ShopOnline.Controllers
                     model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for ProjectName-------------------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -247,10 +247,10 @@ namespace ShopOnline.Controllers
                 model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for ProjectName-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Project_Name_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
-                foreach (var CS_Project_Name in model.Project)
+                foreach (var CS_Project_Name in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -292,10 +292,10 @@ namespace ShopOnline.Controllers
                     model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for ProjectName-------------------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -318,10 +318,10 @@ namespace ShopOnline.Controllers
                     model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for ProjectName-------------------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -351,10 +351,10 @@ namespace ShopOnline.Controllers
                 model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for ProjectName-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Project_Name_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
-                foreach (var CS_Project_Name in model.Project)
+                foreach (var CS_Project_Name in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -388,10 +388,10 @@ namespace ShopOnline.Controllers
                     model.CS_tbWorkCount            = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for ProjectName-------------------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -414,10 +414,10 @@ namespace ShopOnline.Controllers
                     model.CS_tbWorkCount = db.CS_tbWorkCount.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for ProjectName-------------------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Project_Name_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
-                    foreach (var CS_Project_Name in model.Project)
+                    foreach (var CS_Project_Name in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {

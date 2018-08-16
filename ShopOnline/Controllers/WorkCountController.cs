@@ -21,11 +21,11 @@ namespace ShopOnline.Controllers
             {
                 WorkCountViewModel model = new WorkCountViewModel();
                 
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.ProjectAll = new List<SelectListItem>();
 
                 var items = new List<SelectListItem>();
-                foreach (var project in model.Project)
+                foreach (var project in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -36,7 +36,7 @@ namespace ShopOnline.Controllers
 
                 model.ProjectAll = items;
 
-                var Check = model.Project[0].Ten_Thiet_Bi;
+                var Check = model.Thiet_Bi[0].Ten_Thiet_Bi;
 
                 model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -75,11 +75,11 @@ namespace ShopOnline.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     WorkCountViewModel model = new WorkCountViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.ProjectAll = new List<SelectListItem>();
 
                     var items = new List<SelectListItem>();
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -90,7 +90,7 @@ namespace ShopOnline.Controllers
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Ten_Thiet_Bi;
+                    var Check = model.Thiet_Bi[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 
@@ -185,12 +185,12 @@ namespace ShopOnline.Controllers
                 {
                     WorkCountViewModel model = new WorkCountViewModel();
 
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.ProjectAll = new List<SelectListItem>();
 
                     var items = new List<SelectListItem>();
 
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -201,7 +201,7 @@ namespace ShopOnline.Controllers
 
                     model.ProjectAll = items;
 
-                    var Check = model.Project[0].Ten_Thiet_Bi;
+                    var Check = model.Thiet_Bi[0].Ten_Thiet_Bi;
 
                     model.Catelory_Project = db.Catelories.Where(i => i.Prj_Name == Check).ToList();
 

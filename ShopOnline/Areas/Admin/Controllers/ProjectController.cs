@@ -12,14 +12,14 @@ namespace ShopOnline.Areas.Admin.Controllers
     public class ProjectController : Controller
     {
         //
-        // GET: /Admin/Project
+        // GET: /Admin/Thiet_Bi
 
         public ActionResult Index()
         {
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 ProjectViewModel model      = new ProjectViewModel();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
                 model.SelectedProject = null;
                 //model.SelectedProject.Number_Project = 100;
@@ -28,7 +28,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Project/Details/5
+        // GET: /Admin/Thiet_Bi/Details/5
 
         public ActionResult Details(int id)
         {
@@ -36,7 +36,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Project/Create
+        // GET: /Admin/Thiet_Bi/Create
 
         public ActionResult Create()
         {
@@ -44,7 +44,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // POST: /Admin/Project/Create
+        // POST: /Admin/Thiet_Bi/Create
 
         [HttpPost]
         public ActionResult Create(ProjectViewModel collection)
@@ -53,13 +53,13 @@ namespace ShopOnline.Areas.Admin.Controllers
             {
                     using (OnlineShopDbContext db = new OnlineShopDbContext())
                     {
-                        Project obj = new Project();
+                        Thiet_Bi obj = new Thiet_Bi();
                         obj.Ten_Thiet_Bi = collection.SelectedProject.Ten_Thiet_Bi;
-                        db.Projects.Add(obj);
+                        db.Thiet_Bis.Add(obj);
                         db.SaveChanges();
 
                         ProjectViewModel model1 = new ProjectViewModel();
-                        model1.Project = db.Projects.OrderByDescending(m => m.ID).ToList();
+                        model1.Thiet_Bi = db.Thiet_Bis.OrderByDescending(m => m.ID).ToList();
                         model1.SelectedProject = null;
                         return RedirectToAction("Index", model1);
                     }
@@ -69,7 +69,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(
                             m => m.ID).ToList();
                     model1.SelectedProject = null;
                     return View("Index", model1);
@@ -78,7 +78,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Project/Edit/5
+        // GET: /Admin/Thiet_Bi/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -86,7 +86,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // POST: /Admin/Project/Save/5
+        // POST: /Admin/Thiet_Bi/Save/5
 
         [HttpPost]
         public ActionResult Save(int id, ProjectViewModel collection)
@@ -95,7 +95,7 @@ namespace ShopOnline.Areas.Admin.Controllers
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    Project exsiting = db.Projects.Find(id);
+                    Thiet_Bi exsiting = db.Thiet_Bis.Find(id);
                     List<Catelory> exsiting_2;
                     exsiting_2 = db.Catelories.Where(i => i.Prj_Name == exsiting.Ten_Thiet_Bi).ToList();
                     foreach (var item1 in exsiting_2)
@@ -106,7 +106,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                     db.SaveChanges();
 
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model1.DisplayMode = "Add";
                     model1.SelectedProject = null;
                     return RedirectToAction("Index", model1);
@@ -117,7 +117,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(
                             m => m.ID).ToList();
                     model1.SelectedProject = null;
                     return View("Index", model1);
@@ -126,7 +126,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Project/Delete/5
+        // GET: /Admin/Thiet_Bi/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -134,7 +134,7 @@ namespace ShopOnline.Areas.Admin.Controllers
         }
 
         //
-        // POST: /Admin/Project/Delete/5
+        // POST: /Admin/Thiet_Bi/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
@@ -143,12 +143,12 @@ namespace ShopOnline.Areas.Admin.Controllers
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
-                    Project existing = db.Projects.Find(id);
-                    db.Projects.Remove(existing);
+                    Thiet_Bi existing = db.Thiet_Bis.Find(id);
+                    db.Thiet_Bis.Remove(existing);
                     db.SaveChanges();
 
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(
                             m => m.ID).ToList();
                     model1.SelectedProject = null;
                     return View("Index", model1);
@@ -159,7 +159,7 @@ namespace ShopOnline.Areas.Admin.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(
                             m => m.ID).ToList();
                     model1.SelectedProject = null;
                     return View("Index", model1);

@@ -17,7 +17,7 @@ namespace Models
         public CS_tbWorkCount           CS_tbWorkCount_Select         { get; set; }
         public List<CS_tbWorkCount_Sub> CS_tbWorkCountMultiSelect_Sub { get; set; }
 
-        public List<Project>            Project                       { get; set; }
+        public List<Thiet_Bi>            Thiet_Bi                       { get; set; }
         public List<CS_tbLLTCTypeSub>   CS_tbLLTCTypeSub              { get; set; }
         public List<LLTC>               LLTC_temp                     { get; set; }
         public List<CS_tbWorkType>      CS_tbWorkType_temp            { get; set; }

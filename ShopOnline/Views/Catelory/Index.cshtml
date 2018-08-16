@@ -28,9 +28,9 @@
     <div class="col-lg-3">
             <!-- /.panel-heading -->
             <div class="panel-body-2">
-                @using (Html.BeginForm("Index", "Project"))
+                @using (Html.BeginForm("Index", "Thiet_Bi"))
                 {
-                    <button type="submit" onclick=" window.open('/Project/Create', 'windowName', 'width=700, height=400, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</B></button>
+                    <button type="submit" onclick=" window.open('/Thiet_Bi/Create', 'windowName', 'width=700, height=400, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</B></button>
                 }
             </div>
     </div>
@@ -67,7 +67,7 @@
                                  <tr class="odd gradeX">
                                      <td>@item.ID</td>
                                      @{
-                                 foreach (var item1 in Model.Project)
+                                 foreach (var item1 in Model.Thiet_Bi)
                                  {
                                      if (item.Prj_Name == item1.Ten_Thiet_Bi)
                                      {

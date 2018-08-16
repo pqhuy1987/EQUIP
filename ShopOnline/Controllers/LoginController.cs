@@ -58,7 +58,7 @@ namespace ShopOnline.Controllers
                     }
 
                 }
-                return RedirectToAction("Index", "Project");
+                return RedirectToAction("Index", "Thiet_Bi");
             }
             else
             {

@@ -19,7 +19,7 @@ namespace ShopOnline.Controllers
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 CateloryViewModel model = new CateloryViewModel();
-                model.Project       = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi       = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.Catelory      = db.Catelories.OrderBy(m => m.ID).ToList();
                 model.LLTC          = db.LLTCs.OrderBy(m => m.ID).Take(1000).ToList();
 
@@ -29,7 +29,7 @@ namespace ShopOnline.Controllers
                 var items               = new List<SelectListItem>();
                 var items_2             = new List<SelectListItem>();
 
-                foreach (var project in model.Project)
+                foreach (var project in model.Thiet_Bi)
                 {
                     items.Add(new SelectListItem()
                     {
@@ -103,7 +103,7 @@ namespace ShopOnline.Controllers
                     db.SaveChanges();
 
                     CateloryViewModel model = new CateloryViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).Take(1000).ToList();
 
@@ -112,7 +112,7 @@ namespace ShopOnline.Controllers
                     var items = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
 
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -145,7 +145,7 @@ namespace ShopOnline.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     CateloryViewModel model = new CateloryViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
                     model.SelectedCatelory = null;
                     model.DisplayMode = null;
@@ -173,7 +173,7 @@ namespace ShopOnline.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     CateloryViewModel model = new CateloryViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).Take(1000).ToList();
 
@@ -190,7 +190,7 @@ namespace ShopOnline.Controllers
                     var items   = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
 
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -225,7 +225,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /Admin/Project/Save/5
+        // POST: /Admin/Thiet_Bi/Save/5
 
         [HttpPost]
         public ActionResult Save(int id, CateloryViewModel collection)
@@ -250,14 +250,14 @@ namespace ShopOnline.Controllers
                     db.SaveChanges();
 
                     CateloryViewModel model = new CateloryViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).Take(1000).ToList();
 
                     model.ProjectAll    = new List<SelectListItem>();
                     var items           = new List<SelectListItem>();
 
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {
@@ -279,7 +279,7 @@ namespace ShopOnline.Controllers
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 {
                     ProjectViewModel model1 = new ProjectViewModel();
-                    model1.Project = db.Projects.OrderBy(
+                    model1.Thiet_Bi = db.Thiet_Bis.OrderBy(
                             m => m.ID).ToList();
                     model1.SelectedProject = null;
                     return View("Index", model1);
@@ -311,14 +311,14 @@ namespace ShopOnline.Controllers
                     db.SaveChanges();
 
                     CateloryViewModel model = new CateloryViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.Catelory = db.Catelories.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).Take(1000).ToList();
 
                     model.ProjectAll = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
 
-                    foreach (var project in model.Project)
+                    foreach (var project in model.Thiet_Bi)
                     {
                         items.Add(new SelectListItem()
                         {

@@ -3,18 +3,29 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     function example_ajax_request() {
         $('#example-placeholder').html('<p><img src="Assets/files/ajax-loader-2.gif" width="220" height="19" /></p>');
     }
 </script>
-
+<style>
+    #dataTables-example td {
+        vertical-align: middle;
+    }
+    .zoom:hover {
+        -moz-transition: all 1.7s;
+        -webkit-transition: all 1.7s;
+        transition: all 1.7s;
+        -moz-transform: scale(4.5);
+        -webkit-transform: scale(4.5);
+        transform: scale(4.5);
+    }
+</style>
 <div class="row">
     <div class="col-lg-3">
         <!-- /.panel-heading -->
         <div class="panel-body-2">
-             <button type="submit" onclick="window.open('/Project/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
+             <button type="submit" onclick="window.open('/Thiet_Bi/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
         </div>
     </div>
     <div class="col-lg-1">
@@ -39,33 +50,34 @@
                             <th>Hình Ảnh</th>
                             <th>Tên Thiết Bị/Dụng Cụ</th>
                             <th>Mã Thiết Bị</th>
+                            <th>Đơn Giá</th>
                             <th>Phòng Ban</th>
                             <th>Vị Trí</th>                         
                             <th>Ghi Chú 1</th>
                             <th>Ghi Chú 2</th>                           
                             <th>Sửa</th>
                             <th>Xóa</th>
-                            <!-- <th>QR Code</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         @{int i = 1;}
-                        @foreach (var item in Model.Project)
+                        @foreach (var item in Model.Thiet_Bi)
                         {
                             <tr class="odd gradeX">
                                 <td>@i</td>
-                                <td><img src="@Url.Content("~/Assets/images/" + item.Site_Manager)" alt="IMAGES" style="width: 50px; height: 50px; display: block; margin: 0 auto; " /></td>
-                                <td>@item.Ten_Thiet_Bi</td>
-                                <td>@item.Site_Address</td>
+                                <td><div class="zoom"> <img src="@Url.Content("~/Assets/images/" + item.Hinh_Anh)" alt="IMAGES" style="width: 35px; height: 35px; display: block; margin: 0 auto;" /></div></td>
+                                <td>@item.Ten_Thiet_Bi </td>
+                                <td>@item.Ma_Thiet_Bi</td>
+                                <td>@item.Don_Gia</td>
                                 <td>@item.Phong_Ban</td>
                                 <td>@item.Vi_Tri</td>
-                                <td>@item.Site_Area</td>
-                                <td>@item.Site_Area</td>
+                                <td>@item.Don_Gia</td>
+                                <td>@item.Don_Gia</td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/Project/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
+                                    <button type="submit" onclick="window.open('/Thiet_Bi/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
                                 </td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/Project/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
+                                    <button type="submit" onclick="window.open('/Thiet_Bi/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
                                 </td>
                             </tr>
                             i++;
@@ -77,6 +89,5 @@
         </div>
     </div>
 </div>
-
 
 

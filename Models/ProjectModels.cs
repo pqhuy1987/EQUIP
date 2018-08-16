@@ -12,8 +12,8 @@ namespace Models
 {
     public class ProjectViewModel
     {
-        public List<Project>                    Project                     { get; set; }
-        public Project                          SelectedProject             { get; set; }
+        public List<Thiet_Bi>                    Thiet_Bi                   { get; set; }
+        public Thiet_Bi                          SelectedProject            { get; set; }
         public List<CS_tbLLTCTypeSub>           CS_tbLLTCTypeSub            { get; set; }
         public CS_tbLLTCTypeSub                 CS_tbLLTCTypeSub_Select     { get; set; }
         public List<LLTC>                       LLTC                        { get; set; }
@@ -24,9 +24,9 @@ namespace Models
         public string DisplayMode                                           { get; set; }
         public int DisplayModeSub                                           { get; set; }
 
-        public List<CS_tbConstructionSiteType>  CS_tbConstructionSiteType   { get; set; }
+        public List<CS_tbPhong_Ban>  CS_tbPhong_Ban   { get; set; }
 
-        public List<SelectListItem>             Project_Type_All            { get; set; }
+        public List<SelectListItem>             Phong_Ban_All               { get; set; }
         public List<SelectListItem>             Vi_Tri_All                  { get; set; }
         public List<SelectListItem>             Project_All                 { get; set; }
         public List<SelectListItem>             LLTC_Name_All               { get; set; }
@@ -43,9 +43,9 @@ namespace Models
             context = new OnlineShopDbContext();
         }
 
-        public List<Project> ListAll()
+        public List<Thiet_Bi> ListAll()
         {
-            var list = context.Database.SqlQuery<Project>("Sp_Project_ListAll").ToList();
+            var list = context.Database.SqlQuery<Thiet_Bi>("Sp_Project_ListAll").ToList();
             return list;
         }
 

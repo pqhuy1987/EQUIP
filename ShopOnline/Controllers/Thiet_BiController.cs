@@ -15,10 +15,10 @@ using Microsoft.Office.Core;
 
 namespace ShopOnline.Controllers
 {
-    public class ProjectController : Controller
+    public class Thiet_BiController : Controller
     {
         //
-        // GET: /Admin/Project
+        // GET: /Admin/Thiet_Bi
 
         public ActionResult Index()
         {
@@ -26,28 +26,28 @@ namespace ShopOnline.Controllers
             {
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model      = new ProjectViewModel();
-                model.Project                       = db.Projects.OrderBy(m => m.ID).ToList();
-                model.CS_tbConstructionSiteType     = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
-                model.Project_Type_All = new List<SelectListItem>();
+                model.Thiet_Bi                       = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban     = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
 
-                foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value   = CS_tbConstructionSiteType.Type,
-                        Text    = CS_tbConstructionSiteType.Type,
+                        Value   = CS_tbPhong_Ban.Type,
+                        Text    = CS_tbPhong_Ban.Type,
                     });
                 }
 
-                model.Project_Type_All = items;
+                model.Phong_Ban_All = items;
                 return View(model);
                 //--------Add Dropdown for Type-------------------//               
             }
         }
 
         //
-        // GET: /Admin/Project/Details/5
+        // GET: /Admin/Thiet_Bi/Details/5
 
         public ActionResult Details(int id)
         {
@@ -55,12 +55,12 @@ namespace ShopOnline.Controllers
             {
                 ProjectViewModel model = new ProjectViewModel();
                 //--------Select ID trả kết quả về View-----------//
-                model.SelectedProject   = db.Projects.Find(id);
+                model.SelectedProject   = db.Thiet_Bis.Find(id);
                 model.LLTC              = db.LLTCs.OrderBy(m => m.ID).ToList();
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID}).ToList();
                 model.CS_tbWorkType     = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
                 model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                model.Project           = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi           = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for LLTCName-------------------//
                 model.LLTC_Name_All = new List<SelectListItem>();
@@ -104,10 +104,10 @@ namespace ShopOnline.Controllers
                 model.WorkTypeCore_All = items_3;
                 //--------Add Dropdown for Core Job-------------------//
 
-                //--------Add Dropdown for Project All-------------------//
+                //--------Add Dropdown for Thiet_Bi All-------------------//
                 model.Project_All = new List<SelectListItem>();
                 var items_4 = new List<SelectListItem>();
-                foreach (var CS_Project in model.Project)
+                foreach (var CS_Project in model.Thiet_Bi)
                 {
                     items_4.Add(new SelectListItem()
                     {
@@ -116,7 +116,7 @@ namespace ShopOnline.Controllers
                     });
                 }
                 model.Project_All = items_4;
-                //--------Add Dropdown for Project All-------------------//
+                //--------Add Dropdown for Thiet_Bi All-------------------//
                 model.DisplayMode = "Index";
 
                 return View("Details", model);
@@ -124,7 +124,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /Admin/Project/Details/5
+        // GET: /Admin/Thiet_Bi/Details/5
 
         public ActionResult DetailsEditGet(int id, int LLTC_ID)
         {
@@ -133,12 +133,12 @@ namespace ShopOnline.Controllers
                 ProjectViewModel model = new ProjectViewModel();
                 //--------Select ID trả kết quả về View-----------//
                 model.CS_tbLLTCTypeSub_Select = db.CS_tbLLTCTypeSub.Find(LLTC_ID);
-                model.SelectedProject = db.Projects.Find(id);
+                model.SelectedProject = db.Thiet_Bis.Find(id);
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                 model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
                 model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for LLTCName-------------------//
                 model.LLTC_Name_All = new List<SelectListItem>();
@@ -182,10 +182,10 @@ namespace ShopOnline.Controllers
                 model.WorkTypeCore_All = items_3;
                 //--------Add Dropdown for Core Job-------------------//
 
-                //--------Add Dropdown for Project All-------------------//
+                //--------Add Dropdown for Thiet_Bi All-------------------//
                 model.Project_All = new List<SelectListItem>();
                 var items_4 = new List<SelectListItem>();
-                foreach (var CS_Project in model.Project)
+                foreach (var CS_Project in model.Thiet_Bi)
                 {
                     items_4.Add(new SelectListItem()
                     {
@@ -194,14 +194,14 @@ namespace ShopOnline.Controllers
                     });
                 }
                 model.Project_All = items_4;
-                //--------Add Dropdown for Project All-------------------//
+                //--------Add Dropdown for Thiet_Bi All-------------------//
                 model.DisplayMode = "Edit";
 
                 return View("Details", model);
             }
         }
         //
-        // GET: /Admin/Project/Details/5
+        // GET: /Admin/Thiet_Bi/Details/5
 
         public ActionResult DetailsGetList(int id, ProjectViewModel collection )
         {
@@ -209,11 +209,11 @@ namespace ShopOnline.Controllers
             {
                 ProjectViewModel model = new ProjectViewModel();
                 //--------Select ID trả kết quả về View-----------//
-                model.SelectedProject = db.Projects.Find(id);
+                model.SelectedProject = db.Thiet_Bis.Find(id);
                 model.LLTC_Select = db.LLTCs.Find(collection.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID);
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                 model.CS_tbWorkType = db.CS_tbWorkType.Where(m => m.CoreWorkType == model.LLTC_Select.Main_Name_Job).OrderBy(m => m.ID).ToList();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
  
                 //--------Add Dropdown for LLTCName-------------------//
@@ -251,7 +251,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /Admin/Project/Details/5
+        // GET: /Admin/Thiet_Bi/Details/5
 
         public ActionResult DetailsGetEditList(int id, int LLTCSub_ID, ProjectViewModel collection)
         {
@@ -260,11 +260,11 @@ namespace ShopOnline.Controllers
                 ProjectViewModel model = new ProjectViewModel();
                 //--------Select ID trả kết quả về View-----------//
                 model.CS_tbLLTCTypeSub_Select = db.CS_tbLLTCTypeSub.Find(LLTCSub_ID);
-                model.SelectedProject = db.Projects.Find(id);
+                model.SelectedProject = db.Thiet_Bis.Find(id);
                 model.LLTC_Select = db.LLTCs.Find(collection.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID);
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                 model.CS_tbWorkType = db.CS_tbWorkType.Where(m => m.CoreWorkType == model.LLTC_Select.Main_Name_Job).OrderBy(m => m.ID).ToList();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
 
                 //--------Add Dropdown for LLTCName-------------------//
@@ -325,11 +325,11 @@ namespace ShopOnline.Controllers
                     db.SaveChanges();
 
                     //--------Select ID trả kết quả về View-----------//
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     model.LLTC_Select = db.LLTCs.Find(collection.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID);
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.Where(m => m.CoreWorkType == model.LLTC_Select.Main_Name_Job).OrderBy(m => m.ID).ToList();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
@@ -370,12 +370,12 @@ namespace ShopOnline.Controllers
                 {
                     ProjectViewModel model = new ProjectViewModel();
                     //--------Select ID trả kết quả về View-----------//
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
                     model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
                     model.LLTC_Name_All = new List<SelectListItem>();
@@ -419,10 +419,10 @@ namespace ShopOnline.Controllers
                     model.WorkTypeCore_All = items_3;
                     //--------Add Dropdown for Core Job-------------------//
 
-                    //--------Add Dropdown for Project All-------------------//
+                    //--------Add Dropdown for Thiet_Bi All-------------------//
                     model.Project_All = new List<SelectListItem>();
                     var items_4 = new List<SelectListItem>();
-                    foreach (var CS_Project in model.Project)
+                    foreach (var CS_Project in model.Thiet_Bi)
                     {
                         items_4.Add(new SelectListItem()
                         {
@@ -431,7 +431,7 @@ namespace ShopOnline.Controllers
                         });
                     }
                     model.Project_All = items_4;
-                    //--------Add Dropdown for Project All-------------------//
+                    //--------Add Dropdown for Thiet_Bi All-------------------//
                     model.DisplayMode = "Index";
 
                     return View("Details", model);
@@ -464,11 +464,11 @@ namespace ShopOnline.Controllers
 
                     //--------Select ID trả kết quả về View-----------//
                     model.CS_tbLLTCTypeSub_Select = db.CS_tbLLTCTypeSub.Find(LLTCSub_ID);
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     model.LLTC_Select = db.LLTCs.Find(collection.CS_tbLLTCTypeSub_Select.CS_tbLLTC_ID);
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.Where(m => m.CoreWorkType == model.LLTC_Select.Main_Name_Job).OrderBy(m => m.ID).ToList();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
@@ -509,12 +509,12 @@ namespace ShopOnline.Controllers
                 {
                     ProjectViewModel model = new ProjectViewModel();
                     //--------Select ID trả kết quả về View-----------//
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                     model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => new { m.CS_tbLLTCNameJobDetailsSub, m.ID }).ToList();
                     model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
                     model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
                     //--------Add Dropdown for LLTCName-------------------//
                     model.LLTC_Name_All = new List<SelectListItem>();
@@ -558,10 +558,10 @@ namespace ShopOnline.Controllers
                     model.WorkTypeCore_All = items_3;
                     //--------Add Dropdown for Core Job-------------------//
 
-                    //--------Add Dropdown for Project All-------------------//
+                    //--------Add Dropdown for Thiet_Bi All-------------------//
                     model.Project_All = new List<SelectListItem>();
                     var items_4 = new List<SelectListItem>();
-                    foreach (var CS_Project in model.Project)
+                    foreach (var CS_Project in model.Thiet_Bi)
                     {
                         items_4.Add(new SelectListItem()
                         {
@@ -570,7 +570,7 @@ namespace ShopOnline.Controllers
                         });
                     }
                     model.Project_All = items_4;
-                    //--------Add Dropdown for Project All-------------------//
+                    //--------Add Dropdown for Thiet_Bi All-------------------//
                     model.DisplayMode = "Edit";
 
                     return View("Details", model);
@@ -581,7 +581,7 @@ namespace ShopOnline.Controllers
         [HttpPost]
         public ActionResult DetailsSub(int id, int LLTC_ID, int display)
         {
-            //--------Add Dropdown for Project Name-------------------//
+            //--------Add Dropdown for Thiet_Bi Name-------------------//
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 ProjectViewModel model = new ProjectViewModel();
@@ -597,7 +597,7 @@ namespace ShopOnline.Controllers
                     model.DisplayModeSub = display;
                 }
                 model.LLTC_Select = db.LLTCs.Find(LLTC_ID);
-                model.SelectedProject = db.Projects.Find(id);
+                model.SelectedProject = db.Thiet_Bis.Find(id);
                 model.LLTC = db.LLTCs.OrderBy(m => m.ID).ToList();
                 model.CS_tbLLTCTypeSub = db.CS_tbLLTCTypeSub.Where(m => m.CS_tbLLTCNameSiteID == model.SelectedProject.ID).OrderBy(m => m.ID).ToList();
                 model.CS_tbWorkType = db.CS_tbWorkType.OrderBy(m => m.ID).ToList();
@@ -632,11 +632,11 @@ namespace ShopOnline.Controllers
 
                 return View("Details", model);
             }
-            //--------Add Dropdown for Project Name-------------------//
+            //--------Add Dropdown for Thiet_Bi Name-------------------//
         }
 
         //
-        // GET: /Admin/Project/Create
+        // GET: /Admin/Thiet_Bi/Create
 
         public ActionResult Create()
         {
@@ -644,24 +644,24 @@ namespace ShopOnline.Controllers
             {
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model = new ProjectViewModel();
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                model.Project_Type_All = new List<SelectListItem>();
+                model.Phong_Ban_All = new List<SelectListItem>();
                 model.Vi_Tri_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
                 var items_2 = new List<SelectListItem>();
 
-                foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = CS_tbConstructionSiteType.Type,
-                        Text = CS_tbConstructionSiteType.Type,
+                        Value = CS_tbPhong_Ban.Type,
+                        Text = CS_tbPhong_Ban.Type,
                     });
                 }
 
-                model.Project_Type_All = items;
+                model.Phong_Ban_All = items;
 
                 foreach (var CS_ViTri in model.CS_tbViTri)
                 {
@@ -672,7 +672,7 @@ namespace ShopOnline.Controllers
                     });
                 }
 
-                model.Project_Type_All = items;
+                model.Phong_Ban_All = items;
                 model.Vi_Tri_All = items_2;
 
                 return View(model);
@@ -681,7 +681,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /Admin/Project/Create
+        // POST: /Admin/Thiet_Bi/Create
 
         [HttpPost]
         public ActionResult Create(ProjectViewModel collection, HttpPostedFileBase uploadfile)
@@ -690,7 +690,7 @@ namespace ShopOnline.Controllers
             {
                     using (OnlineShopDbContext db = new OnlineShopDbContext())
                     {
-                        Project obj             = new Project();
+                        Thiet_Bi obj             = new Thiet_Bi();
                         obj.Ten_Thiet_Bi        = collection.SelectedProject.Ten_Thiet_Bi;
                         obj.Phong_Ban           = collection.SelectedProject.Phong_Ban;
                         obj.Vi_Tri              = collection.SelectedProject.Vi_Tri;
@@ -702,39 +702,39 @@ namespace ShopOnline.Controllers
                             string _FileName = "NoImage.jpg";
                             //string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                             //uploadfile.SaveAs(_path);
-                            obj.Site_Manager = _FileName;
+                            obj.Hinh_Anh = _FileName;
                         }
                         else
                         {
                             string _FileName = Path.GetFileName(uploadfile.FileName);
                             string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                             uploadfile.SaveAs(_path);
-                            obj.Site_Manager = _FileName;
+                            obj.Hinh_Anh = _FileName;
                         }
 
-                        obj.Site_Address = collection.SelectedProject.Site_Address;
-                        db.Projects.Add(obj);
+                        obj.Ma_Thiet_Bi = collection.SelectedProject.Ma_Thiet_Bi;
+                        db.Thiet_Bis.Add(obj);
                         db.SaveChanges();
 
                         //--------Add Dropdown for Type-------------------//
                         ProjectViewModel model = new ProjectViewModel();
-                        model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                        model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                        model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                        model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                         model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                        model.Project_Type_All = new List<SelectListItem>();
+                        model.Phong_Ban_All = new List<SelectListItem>();
                         model.Vi_Tri_All = new List<SelectListItem>();
                         var items = new List<SelectListItem>();
                         var items_2 = new List<SelectListItem>();
 
-                        foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                        foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                         {
                             items.Add(new SelectListItem()
                             {
-                                Value = CS_tbConstructionSiteType.Type,
-                                Text = CS_tbConstructionSiteType.Type,
+                                Value = CS_tbPhong_Ban.Type,
+                                Text = CS_tbPhong_Ban.Type,
                             });
                         }
-                        model.Project_Type_All = items;
+                        model.Phong_Ban_All = items;
 
                         foreach (var CS_ViTri in model.CS_tbViTri)
                         {
@@ -756,25 +756,24 @@ namespace ShopOnline.Controllers
                 {
                     //--------Add Dropdown for Type-------------------//
                     ProjectViewModel model = new ProjectViewModel();
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                    model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
-                    model.Project_Type_All = new List<SelectListItem>();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                    model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                    model.Phong_Ban_All = new List<SelectListItem>();
                     model.Vi_Tri_All = new List<SelectListItem>();
 
                     var items = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
 
-
-                    foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                    foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = CS_tbConstructionSiteType.Type,
-                            Text = CS_tbConstructionSiteType.Type,
+                            Value = CS_tbPhong_Ban.Type,
+                            Text = CS_tbPhong_Ban.Type,
                         });
                     }
 
-                    model.Project_Type_All = items;
+                    model.Phong_Ban_All = items;
 
                     foreach (var CS_ViTri in model.CS_tbViTri)
                     {
@@ -793,7 +792,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /Admin/Project/Edit/5
+        // GET: /Admin/Thiet_Bi/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -801,27 +800,27 @@ namespace ShopOnline.Controllers
             {
                 ProjectViewModel model = new ProjectViewModel();
                     //--------Select ID trả kết quả về View-----------//
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     //--------Add Dropdown for Type-------------------//
                 //--------Model để phía trên----------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
-                model.Project_Type_All = new List<SelectListItem>();
+                model.Phong_Ban_All = new List<SelectListItem>();
                 model.Vi_Tri_All = new List<SelectListItem>();
 
                 var items = new List<SelectListItem>();
                 var items_2 = new List<SelectListItem>();
 
-                foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = CS_tbConstructionSiteType.Type,
-                        Text = CS_tbConstructionSiteType.Type,
+                        Value = CS_tbPhong_Ban.Type,
+                        Text = CS_tbPhong_Ban.Type,
                     });
                 }
-                model.Project_Type_All = items;
+                model.Phong_Ban_All = items;
 
 
                 foreach (var CS_ViTri in model.CS_tbViTri)
@@ -846,7 +845,7 @@ namespace ShopOnline.Controllers
             {
                 using (OnlineShopDbContext db = new OnlineShopDbContext())
                 { 
-                    Project Exsiting_Project = db.Projects.Find(id);
+                    Thiet_Bi Exsiting_Project = db.Thiet_Bis.Find(id);
 
                     Exsiting_Project.Ten_Thiet_Bi = collection.SelectedProject.Ten_Thiet_Bi;
                     Exsiting_Project.Phong_Ban = collection.SelectedProject.Phong_Ban;
@@ -854,49 +853,47 @@ namespace ShopOnline.Controllers
 
                     if (uploadfile == null)
                     {
-                        string _FileName = Exsiting_Project.Site_Manager;
+                        string _FileName = Exsiting_Project.Hinh_Anh;
                         //string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                         //uploadfile.SaveAs(_path);
-                        Exsiting_Project.Site_Manager = _FileName;
+                        Exsiting_Project.Hinh_Anh = _FileName;
                     }
                     else
                     {
                         string _FileName = Path.GetFileName(uploadfile.FileName);
                         string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                         uploadfile.SaveAs(_path);
-                        Exsiting_Project.Site_Manager = _FileName;
+                        Exsiting_Project.Hinh_Anh = _FileName;
                     }
 
-
- 
                     db.SaveChanges();
 
                     //--------Add Dropdown for Type-------------------//
                     ProjectViewModel model = new ProjectViewModel();
                         //--------Select ID trả kết quả về View-----------//
-                        model.SelectedProject = db.Projects.Find(id);
+                        model.SelectedProject = db.Thiet_Bis.Find(id);
                         //--------Select ID trả kết quả về View-----------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
 
-                    model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
+                    model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                     model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
 
-                    model.Project_Type_All = new List<SelectListItem>();
+                    model.Phong_Ban_All = new List<SelectListItem>();
                     model.Vi_Tri_All = new List<SelectListItem>();
 
                     var items = new List<SelectListItem>();
                     var items_2 = new List<SelectListItem>();
 
-                    foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                    foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = CS_tbConstructionSiteType.Type,
-                            Text = CS_tbConstructionSiteType.Type,
+                            Value = CS_tbPhong_Ban.Type,
+                            Text = CS_tbPhong_Ban.Type,
                         });
                     }
 
-                    model.Project_Type_All = items;
+                    model.Phong_Ban_All = items;
 
                     foreach (var CS_ViTri in model.CS_tbViTri)
                     {
@@ -919,23 +916,23 @@ namespace ShopOnline.Controllers
                     //--------Add Dropdown for Type-------------------//
                     ProjectViewModel model = new ProjectViewModel();
                         //--------Select ID trả kết quả về View-----------//
-                        model.SelectedProject = db.Projects.Find(id);
+                        model.SelectedProject = db.Thiet_Bis.Find(id);
                         //--------Select ID trả kết quả về View-----------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                    model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
-                    model.Project_Type_All = new List<SelectListItem>();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                    model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                    model.Phong_Ban_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
 
-                    foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                    foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = CS_tbConstructionSiteType.Type,
-                            Text = CS_tbConstructionSiteType.Type,
+                            Value = CS_tbPhong_Ban.Type,
+                            Text = CS_tbPhong_Ban.Type,
                         });
                     }
 
-                    model.Project_Type_All = items;
+                    model.Phong_Ban_All = items;
                     return View("Edit", model);
                     //--------Add Dropdown for Type-------------------//
                 }
@@ -943,7 +940,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /Admin/Project/Delete/5
+        // GET: /Admin/Thiet_Bi/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -952,30 +949,30 @@ namespace ShopOnline.Controllers
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model = new ProjectViewModel();
                     //--------Select ID trả kết quả về View-----------//
-                    model.SelectedProject = db.Projects.Find(id);
+                    model.SelectedProject = db.Thiet_Bis.Find(id);
                     //--------Select ID trả kết quả về View-----------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
-                model.Project_Type_All = new List<SelectListItem>();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
 
-                foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = CS_tbConstructionSiteType.Type,
-                        Text = CS_tbConstructionSiteType.Type,
+                        Value = CS_tbPhong_Ban.Type,
+                        Text = CS_tbPhong_Ban.Type,
                     });
                 }
 
-                model.Project_Type_All = items;
+                model.Phong_Ban_All = items;
                 return View(model);
                 //--------Add Dropdown for Type-------------------//
             }
         }
 
         //
-        // POST: /Admin/Project/Delete/5
+        // POST: /Admin/Thiet_Bi/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
@@ -986,8 +983,8 @@ namespace ShopOnline.Controllers
                 {
                     ProjectViewModel model = new ProjectViewModel();
 
-                    Project Exsiting_Type = db.Projects.Find(id);
-                    db.Projects.Remove(Exsiting_Type);
+                    Thiet_Bi Exsiting_Type = db.Thiet_Bis.Find(id);
+                    db.Thiet_Bis.Remove(Exsiting_Type);
                     db.SaveChanges();
 
                     return View("Finish", model);
@@ -1000,23 +997,23 @@ namespace ShopOnline.Controllers
                     //--------Add Dropdown for Type-------------------//
                     ProjectViewModel model = new ProjectViewModel();
                         //--------Select ID trả kết quả về View-----------//
-                        model.SelectedProject = db.Projects.Find(id);
+                        model.SelectedProject = db.Thiet_Bis.Find(id);
                         //--------Select ID trả kết quả về View-----------//
-                    model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                    model.CS_tbConstructionSiteType = db.CS_tbConstructionSiteType.OrderBy(m => m.ID).ToList();
-                    model.Project_Type_All = new List<SelectListItem>();
+                    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                    model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                    model.Phong_Ban_All = new List<SelectListItem>();
                     var items = new List<SelectListItem>();
 
-                    foreach (var CS_tbConstructionSiteType in model.CS_tbConstructionSiteType)
+                    foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = CS_tbConstructionSiteType.Type,
-                            Text = CS_tbConstructionSiteType.Type,
+                            Value = CS_tbPhong_Ban.Type,
+                            Text = CS_tbPhong_Ban.Type,
                         });
                     }
 
-                    model.Project_Type_All = items;
+                    model.Phong_Ban_All = items;
                     return View(model);
                     //--------Add Dropdown for Type-------------------//
                 }
@@ -1047,8 +1044,8 @@ namespace ShopOnline.Controllers
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 //--------Add Dropdown for Type-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                Card_number = db.Projects.OrderBy(m => m.ID).Count();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
             }
 
             //Microsoft.Office.Interop.Excel.Workbook workbook;
@@ -1095,7 +1092,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 48;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 3)))
                     {
@@ -1104,7 +1101,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 2] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 3] = model.Project[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_right, 3] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 2] = "Ngày cấp:";
@@ -1114,7 +1111,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 2] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 3] = model.Project[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_right, 3] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 2] = "Mã Thiết bị:";
@@ -1150,7 +1147,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 48;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 2, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("G" + current_rownum_left, "H" + (current_rownum_left + 3)))
                     {
@@ -1159,7 +1156,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 7] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 8] = model.Project[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_left, 8] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 7] = "Ngày cấp:";
@@ -1169,7 +1166,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 7] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_left, 7].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 8] = model.Project[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_left, 8] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 7] = "Mã Thiết bị:";
@@ -1221,8 +1218,8 @@ namespace ShopOnline.Controllers
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 //--------Add Dropdown for Type-------------------//
-                model.Project = db.Projects.OrderBy(m => m.ID).ToList();
-                Card_number = db.Projects.OrderBy(m => m.ID).Count();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
             }
 
             //Microsoft.Office.Interop.Excel.Workbook workbook;
@@ -1269,7 +1266,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("A" + current_rownum_right, "B" + (current_rownum_right + 4)))
                     {
@@ -1278,7 +1275,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 1] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Project[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Ngày cấp:";
@@ -1288,12 +1285,12 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 1] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Project[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Vị Trí:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Project[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Vi_Tri;
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Mã Thiết bị:";
@@ -1330,7 +1327,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("E" + current_rownum_mid, "F" + (current_rownum_mid + 4)))
                     {
@@ -1339,7 +1336,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_mid, 5] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Project[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Ngày cấp:";
@@ -1349,12 +1346,12 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_mid, 5] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Project[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Vị Trí:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Project[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Vi_Tri;
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Mã Thiết bị:";
@@ -1390,7 +1387,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Project/Edit/" + model.Project[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("I" + current_rownum_left, "J" + (current_rownum_left + 4)))
                     {
@@ -1399,7 +1396,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 9] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Project[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Ngày cấp:";
@@ -1409,12 +1406,12 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 9] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Project[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Vị Trí:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Project[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Vi_Tri;
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Mã Thiết bị:";

@@ -18,7 +18,7 @@ namespace Models
         public List<CS_tbLLTCTypeSub>       CS_tbLLTCTypeSub        { get; set; }
         public CS_tbLLTCTypeSub             CS_tbLLTCTypeSub_Select { get; set; }
 
-        public List<Project>                Project                 { get; set; }
+        public List<Thiet_Bi>                Thiet_Bi                 { get; set; }
         public List<CS_tbWorkType>          CS_tbWorkType           { get; set; }
         public List<CS_tbViTri>      CS_tbViTri       { get; set; }
 

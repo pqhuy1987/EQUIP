@@ -11,7 +11,7 @@ namespace ShopOnline.Controllers
     public class CS_tbViTriController : Controller
     {
         //
-        // GET: /CS_tbConstructionSiteType/
+        // GET: /CS_tbPhong_Ban/
 
         public ActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Details/5
+        // GET: /CS_tbPhong_Ban/Details/5
 
         public ActionResult Details(int id)
         {
@@ -32,7 +32,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Create
+        // GET: /CS_tbPhong_Ban/Create
 
         public ActionResult Create()
         {
@@ -40,7 +40,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Create
+        // POST: /CS_tbPhong_Ban/Create
 
         [HttpPost]
         public ActionResult Create(CS_tbViTriViewModel collection)
@@ -64,7 +64,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Edit/5
+        // GET: /CS_tbPhong_Ban/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -79,7 +79,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Edit/5
+        // POST: /CS_tbPhong_Ban/Edit/5
 
         [HttpPost]
         public ActionResult Save(int id, CS_tbViTriViewModel collection)
@@ -107,7 +107,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // GET: /CS_tbConstructionSiteType/Delete/5
+        // GET: /CS_tbPhong_Ban/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -122,7 +122,7 @@ namespace ShopOnline.Controllers
         }
 
         //
-        // POST: /CS_tbConstructionSiteType/Delete/5
+        // POST: /CS_tbPhong_Ban/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

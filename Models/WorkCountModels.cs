@@ -14,7 +14,7 @@ namespace Models
         public List<DateTime>   SelectDate              { get; set; }
         public List<DateTime>   SelectDate_Temp         { get; set; }
         public List<Catelory>   Catelory                { get; set; }
-        public List<Project>    Project                 { get; set; }
+        public List<Thiet_Bi>    Thiet_Bi                 { get; set; }
         public List<WorkCount> WorkCount                { get; set; }
         public List<List<WorkCount>>  WorkCount_List    { get; set; }
         public List<List<WorkCount>>  WorkCount_List_2  { get; set; }
@@ -23,7 +23,7 @@ namespace Models
 
         public List<int>  Count_Number                   { get; set; }
 
-        public Project SelectedProject                  { get; set; }
+        public Thiet_Bi SelectedProject                  { get; set; }
         public WorkCount SelectedWorkCount              { get; set; }
 
         public List<Catelory> Catelory_Project          { get; set; }
