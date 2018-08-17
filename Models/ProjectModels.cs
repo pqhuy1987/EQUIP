@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using Models.Framework;
 using System.Data.SqlClient;
 using System.Web.Mvc;
-
 namespace Models
 {
     public class ProjectViewModel
     {
-        public List<Thiet_Bi>                    Thiet_Bi                   { get; set; }
-        public Thiet_Bi                          SelectedProject            { get; set; }
+        public List<Thiet_Bi>                   Thiet_Bi                   { get; set; }
+        public Thiet_Bi                         SelectedProject            { get; set; }
         public List<CS_tbLLTCTypeSub>           CS_tbLLTCTypeSub            { get; set; }
         public CS_tbLLTCTypeSub                 CS_tbLLTCTypeSub_Select     { get; set; }
         public List<LLTC>                       LLTC                        { get; set; }
         public LLTC                             LLTC_Select                 { get; set; }
+        public LoginModel                       LoginModel                  { get; set; }
         public List<CS_tbWorkType>              CS_tbWorkType               { get; set; }
         public List<CS_tbViTri>                 CS_tbViTri                  { get; set; }
 

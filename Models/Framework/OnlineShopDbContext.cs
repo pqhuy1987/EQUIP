@@ -15,7 +15,7 @@ namespace Models.Framework
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Catelory> Catelories { get; set; }
         public virtual DbSet<LLTC> LLTCs { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Phan_Quyen> Phan_Quyens { get; set; }
         public virtual DbSet<Thiet_Bi> Thiet_Bis { get; set; }
         public virtual DbSet<WorkCount> WorkCounts { get; set; }
         public virtual DbSet<CS_tbPhong_Ban> CS_tbPhong_Ban { get; set; }
@@ -31,13 +31,11 @@ namespace Models.Framework
                 .Property(e => e.Email)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Alias)
-                .IsUnicode(false);
+            modelBuilder.Entity<Phan_Quyen>()
+                .Property(e => e.ID);
 
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Price)
-                .HasPrecision(18, 0);
+            modelBuilder.Entity<Phan_Quyen>()
+                .Property(e => e.Dia_Chi_Mail);
         }
     }
 }

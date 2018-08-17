@@ -6,30 +6,13 @@ namespace Models.Framework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Product")]
-    public partial class Product
+    [Table("Phan_Quyen")]
+    public partial class Phan_Quyen
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string Dia_Chi_Mail { get; set; }
 
-        [StringLength(50)]
-        public string Alias { get; set; }
-
-        public int? CategoryID { get; set; }
-
-        [StringLength(250)]
-        public string Images { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-
-        public decimal? Price { get; set; }
-
-        [Column(TypeName = "ntext")]
-        public string Detail { get; set; }
-
-        public bool? Status { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ShopOnline.Areas.Admin.Models;
 using Models;
 using ShopOnline.Areas.Admin.Code;
 using System.Web.Security;

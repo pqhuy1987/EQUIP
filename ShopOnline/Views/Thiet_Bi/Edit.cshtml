@@ -1,7 +1,9 @@
 ﻿@model Models.ProjectViewModel
 @{
+    HttpCookie cookie = Request.Cookies["login"];
+    HttpCookie cookie_edit = Request.Cookies["login_edit"];
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout_Temp.cshtml";
+    Layout = "~/Views/Shared/_Layout_Edit.cshtml";
 }
 
 <div class="row">
@@ -141,7 +143,15 @@
                                             @Html.ValidationMessageFor(model => Model.SelectedProject.Ghi_Chu_2, null, new { @class = "text-danger", style = "font-weight:bold" })
                                         </div>
                                     <p>
-                                        <button type="submit" value="Sửa" class="btn btn-success"> <b>LƯU</b> </button>
+                                        @{
+                                            if ((cookie == null) && (cookie_edit == null))
+                                            {
+                                                ;
+                                            } else 
+                                            {
+                                                <button type="submit" value="Sửa" class="btn-sub btn-success"> <b>LƯU</b> </button>
+                                            }
+                                        }
                                     </p>
                                 }
                             }
