@@ -54,7 +54,11 @@
   <ItemGroup>
     <Compile Include="AccountModels.cs" />
     <Compile Include="CateloryModels.cs" />
+    <Compile Include="Code_EquipModels.cs" />
+    <Compile Include="Code_GroupModels.cs" />
     <Compile Include="CS_tbWorkCountModels.cs" />
+    <Compile Include="Framework\Code_Equip.cs" />
+    <Compile Include="Framework\Code_Group.cs" />
     <Compile Include="Framework\CS_tbWorkCount.cs" />
     <Compile Include="CS_tbWorkTypeMainModels.cs" />
     <Compile Include="CS_tbConstructioSiteTypeModel.cs" />

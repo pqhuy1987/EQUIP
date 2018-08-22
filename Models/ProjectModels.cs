@@ -11,8 +11,8 @@ namespace Models
 {
     public class ProjectViewModel
     {
-        public List<Thiet_Bi>                   Thiet_Bi                   { get; set; }
-        public Thiet_Bi                         SelectedProject            { get; set; }
+        public List<Thiet_Bi>                   Thiet_Bi                    { get; set; }
+        public Thiet_Bi                         SelectedProject             { get; set; }
         public List<CS_tbLLTCTypeSub>           CS_tbLLTCTypeSub            { get; set; }
         public CS_tbLLTCTypeSub                 CS_tbLLTCTypeSub_Select     { get; set; }
         public List<LLTC>                       LLTC                        { get; set; }
@@ -24,7 +24,7 @@ namespace Models
         public string DisplayMode                                           { get; set; }
         public int DisplayModeSub                                           { get; set; }
 
-        public List<CS_tbPhong_Ban>  CS_tbPhong_Ban   { get; set; }
+        public List<CS_tbPhong_Ban>             CS_tbPhong_Ban              { get; set; }
 
         public List<SelectListItem>             Phong_Ban_All               { get; set; }
         public List<SelectListItem>             Vi_Tri_All                  { get; set; }

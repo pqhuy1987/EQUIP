@@ -137,6 +137,8 @@
     <Compile Include="Code\SessionHelper.cs" />
     <Compile Include="Code\UserSession.cs" />
     <Compile Include="Controllers\CateloryController.cs" />
+    <Compile Include="Controllers\Code_EquipController.cs" />
+    <Compile Include="Controllers\Code_GroupController.cs" />
     <Compile Include="Controllers\CS_tbPhong_BanController.cs" />
     <Compile Include="Controllers\CS_tbWorkCountController.cs" />
     <Compile Include="Controllers\CS_tbWorkTypeController.cs" />
@@ -543,6 +545,8 @@
     <Content Include="Views\Thiet_Bi\Details.cshtml" />
     <Content Include="Views\Shared\_Layout_Edit.cshtml" />
     <Content Include="Views\Shared\_LeftMenu_Edit.cshtml" />
+    <Content Include="Views\Code_Equip\Index.cshtml" />
+    <Content Include="Views\Code_Group\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,8 @@ namespace Models.Framework
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Catelory> Catelories { get; set; }
+        public virtual DbSet<Code_Group> Code_Group { get; set; }
+        public virtual DbSet<Code_Equip> Code_Equip { get; set; }
         public virtual DbSet<LLTC> LLTCs { get; set; }
         public virtual DbSet<Phan_Quyen> Phan_Quyens { get; set; }
         public virtual DbSet<Thiet_Bi> Thiet_Bis { get; set; }
