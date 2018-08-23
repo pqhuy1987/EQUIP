@@ -17,11 +17,11 @@
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Phong_Ban { get; set; }
+        public int Phong_Ban { get; set; }
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]
-        public string Vi_Tri    { get; set; }
+        public int Vi_Tri    { get; set; }
 
         //[Required(ErrorMessage = "Không được để trống nội dung này")]
         //[StringLength(50, ErrorMessage = "Nội dung nhập vào không quá 50 ký tự")]

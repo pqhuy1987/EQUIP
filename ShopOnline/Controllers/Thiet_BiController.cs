@@ -26,8 +26,9 @@ namespace ShopOnline.Controllers
             {
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model      = new ProjectViewModel();
-                model.Thiet_Bi                       = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
-                model.CS_tbPhong_Ban     = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Thiet_Bi_Table        = Load_ThietBi();
+                model.Thiet_Bi              = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban        = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 model.Phong_Ban_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
 
@@ -35,7 +36,7 @@ namespace ShopOnline.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value   = CS_tbPhong_Ban.Type,
+                        Value   = CS_tbPhong_Ban.ID.ToString(),
                         Text    = CS_tbPhong_Ban.Type,
                     });
                 }
@@ -656,7 +657,7 @@ namespace ShopOnline.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = CS_tbPhong_Ban.Type,
+                        Value = CS_tbPhong_Ban.ID.ToString(),
                         Text = CS_tbPhong_Ban.Type,
                     });
                 }
@@ -1036,9 +1037,9 @@ namespace ShopOnline.Controllers
         {
             List<int> Section_RowNum = new List<int>();
 
-            int current_rownum_right = 1;
-            int current_rownum_mid = 1;
-            int current_rownum_left = 1;
+            int current_rownum_right = 3;
+            int current_rownum_mid = 3;
+            int current_rownum_left = 3;
             int Card_number;
             ProjectViewModel model = new ProjectViewModel();
 
@@ -1068,191 +1069,192 @@ namespace ShopOnline.Controllers
 
             var xlCells = workSheet.Cells;
             Excel.Range EntireRow = xlCells.EntireRow;
-            EntireRow.RowHeight = 4;
+            EntireRow.RowHeight = 5;
 
             for (int i = 0; i < Card_number; i++)
             {
-                if (i % 3 == 0)
-                {
+                //if (i % 3 == 0)
+               // {
                     //------------------------------QR_CARD_RIGHT------------------------------//
                     current_rownum_right++;
 
-                    workSheet.get_Range("A" + current_rownum_right, "A" + (current_rownum_right + 2)).Merge();
-                    workSheet.get_Range("A" + current_rownum_right, "A" + (current_rownum_right + 2)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 1];
+                    workSheet.get_Range("B" + current_rownum_right, "B" + (current_rownum_right + 2)).Merge();
+                    workSheet.get_Range("B" + current_rownum_right, "B" + (current_rownum_right + 2)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 2];
                     float Left_logo = (float)((double)oRange_logo.Left);
                     float Top_logo = (float)((double)oRange_logo.Top);
-                    const float ImageSize_logo_W = 18;
+                    const float ImageSize_logo_W = 16;
                     const float ImageSize_logo_H = 9;
-                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 2, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 4, Top_logo + 3, ImageSize_logo_W, ImageSize_logo_H);
 
-                    workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 2)).Merge();
-                    workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 2)).BorderAround2();
-                    oSheet.Cells[current_rownum_right, 2] = "TEM THIẾT BỊ VĂN PHÒNG";
-                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    workSheet.get_Range("C" + current_rownum_right, "C" + (current_rownum_right + 2)).Merge();
+                    workSheet.get_Range("C" + current_rownum_right, "C" + (current_rownum_right + 2)).BorderAround2();
+                    oSheet.Cells[current_rownum_right, 3] = "TEM THIẾT BỊ VĂN PHÒNG";
+                    oSheet.Cells[current_rownum_right, 3].Font.Bold = true;
+
+                    workSheet.get_Range("D" + current_rownum_right, "D" + (current_rownum_right + 7)).Merge();
+                    workSheet.get_Range("D" + current_rownum_right, "D" + (current_rownum_right + 7)).BorderAround2();
+                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 4];
+                    float Left = (float)((double)oRange.Left);
+                    float Top = (float)((double)oRange.Top);
+                    const float ImageSize = 34;
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_right = current_rownum_right + 3;
-                    workSheet.get_Range("C" + current_rownum_right, "C" + (current_rownum_right + 4)).Merge();
-                    workSheet.get_Range("C" + current_rownum_right, "C" + (current_rownum_right + 4)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_right, 3];
-                    float Left = (float)((double)oRange.Left);
-                    float Top = (float)((double)oRange.Top);
-                    const float ImageSize = 18;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 5, ImageSize, ImageSize);
 
-                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("A" + current_rownum_right, "B" + (current_rownum_right + 4)))
+                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("B" + current_rownum_right, "C" + (current_rownum_right + 4)))
                     {
                         cell.BorderAround2();
                     }
 
-                    oSheet.Cells[current_rownum_right, 1] = "Tên Thiết bị:";
-                    oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_right, 2] = "Tên Thiết bị:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = model.Thiet_Bi[i].Ten_Thiet_Bi;
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1] = "Ngày cấp:";
-                    oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = "13-08-2018";
+                    oSheet.Cells[current_rownum_right, 2] = "Ngày cấp:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "13-08-2018";
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1] = "Phòng/Ban:";
-                    oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_right, 2] = "Phòng/Ban:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = model.Thiet_Bi[i].Phong_Ban;
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1] = "Vị Trí:";
-                    oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_right, 2] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = model.Thiet_Bi[i].Vi_Tri;
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1] = "Mã Thiết bị:";
-                    oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = "BAN_0.6x1.2_001";
+                    oSheet.Cells[current_rownum_right, 2] = "Mã Thiết bị:";
+                    oSheet.Cells[current_rownum_right, 2].Font.Bold = true;
+                    oSheet.Cells[current_rownum_right, 3] = "BAN_0.6x1.2_001";
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1].RowHeight = 12;
+                    oSheet.Cells[current_rownum_right, 2].RowHeight = 11;
                     //------------------------------QR_CARD_RIGHT------------------------------//
-                }
-                else if (i % 3 == 1)
-                {
-                    //------------------------------QR_CARD_MIDDLE------------------------------//
-                    current_rownum_mid++;
+                //}
+                //else if (i % 3 == 1)
+                //{
+                //    //------------------------------QR_CARD_MIDDLE------------------------------//
+                //    current_rownum_mid++;
 
-                    workSheet.get_Range("E" + current_rownum_mid, "E" + (current_rownum_mid + 2)).Merge();
-                    workSheet.get_Range("E" + current_rownum_mid, "E" + (current_rownum_mid + 2)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_mid, 5];
-                    float Left_logo = (float)((double)oRange_logo.Left);
-                    float Top_logo = (float)((double)oRange_logo.Top);
-                    const float ImageSize_logo_W = 18;
-                    const float ImageSize_logo_H = 9;
-                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 2, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
+                //    workSheet.get_Range("E" + current_rownum_mid, "E" + (current_rownum_mid + 2)).Merge();
+                //    workSheet.get_Range("E" + current_rownum_mid, "E" + (current_rownum_mid + 2)).BorderAround2();
+                //    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_mid, 5];
+                //    float Left_logo = (float)((double)oRange_logo.Left);
+                //    float Top_logo = (float)((double)oRange_logo.Top);
+                //    const float ImageSize_logo_W = 18;
+                //    const float ImageSize_logo_H = 9;
+                //    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 2, Top_logo + 4, ImageSize_logo_W, ImageSize_logo_H);
 
-                    workSheet.get_Range("F" + current_rownum_mid, "G" + (current_rownum_mid + 2)).Merge();
-                    workSheet.get_Range("F" + current_rownum_mid, "G" + (current_rownum_mid + 2)).BorderAround2();
-                    oSheet.Cells[current_rownum_mid, 6] = "TEM THIẾT BỊ VĂN PHÒNG";
-                    oSheet.Cells[current_rownum_mid, 6].Font.Bold = true;
+                //    workSheet.get_Range("F" + current_rownum_mid, "G" + (current_rownum_mid + 2)).Merge();
+                //    workSheet.get_Range("F" + current_rownum_mid, "G" + (current_rownum_mid + 2)).BorderAround2();
+                //    oSheet.Cells[current_rownum_mid, 6] = "TEM THIẾT BỊ VĂN PHÒNG";
+                //    oSheet.Cells[current_rownum_mid, 6].Font.Bold = true;
 
-                    current_rownum_mid = current_rownum_mid + 3;
-                    workSheet.get_Range("G" + current_rownum_mid, "G" + (current_rownum_mid + 4)).Merge();
-                    workSheet.get_Range("G" + current_rownum_mid, "G" + (current_rownum_mid + 4)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_mid, 7];
-                    float Left = (float)((double)oRange.Left);
-                    float Top = (float)((double)oRange.Top);
-                    const float ImageSize = 18;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 5, ImageSize, ImageSize);
+                //    current_rownum_mid = current_rownum_mid + 3;
+                //    workSheet.get_Range("G" + current_rownum_mid, "G" + (current_rownum_mid + 4)).Merge();
+                //    workSheet.get_Range("G" + current_rownum_mid, "G" + (current_rownum_mid + 4)).BorderAround2();
+                //    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_mid, 7];
+                //    float Left = (float)((double)oRange.Left);
+                //    float Top = (float)((double)oRange.Top);
+                //    const float ImageSize = 18;
+                //    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 2, Top + 5, ImageSize, ImageSize);
 
-                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("E" + current_rownum_mid, "F" + (current_rownum_mid + 4)))
-                    {
-                        cell.BorderAround2();
-                    }
+                //    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("E" + current_rownum_mid, "F" + (current_rownum_mid + 4)))
+                //    {
+                //        cell.BorderAround2();
+                //    }
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Tên Thiết bị:";
-                    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Ten_Thiet_Bi;
-                    current_rownum_mid++;
+                //    oSheet.Cells[current_rownum_mid, 5] = "Tên Thiết bị:";
+                //    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                //    current_rownum_mid++;
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Ngày cấp:";
-                    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = "13-08-2018";
-                    current_rownum_mid++;
+                //    oSheet.Cells[current_rownum_mid, 5] = "Ngày cấp:";
+                //    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_mid, 6] = "13-08-2018";
+                //    current_rownum_mid++;
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Phòng/Ban:";
-                    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Phong_Ban;
-                    current_rownum_mid++;
+                //    oSheet.Cells[current_rownum_mid, 5] = "Phòng/Ban:";
+                //    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Phong_Ban;
+                //    current_rownum_mid++;
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Vị Trí:";
-                    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Vi_Tri;
-                    current_rownum_mid++;
+                //    oSheet.Cells[current_rownum_mid, 5] = "Vị Trí:";
+                //    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Vi_Tri;
+                //    current_rownum_mid++;
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Mã Thiết bị:";
-                    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = "BAN_0.6x1.2_001";
-                    current_rownum_mid++;
-                    oSheet.Cells[current_rownum_mid, 5].RowHeight = 12;
-                    //------------------------------QR_CARD_MIDDLE------------------------------//
-                }
-                else if (i % 3 == 2)
-                {
-                    //------------------------------QR_CARD_LEFT------------------------------//
-                    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_mid, 5] = "Mã Thiết bị:";
+                //    oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_mid, 6] = "BAN_0.6x1.2_001";
+                //    current_rownum_mid++;
+                //    oSheet.Cells[current_rownum_mid, 5].RowHeight = 12;
+                //    //------------------------------QR_CARD_MIDDLE------------------------------//
+                //}
+                //else if (i % 3 == 2)
+                //{
+                //    //------------------------------QR_CARD_LEFT------------------------------//
+                //    current_rownum_left++;
 
-                    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 2)).Merge();
-                    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 2)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 9];
-                    float Left_logo = (float)((double)oRange_logo.Left);
-                    float Top_logo = (float)((double)oRange_logo.Top);
-                    const float ImageSize_logo_W = 36;
-                    const float ImageSize_logo_H = 18;
-                    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 5, Top_logo + 8, ImageSize_logo_W, ImageSize_logo_H);
+                //    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 2)).Merge();
+                //    workSheet.get_Range("I" + current_rownum_left, "I" + (current_rownum_left + 2)).BorderAround2();
+                //    Microsoft.Office.Interop.Excel.Range oRange_logo = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 9];
+                //    float Left_logo = (float)((double)oRange_logo.Left);
+                //    float Top_logo = (float)((double)oRange_logo.Top);
+                //    const float ImageSize_logo_W = 36;
+                //    const float ImageSize_logo_H = 18;
+                //    workSheet.Shapes.AddPicture(filepathImageLogo, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left_logo + 5, Top_logo + 8, ImageSize_logo_W, ImageSize_logo_H);
 
-                    workSheet.get_Range("J" + current_rownum_left, "K" + (current_rownum_left + 2)).Merge();
-                    workSheet.get_Range("J" + current_rownum_left, "K" + (current_rownum_left + 2)).BorderAround2();
-                    oSheet.Cells[current_rownum_left, 10] = "TEM THIẾT BỊ VĂN PHÒNG";
-                    oSheet.Cells[current_rownum_left, 10].Font.Bold = true;
+                //    workSheet.get_Range("J" + current_rownum_left, "K" + (current_rownum_left + 2)).Merge();
+                //    workSheet.get_Range("J" + current_rownum_left, "K" + (current_rownum_left + 2)).BorderAround2();
+                //    oSheet.Cells[current_rownum_left, 10] = "TEM THIẾT BỊ VĂN PHÒNG";
+                //    oSheet.Cells[current_rownum_left, 10].Font.Bold = true;
 
-                    current_rownum_left = current_rownum_left + 3;
-                    workSheet.get_Range("K" + current_rownum_left, "K" + (current_rownum_left + 4)).Merge();
-                    workSheet.get_Range("K" + current_rownum_left, "K" + (current_rownum_left + 4)).BorderAround2();
-                    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 11];
-                    float Left = (float)((double)oRange.Left);
-                    float Top = (float)((double)oRange.Top);
-                    const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                //    current_rownum_left = current_rownum_left + 3;
+                //    workSheet.get_Range("K" + current_rownum_left, "K" + (current_rownum_left + 4)).Merge();
+                //    workSheet.get_Range("K" + current_rownum_left, "K" + (current_rownum_left + 4)).BorderAround2();
+                //    Microsoft.Office.Interop.Excel.Range oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[current_rownum_left, 11];
+                //    float Left = (float)((double)oRange.Left);
+                //    float Top = (float)((double)oRange.Top);
+                //    const float ImageSize = 36;
+                //    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://cwd.fdcc.com.vn:8888/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
-                    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("I" + current_rownum_left, "J" + (current_rownum_left + 4)))
-                    {
-                        cell.BorderAround2();
-                    }
+                //    foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("I" + current_rownum_left, "J" + (current_rownum_left + 4)))
+                //    {
+                //        cell.BorderAround2();
+                //    }
 
-                    oSheet.Cells[current_rownum_left, 9] = "Tên Thiết bị:";
-                    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Ten_Thiet_Bi;
-                    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_left, 9] = "Tên Thiết bị:";
+                //    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                //    current_rownum_left++;
 
-                    oSheet.Cells[current_rownum_left, 9] = "Ngày cấp:";
-                    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = "13-08-2018";
-                    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_left, 9] = "Ngày cấp:";
+                //    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_left, 10] = "13-08-2018";
+                //    current_rownum_left++;
 
-                    oSheet.Cells[current_rownum_left, 9] = "Phòng/Ban:";
-                    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Phong_Ban;
-                    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_left, 9] = "Phòng/Ban:";
+                //    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Phong_Ban;
+                //    current_rownum_left++;
 
-                    oSheet.Cells[current_rownum_left, 9] = "Vị Trí:";
-                    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Vi_Tri;
-                    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_left, 9] = "Vị Trí:";
+                //    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Vi_Tri;
+                //    current_rownum_left++;
 
-                    oSheet.Cells[current_rownum_left, 9] = "Mã Thiết bị:";
-                    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = "BAN_0.6x1.2_001";
-                    current_rownum_left++;
-                    oSheet.Cells[current_rownum_left, 9].RowHeight = 12;
-                    //------------------------------QR_CARD_LEFT------------------------------//
-                }
+                //    oSheet.Cells[current_rownum_left, 9] = "Mã Thiết bị:";
+                //    oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
+                //    oSheet.Cells[current_rownum_left, 10] = "BAN_0.6x1.2_001";
+                //    current_rownum_left++;
+                //    oSheet.Cells[current_rownum_left, 9].RowHeight = 12;
+                //    //------------------------------QR_CARD_LEFT------------------------------//
+                //}
             }
 
             //Saving the excel file to “e” directory
@@ -1547,6 +1549,33 @@ namespace ShopOnline.Controllers
                 cmd = new SqlCommand("LLTC_Get_List_By_All_Project", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
           
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Load_ThietBi()
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            SqlConnection conn = null;
+            conn = new SqlConnection(string.Format("Data Source=SRBDC.FDC.LOCAL; Initial Catalog=EQUIP; User id=sa; Password=P@ssw0rd"));
+            try
+            {
+                cmd = new SqlCommand("Thiet_Bi_List", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);

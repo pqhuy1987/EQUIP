@@ -547,6 +547,14 @@
     <Content Include="Views\Shared\_LeftMenu_Edit.cshtml" />
     <Content Include="Views\Code_Equip\Index.cshtml" />
     <Content Include="Views\Code_Group\Index.cshtml" />
+    <Content Include="Views\Code_Group\Create.cshtml" />
+    <Content Include="Views\Code_Group\Edit.cshtml" />
+    <Content Include="Views\Code_Group\Delete.cshtml" />
+    <Content Include="Views\Code_Group\Finish.cshtml" />
+    <Content Include="Views\Code_Equip\Create.cshtml" />
+    <Content Include="Views\Code_Equip\Edit.cshtml" />
+    <Content Include="Views\Code_Equip\Delete.cshtml" />
+    <Content Include="Views\Code_Equip\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

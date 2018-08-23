@@ -1,4 +1,5 @@
-﻿@model Models.ProjectViewModel
+﻿@using System.Data;
+@model Models.ProjectViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -61,27 +62,28 @@
                     </thead>
                     <tbody>
                         @{int i = 1;}
-                        @foreach (var item in Model.Thiet_Bi)
+                        @foreach (DataRow row in Model.Thiet_Bi_Table.Rows)
                         {
                             <tr class="odd gradeX">
                                 <td>@i</td>
-                                <td><div class="zoom"> <img src="@Url.Content("~/Assets/images/" + item.Hinh_Anh)" alt="IMAGES" style="width: 35px; height: 35px; display: block; margin: 0 auto;" /></div></td>
-                                <td>@item.Ten_Thiet_Bi </td>
-                                <td>@item.Ma_Thiet_Bi</td>
-                                <td>@item.Don_Gia</td>
-                                <td>@item.Phong_Ban</td>
-                                <td>@item.Vi_Tri</td>
-                                <td>@item.Don_Gia</td>
-                                <td>@item.Don_Gia</td>
+                                <td><div class="zoom"> <img src="@Url.Content("~/Assets/images/" + @row["Hinh_Anh"])" alt="IMAGES" style="width: 35px; height: 35px; display: block; margin: 0 auto;" /></div></td>
+                                <td>@row["Ten_Thiet_Bi"]</td>
+                                <td>@row["Ma_Thiet_Bi"]</td>
+                                <td>@row["Don_Gia"]</td>
+                                <td>@row["Type"]</td>
+                                <td>@row["CS_ViTri"]</td>
+                                <td>@row["Ghi_Chu_1"]</td>
+                                <td>@row["Ghi_Chu_2"]</td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/Thiet_Bi/Edit/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
+                                    <button type="submit" onclick="window.open('/Thiet_Bi/Edit/'+@row["ID"] , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-success"><b>Sửa</b></button>
                                 </td>
                                 <td>
-                                    <button type="submit" onclick="window.open('/Thiet_Bi/Delete/'+@item.ID , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
+                                    <button type="submit" onclick="window.open('/Thiet_Bi/Delete/'+@row["ID"] , 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" class="btn-sub btn-danger"><b>Xóa</b></button>
                                 </td>
                             </tr>
                             i++;
                         }
+
                     </tbody>
                 </table>
             </div>

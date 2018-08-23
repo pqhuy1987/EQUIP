@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Models.Framework;
-using System.Data.SqlClient;
+using System.Web;
 using System.Web.Mvc;
+using Models;
+using Models.Framework;
+using System.Runtime.InteropServices;
+
 namespace Models
 {
     public class ProjectViewModel
     {
+        public DataTable                        Thiet_Bi_Table              { get; set; }
         public List<Thiet_Bi>                   Thiet_Bi                    { get; set; }
         public Thiet_Bi                         SelectedProject             { get; set; }
         public List<CS_tbLLTCTypeSub>           CS_tbLLTCTypeSub            { get; set; }
