@@ -817,7 +817,7 @@ namespace ShopOnline.Controllers
                 {
                     items.Add(new SelectListItem()
                     {
-                        Value = CS_tbPhong_Ban.Type,
+                        Value = CS_tbPhong_Ban.ID.ToString(),
                         Text = CS_tbPhong_Ban.Type,
                     });
                 }
@@ -828,7 +828,7 @@ namespace ShopOnline.Controllers
                 {
                     items_2.Add(new SelectListItem()
                     {
-                        Value = CS_ViTri.CS_ViTri,
+                        Value = CS_ViTri.ID.ToString(),
                         Text = CS_ViTri.CS_ViTri,
                     });
                 }
@@ -889,7 +889,7 @@ namespace ShopOnline.Controllers
                     {
                         items.Add(new SelectListItem()
                         {
-                            Value = CS_tbPhong_Ban.Type,
+                            Value = CS_tbPhong_Ban.ID.ToString(),
                             Text = CS_tbPhong_Ban.Type,
                         });
                     }
@@ -900,7 +900,7 @@ namespace ShopOnline.Controllers
                     {
                         items_2.Add(new SelectListItem()
                         {
-                            Value = CS_ViTri.CS_ViTri,
+                            Value = CS_ViTri.ID.ToString(),
                             Text = CS_ViTri.CS_ViTri,
                         });
                     }
@@ -1050,7 +1050,11 @@ namespace ShopOnline.Controllers
                 Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
             }
 
+            //if (Card_number <=12 ) {
+            //   int Card_number_page_1 = Card_number - 12;
+            //}
             //Microsoft.Office.Interop.Excel.Workbook workbook;
+
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
 
             var excelApp = new Excel.Application();
@@ -1070,6 +1074,9 @@ namespace ShopOnline.Controllers
             var xlCells = workSheet.Cells;
             Excel.Range EntireRow = xlCells.EntireRow;
             EntireRow.RowHeight = 5;
+
+            current_rownum_right++;
+            oSheet.Cells[current_rownum_right, 2].RowHeight = 2;
 
             for (int i = 0; i < Card_number; i++)
             {
@@ -1132,7 +1139,19 @@ namespace ShopOnline.Controllers
                     oSheet.Cells[current_rownum_right, 3] = "BAN_0.6x1.2_001";
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 2].RowHeight = 11;
+                    if (((i!=0)&&(((i+1)%16)==0)))
+                    {
+                        oSheet.Cells[current_rownum_right, 2].RowHeight = 10;
+                        current_rownum_right = current_rownum_right + 2;
+                        current_rownum_right = current_rownum_right + 3;
+                        current_rownum_right++;
+                        oSheet.Cells[current_rownum_right, 2].RowHeight = 2;
+                    }
+                    else
+                    {
+                        oSheet.Cells[current_rownum_right, 2].RowHeight = 10;
+                    }
+                    
                     //------------------------------QR_CARD_RIGHT------------------------------//
                 //}
                 //else if (i % 3 == 1)
