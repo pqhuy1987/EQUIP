@@ -501,6 +501,7 @@
     <Content Include="Reports\Danh_sách_LLTC_theo_công_trường_ba_miền.xlsx" />
     <Content Include="Reports\DANH_SACH_QR_CODE.xlsx" />
     <None Include="Properties\PublishProfiles\Equip.pubxml" />
+    <Content Include="Reports\DANH_SACH_QR_CODE_LARGE.xlsx" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
