@@ -41,8 +41,10 @@ namespace ShopOnline.Controllers
                 }
                 model.WorkTypeMain_All = items;
                 //--------Add Dropdown for MainProjectName-------------------//
-                
-                return View(model);
+
+                ProjectViewModel model1 = new ProjectViewModel();
+
+                return View(model1);
             }
         }
 

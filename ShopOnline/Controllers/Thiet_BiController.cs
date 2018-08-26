@@ -47,6 +47,33 @@ namespace ShopOnline.Controllers
             }
         }
 
+        public ActionResult Index_2()
+        {
+            using (OnlineShopDbContext db = new OnlineShopDbContext())
+            {
+                //--------Add Dropdown for Type-------------------//
+                ProjectViewModel model = new ProjectViewModel();
+                model.Thiet_Bi_Table = Load_ThietBi();
+                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All = new List<SelectListItem>();
+                var items = new List<SelectListItem>();
+
+                foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
+                {
+                    items.Add(new SelectListItem()
+                    {
+                        Value = CS_tbPhong_Ban.ID.ToString(),
+                        Text = CS_tbPhong_Ban.Type,
+                    });
+                }
+
+                model.Phong_Ban_All = items;
+                return View(model);
+                //--------Add Dropdown for Type-------------------//               
+            }
+        }
+
         //
         // GET: /Admin/Thiet_Bi/Details/5
 
@@ -1671,11 +1698,22 @@ namespace ShopOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult Interop()
+        public ActionResult Interop_Index(ProjectViewModel GetIndex)
         {
-            Excel_Export_Small_Template();
+            ProjectViewModel model = new ProjectViewModel();
+            model = GetIndex;
+            //Excel_Export_Small_Template();
             //Excel_Export_Large_Template();
-            return RedirectToAction("LLTC", "Index");
+            return View("Index_2", model);
+
+        }
+
+        [HttpPost]
+        public ActionResult Interop(ProjectViewModel model)
+        {
+            //Excel_Export_Small_Template();
+            //Excel_Export_Large_Template();
+            return RedirectToAction("Index", "LLTC", model);
 
         }
 

@@ -556,6 +556,7 @@
     <Content Include="Views\Code_Equip\Edit.cshtml" />
     <Content Include="Views\Code_Equip\Delete.cshtml" />
     <Content Include="Views\Code_Equip\Finish.cshtml" />
+    <Content Include="Views\Thiet_Bi\Index_2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
