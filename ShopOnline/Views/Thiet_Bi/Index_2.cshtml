@@ -15,15 +15,12 @@
                    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
                }))
                 {
-                    @Html.DropDownListFor(model => Model.DisplayModeSub, new SelectList("1", "1"), "-- Chọn Group Thiết Bị --", new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
-                }
-                @using (Ajax.BeginForm("Interop_Index", "Thiet_Bi", new AjaxOptions
-                {
-                 HttpMethod = "Post",
-                 InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
-                }))
-                {
-                    @Html.DropDownListFor(model => Model.DisplayModeSub, new SelectList("1", "1"), "-- Chọn Group Thiết Bị --", new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
+                    @Html.DropDownListFor(model => Model.Select_Phong_Ban, Model.Phong_Ban_All, new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
+                    @Html.DropDownListFor(model => Model.Select_Group, Model.Code_Group_All, new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
+                    @Html.DropDownListFor(model => Model.Select_Size, new List<SelectListItem> { 
+                       new SelectListItem { Value = "0" , Text = "Decal dán to" },
+                       new SelectListItem { Value = "1" , Text = "Decal dán nhỏ" }
+                    }, new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
                 }
             </div>
 
@@ -41,18 +38,33 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Group Thiết Bị</th>
-                                <th>Mã Thiết Bị Chi Tiết</th>
-                                <th>Chọn</th>
-                                <th>Xóa</th>
+                                <th>Hình Ảnh</th>
+                                <th>Tên Thiết Bị</th>
+                                <th>Mã Thiết Bị</th>
+                                <th>Vị Trí</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (DataRow row in Model.Thiet_Bi_Table.Rows)
+                            {
+                                <tr class="odd gradeX">
+                                    <td>@i</td>
+                                    <td>@row["Hinh_Anh"]</td>
+                                    <td>@row["Ten_Thiet_Bi"] </td>
+                                    <td>@row["Ma_Thiet_Bi"]</td>
+                                    <td>@row["Vi_Tri"]</td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
                     </table>
                     @using (Html.BeginForm("Interop", "Thiet_Bi"))
                     {
                         <button id="interOpButton" type="submit" onclick="example_ajax_request()" style=" margin-top: 10px; margin-left:0px; margin-bottom: 10px" class="btn btn-primary"><b>+ XUẤT THẺ QR </b></button>
-                        @Html.TextBoxFor(model => Model.DisplayModeSub, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => Model.Select_Size, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => Model.Select_Phong_Ban, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => Model.Select_Group, new { @class = "form-control" })
                     }
                 </div>
             </div>

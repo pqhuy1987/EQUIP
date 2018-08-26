@@ -27,11 +27,15 @@ namespace Models
         public List<CS_tbViTri>                 CS_tbViTri                  { get; set; }
 
         public string DisplayMode                                           { get; set; }
-        public int DisplayModeSub                                           { get; set; }
+        public int Select_Size                                              { get; set; }
+        public int Select_Phong_Ban                                              { get; set; }
+        public int Select_Group                                              { get; set; }
 
         public List<CS_tbPhong_Ban>             CS_tbPhong_Ban              { get; set; }
+        public List<Code_Group>                 Code_Group                  { get; set; }
 
         public List<SelectListItem>             Phong_Ban_All               { get; set; }
+        public List<SelectListItem>             Code_Group_All              { get; set; }
         public List<SelectListItem>             Vi_Tri_All                  { get; set; }
         public List<SelectListItem>             Project_All                 { get; set; }
         public List<SelectListItem>             LLTC_Name_All               { get; set; }

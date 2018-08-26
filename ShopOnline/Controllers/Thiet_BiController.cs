@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -27,7 +29,6 @@ namespace ShopOnline.Controllers
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model      = new ProjectViewModel();
                 model.Thiet_Bi_Table        = Load_ThietBi();
-                model.Thiet_Bi              = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
                 model.CS_tbPhong_Ban        = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 model.Phong_Ban_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
@@ -53,8 +54,13 @@ namespace ShopOnline.Controllers
             {
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model = new ProjectViewModel();
-                model.Thiet_Bi_Table = Load_ThietBi();
-                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+
+                model.Select_Phong_Ban = db.CS_tbPhong_Ban.FirstOrDefault().ID;
+                model.Select_Group = db.Code_Group.FirstOrDefault().ID;
+
+                model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(model.Select_Phong_Ban, model.Select_Group);
+                
+
                 model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
                 model.Phong_Ban_All = new List<SelectListItem>();
                 var items = new List<SelectListItem>();
@@ -69,6 +75,22 @@ namespace ShopOnline.Controllers
                 }
 
                 model.Phong_Ban_All = items;
+
+                //--------Add Dropdown for Code_Group-------------------//
+                model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                model.Code_Group_All = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
+                foreach (var Code_Group_Main in model.Code_Group)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = Code_Group_Main.ID.ToString(),
+                        Text = Code_Group_Main.Code,
+                    });
+                }
+                model.Code_Group_All = items_2;
+                //--------Add Dropdown for Code_Group-------------------//
+
                 return View(model);
                 //--------Add Dropdown for Type-------------------//               
             }
@@ -617,12 +639,12 @@ namespace ShopOnline.Controllers
                 if (display != 1)
                 {
                     display = 1;
-                    model.DisplayModeSub = display;
+                    //model.DisplayModeSub = display;
                 }
                 else
                 {
                     display = 2;
-                    model.DisplayModeSub = display;
+                    //model.DisplayModeSub = display;
                 }
                 model.LLTC_Select = db.LLTCs.Find(LLTC_ID);
                 model.SelectedProject = db.Thiet_Bis.Find(id);
@@ -1050,17 +1072,40 @@ namespace ShopOnline.Controllers
 
         public void killExcel()
         {
-            System.Diagnostics.Process[] PROC = System.Diagnostics.Process.GetProcessesByName("EXCEL");
-            foreach (System.Diagnostics.Process PK in PROC)
+            Process[] excelProcsOld = Process.GetProcessesByName("EXCEL");
+            Excel.Application myExcelApp = null;
+            Excel.Workbooks excelWorkbookTemplate = null;
+            Excel.Workbook excelWorkbook = null;
+            try
             {
-                if (PK.MainWindowTitle.Length == 0)
+                //DO sth using myExcelApp , excelWorkbookTemplate, excelWorkbook
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                //Compare the EXCEL ID and Kill it 
+                Process[] excelProcsNew = Process.GetProcessesByName("EXCEL");
+                foreach (Process procNew in excelProcsNew)
                 {
-                    PK.Kill();
+                    int exist = 0;
+                    foreach (Process procOld in excelProcsOld)
+                    {
+                        if (procNew.Id == procOld.Id)
+                        {
+                            exist++;
+                        }
+                    }
+                    if (exist == 0)
+                    {
+                        procNew.Kill();
+                    }
                 }
             }
         }
 
-        public void Excel_Export_Small_Template()
+        public void Excel_Export_Small_Template(int Phong_Ban, int Group_Code)
         {
             List<int> Section_RowNum = new List<int>();
 
@@ -1071,14 +1116,10 @@ namespace ShopOnline.Controllers
             int Card_number;
             ProjectViewModel model = new ProjectViewModel();
 
-            using (OnlineShopDbContext db = new OnlineShopDbContext())
-            {
-                //--------Add Dropdown for Type-------------------//
-                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
-                Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
-            }
+            model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(Phong_Ban, Group_Code);
+            Card_number = model.Thiet_Bi_Table.Rows.Count;
 
-            Card_number = 128;
+            DataRow[] DataRow = model.Thiet_Bi_Table.Select();
 
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
 
@@ -1136,7 +1177,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_1 = current_rownum_1 + 3;
 
@@ -1145,9 +1186,9 @@ namespace ShopOnline.Controllers
                         cell.BorderAround2();
                     }
 
-                    oSheet.Cells[current_rownum_1, 2] = "Tên Thiết bị:";
+                    oSheet.Cells[current_rownum_1, 2]   = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][1].ToString();
                     current_rownum_1++;
 
                     oSheet.Cells[current_rownum_1, 2] = "Ngày cấp:";
@@ -1157,17 +1198,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_1, 2] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][2].ToString();
                     current_rownum_1++;
 
                     oSheet.Cells[current_rownum_1, 2] = "Group Thiết Bị:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = model.Thiet_Bi[i].Ma_Nhom;
+                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][12].ToString();
                     current_rownum_1++;
 
                     oSheet.Cells[current_rownum_1, 2] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = model.Thiet_Bi[i].Ma_Thiet_Bi;
+                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][6].ToString();
                     current_rownum_1++;
 
                     if (((i != 0) && (((i+1) % 64) == 0)))
@@ -1210,7 +1251,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_2 = current_rownum_2 + 3;
 
@@ -1221,7 +1262,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_2, 6] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][2].ToString();
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Ngày cấp:";
@@ -1231,17 +1272,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_2, 6] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][3].ToString();
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Group Thiết Bị:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = model.Thiet_Bi[i].Ma_Nhom;
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][12].ToString();
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = model.Thiet_Bi[i].Ma_Thiet_Bi;
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][6];
                     current_rownum_2++;
 
                     if (((i != 0) && (((i + 1) % 64) == 0)))
@@ -1284,7 +1325,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_3 = current_rownum_3 + 3;
 
@@ -1295,7 +1336,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_3, 10] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][2].ToString();
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Ngày cấp:";
@@ -1305,17 +1346,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_3, 10] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][3].ToString();
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Vị Trí:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][12].ToString();
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = model.Thiet_Bi[i].Ma_Thiet_Bi;
+                    oSheet.Cells[current_rownum_3, 11] =  DataRow[i][6].ToString();
                     current_rownum_3++;
 
                     if (((i != 0) && (((i + 1) % 64) == 0)))
@@ -1357,7 +1398,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1].ToString(), MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_4 = current_rownum_4 + 3;
 
@@ -1368,7 +1409,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_4, 14] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][2].ToString();
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Ngày cấp:";
@@ -1378,17 +1419,17 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_4, 14] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][3].ToString();
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Vị Trí:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][12].ToString();
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = model.Thiet_Bi[i].Ma_Thiet_Bi;
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][6].ToString();
                     current_rownum_4++;
 
                     if (((i != 0) && (((i + 1) % 64) == 0)))
@@ -1700,10 +1741,45 @@ namespace ShopOnline.Controllers
         [HttpPost]
         public ActionResult Interop_Index(ProjectViewModel GetIndex)
         {
+
             ProjectViewModel model = new ProjectViewModel();
+
             model = GetIndex;
-            //Excel_Export_Small_Template();
-            //Excel_Export_Large_Template();
+
+            using (OnlineShopDbContext db = new OnlineShopDbContext())
+            {
+                model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(GetIndex.Select_Phong_Ban, GetIndex.Select_Group);
+                //--------Add Dropdown for Code_Group-------------------//
+                model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                model.Code_Group_All = new List<SelectListItem>();
+                var items = new List<SelectListItem>();
+                foreach (var Code_Group_Main in model.Code_Group)
+                {
+                    items.Add(new SelectListItem()
+                    {
+                        Value = Code_Group_Main.ID.ToString(),
+                        Text = Code_Group_Main.Code,
+                    });
+                }
+                model.Code_Group_All = items;
+                //--------Add Dropdown for Code_Group-------------------//
+
+                //--------Add Dropdown for Phong_Ban-------------------//
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
+                foreach (var Phong_ban_Main in model.CS_tbPhong_Ban)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = Phong_ban_Main.ID.ToString(),
+                        Text = Phong_ban_Main.Type
+                    });
+                }
+                model.Phong_Ban_All = items_2;
+                //--------Add Dropdown for Phong_Ban-------------------//
+            }
+
             return View("Index_2", model);
 
         }
@@ -1711,23 +1787,31 @@ namespace ShopOnline.Controllers
         [HttpPost]
         public ActionResult Interop(ProjectViewModel model)
         {
-            //Excel_Export_Small_Template();
-            //Excel_Export_Large_Template();
-            return RedirectToAction("Index", "LLTC", model);
+            if (model.Select_Size == 0)
+            {
+                ;
+            }
+            else
+            {
+                Excel_Export_Small_Template(model.Select_Phong_Ban, model.Select_Group);
+            }
+            
+            return RedirectToAction("Interop_Index", "Thiet_Bi", model);
 
         }
 
-        System.Data.DataTable Load_LLTC_Excel_Report()
+        System.Data.DataTable Load_LLTC_Excel_Report_By_Condition(int Phong_Ban, int Ma_Nhom)
         {
             DataTable result = new DataTable();
             SqlCommand cmd = null;
             SqlConnection conn = null;
-            conn = new SqlConnection(string.Format("Data Source=SRBDC.FDC.LOCAL; Initial Catalog=CWD; User id=sa; Password=P@ssw0rd"));
+            conn = new SqlConnection(string.Format("Data Source=SRBDC.FDC.LOCAL; Initial Catalog=EQUIP; User id=sa; Password=P@ssw0rd"));
             try
             {
-                cmd = new SqlCommand("LLTC_Get_List_By_All_Project", conn);
+                cmd = new SqlCommand("Thiet_Bi_List_By_Condition", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-          
+                cmd.Parameters.AddWithValue("@Phong_Ban", Phong_Ban);
+                cmd.Parameters.AddWithValue("@Ma_Nhom", Ma_Nhom);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);
