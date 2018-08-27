@@ -4,6 +4,23 @@
     ViewBag.Title = "Index_2";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .hidden {
+        display: none;
+    }
+    .zoom:hover {
+        -moz-transition: all 1.7s;
+        -webkit-transition: all 1.7s;
+        transition: all 1.7s;
+        -moz-transform: scale(4.5);
+        -webkit-transform: scale(4.5);
+        transform: scale(4.5);
+    }
+    #dataTables td {
+        vertical-align: middle;
+    }
+</style>
+
 <div class="row">
     <div class="col-lg-3">
         <!-- /.panel-heading -->
@@ -34,7 +51,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div id="dvCategoryResults">
-                    <table width="100%" class="table table-striped table-bordered table-hover">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -50,10 +67,10 @@
                             {
                                 <tr class="odd gradeX">
                                     <td>@i</td>
-                                    <td>@row["Hinh_Anh"]</td>
+                                    <td><div class="zoom"> <img src="@Url.Content("~/Assets/images/" + @row["Hinh_Anh"])" alt="IMAGES" style="width: 35px; height: 35px; display: block; margin: 0 auto;" /></div></td>
                                     <td>@row["Ten_Thiet_Bi"] </td>
                                     <td>@row["Ma_Thiet_Bi"]</td>
-                                    <td>@row["Vi_Tri"]</td>
+                                    <td>@row["CS_ViTri"]</td>
                                 </tr>
                                 i++;
                             }
@@ -62,9 +79,9 @@
                     @using (Html.BeginForm("Interop", "Thiet_Bi"))
                     {
                         <button id="interOpButton" type="submit" onclick="example_ajax_request()" style=" margin-top: 10px; margin-left:0px; margin-bottom: 10px" class="btn btn-primary"><b>+ XUẤT THẺ QR </b></button>
-                        @Html.TextBoxFor(model => Model.Select_Size, new { @class = "form-control" })
-                        @Html.TextBoxFor(model => Model.Select_Phong_Ban, new { @class = "form-control" })
-                        @Html.TextBoxFor(model => Model.Select_Group, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => Model.Select_Size, new { @class = "hidden"})
+                        @Html.TextBoxFor(model => Model.Select_Phong_Ban, new { @class = "hidden" })
+                        @Html.TextBoxFor(model => Model.Select_Group, new { @class = "hidden" })
                     }
                 </div>
             </div>

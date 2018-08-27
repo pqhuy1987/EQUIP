@@ -1177,7 +1177,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_1 = current_rownum_1 + 3;
 
@@ -1193,7 +1193,7 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_1, 2] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = "13-08-2018";
+                    oSheet.Cells[current_rownum_1, 3] = "27-08-2018";
                     current_rownum_1++;
 
                     oSheet.Cells[current_rownum_1, 2] = "Phòng/Ban:";
@@ -1201,9 +1201,9 @@ namespace ShopOnline.Controllers
                     oSheet.Cells[current_rownum_1, 3] = DataRow[i][2].ToString();
                     current_rownum_1++;
 
-                    oSheet.Cells[current_rownum_1, 2] = "Group Thiết Bị:";
+                    oSheet.Cells[current_rownum_1, 2] = "Group:";
                     oSheet.Cells[current_rownum_1, 2].Font.Bold = true;
-                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][12].ToString();
+                    oSheet.Cells[current_rownum_1, 3] = DataRow[i][13].ToString();
                     current_rownum_1++;
 
                     oSheet.Cells[current_rownum_1, 2] = "Mã Thiết bị:";
@@ -1251,7 +1251,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_2 = current_rownum_2 + 3;
 
@@ -1262,22 +1262,22 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_2, 6] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][2].ToString();
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][1].ToString();
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = "13-08-2018";
+                    oSheet.Cells[current_rownum_2, 7] = "27-08-2018";
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][3].ToString();
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][2].ToString();
                     current_rownum_2++;
 
-                    oSheet.Cells[current_rownum_2, 6] = "Group Thiết Bị:";
+                    oSheet.Cells[current_rownum_2, 6] = "Group:";
                     oSheet.Cells[current_rownum_2, 6].Font.Bold = true;
-                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][12].ToString();
+                    oSheet.Cells[current_rownum_2, 7] = DataRow[i][13].ToString();
                     current_rownum_2++;
 
                     oSheet.Cells[current_rownum_2, 6] = "Mã Thiết bị:";
@@ -1325,7 +1325,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_3 = current_rownum_3 + 3;
 
@@ -1336,22 +1336,22 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_3, 10] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][2].ToString();
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][1].ToString();
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = "13-08-2018";
+                    oSheet.Cells[current_rownum_3, 11] = "27-08-2018";
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][3].ToString();
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][2].ToString();
                     current_rownum_3++;
 
-                    oSheet.Cells[current_rownum_3, 10] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_3, 10] = "Group:";
                     oSheet.Cells[current_rownum_3, 10].Font.Bold = true;
-                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][12].ToString();
+                    oSheet.Cells[current_rownum_3, 11] = DataRow[i][13].ToString();
                     current_rownum_3++;
 
                     oSheet.Cells[current_rownum_3, 10] = "Mã Thiết bị:";
@@ -1398,7 +1398,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 34;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][1].ToString(), MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 3, Top + 1, ImageSize, ImageSize);
 
                     current_rownum_4 = current_rownum_4 + 3;
 
@@ -1409,22 +1409,22 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_4, 14] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][2].ToString();
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][1].ToString();
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = "13-08-2018";
+                    oSheet.Cells[current_rownum_4, 15] = "27-08-2018";
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][3].ToString();
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][2].ToString();
                     current_rownum_4++;
 
-                    oSheet.Cells[current_rownum_4, 14] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_4, 14] = "Group:";
                     oSheet.Cells[current_rownum_4, 14].Font.Bold = true;
-                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][12].ToString();
+                    oSheet.Cells[current_rownum_4, 15] = DataRow[i][13].ToString();
                     current_rownum_4++;
 
                     oSheet.Cells[current_rownum_4, 14] = "Mã Thiết bị:";
@@ -1493,7 +1493,7 @@ namespace ShopOnline.Controllers
             killExcel();
         }
 
-        public void Excel_Export_Large_Template()
+        public void Excel_Export_Large_Template(int Phong_Ban, int Group_Code)
         {
             List<int> Section_RowNum = new List<int>();
 
@@ -1503,12 +1503,16 @@ namespace ShopOnline.Controllers
             int Card_number;
             ProjectViewModel model = new ProjectViewModel();
 
-            using (OnlineShopDbContext db = new OnlineShopDbContext())
-            {
+            //using (OnlineShopDbContext db = new OnlineShopDbContext())
+            //{
                 //--------Add Dropdown for Type-------------------//
-                model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
-                Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
-            }
+            //    model.Thiet_Bi = db.Thiet_Bis.OrderBy(m => m.ID).ToList();
+            //    Card_number = db.Thiet_Bis.OrderBy(m => m.ID).Count();
+            //}
+            model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(Phong_Ban, Group_Code);
+            Card_number = model.Thiet_Bi_Table.Rows.Count;
+
+            DataRow[] DataRow = model.Thiet_Bi_Table.Select();
 
             //Microsoft.Office.Interop.Excel.Workbook workbook;
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
@@ -1554,7 +1558,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("A" + current_rownum_right, "B" + (current_rownum_right + 4)))
                     {
@@ -1563,27 +1567,27 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_right, 1] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_right, 2] = DataRow[i][1].ToString();
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = "13-08-2018";
+                    oSheet.Cells[current_rownum_right, 2] = "27-08-2018";
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_right, 2] = DataRow[i][2].ToString();
                     current_rownum_right++;
 
-                    oSheet.Cells[current_rownum_right, 1] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_right, 1] = "Group:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_right, 2] = DataRow[i][13].ToString();
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_right, 1].Font.Bold = true;
-                    oSheet.Cells[current_rownum_right, 2] = "BAN_0.6x1.2_001";
+                    oSheet.Cells[current_rownum_right, 2] = DataRow[i][6].ToString();
                     current_rownum_right++;
 
                     oSheet.Cells[current_rownum_right, 1].RowHeight = 24;
@@ -1615,7 +1619,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("E" + current_rownum_mid, "F" + (current_rownum_mid + 4)))
                     {
@@ -1624,27 +1628,27 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_mid, 5] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_mid, 6] = DataRow[i][1].ToString();
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = "13-08-2018";
+                    oSheet.Cells[current_rownum_mid, 6] = "27-08-2018";
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_mid, 6] = DataRow[i][2].ToString();
                     current_rownum_mid++;
 
-                    oSheet.Cells[current_rownum_mid, 5] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_mid, 5] = "Group:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_mid, 6] = DataRow[i][13].ToString();
                     current_rownum_mid++;
 
                     oSheet.Cells[current_rownum_mid, 5] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_mid, 5].Font.Bold = true;
-                    oSheet.Cells[current_rownum_mid, 6] = "BAN_0.6x1.2_001";
+                    oSheet.Cells[current_rownum_mid, 6] = DataRow[i][6].ToString();
                     current_rownum_mid++;
                     oSheet.Cells[current_rownum_mid, 5].RowHeight = 24;
                     //------------------------------QR_CARD_MIDDLE------------------------------//
@@ -1675,7 +1679,7 @@ namespace ShopOnline.Controllers
                     float Left = (float)((double)oRange.Left);
                     float Top = (float)((double)oRange.Top);
                     const float ImageSize = 36;
-                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + model.Thiet_Bi[i].ID, MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
+                    workSheet.Shapes.AddPicture("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://ams.fdcc.vn/Thiet_Bi/Edit/" + DataRow[i][0], MsoTriState.msoFalse, MsoTriState.msoCTrue, Left + 4, Top + 10, ImageSize, ImageSize);
 
                     foreach (Microsoft.Office.Interop.Excel.Range cell in workSheet.get_Range("I" + current_rownum_left, "J" + (current_rownum_left + 4)))
                     {
@@ -1684,29 +1688,43 @@ namespace ShopOnline.Controllers
 
                     oSheet.Cells[current_rownum_left, 9] = "Tên Thiết bị:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Ten_Thiet_Bi;
+                    oSheet.Cells[current_rownum_left, 10] = DataRow[i][1].ToString();
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Ngày cấp:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = "13-08-2018";
+                    oSheet.Cells[current_rownum_left, 10] = "27-08-2018";
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Phòng/Ban:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Phong_Ban;
+                    oSheet.Cells[current_rownum_left, 10] = DataRow[i][2].ToString();
                     current_rownum_left++;
 
-                    oSheet.Cells[current_rownum_left, 9] = "Vị Trí:";
+                    oSheet.Cells[current_rownum_left, 9] = "Group:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = model.Thiet_Bi[i].Vi_Tri;
+                    oSheet.Cells[current_rownum_left, 10] = DataRow[i][13].ToString();
                     current_rownum_left++;
 
                     oSheet.Cells[current_rownum_left, 9] = "Mã Thiết bị:";
                     oSheet.Cells[current_rownum_left, 9].Font.Bold = true;
-                    oSheet.Cells[current_rownum_left, 10] = "BAN_0.6x1.2_001";
+                    oSheet.Cells[current_rownum_left, 10] = DataRow[i][6].ToString();
                     current_rownum_left++;
-                    oSheet.Cells[current_rownum_left, 9].RowHeight = 24;
+
+                    if (((i != 0) && (((i + 1) % 21) == 0)))
+                    {
+                        oSheet.Cells[current_rownum_right, 1].RowHeight = 13;
+                        current_rownum_right++;
+                        oSheet.Cells[current_rownum_mid, 5].RowHeight = 13;
+                        current_rownum_mid++;
+                        oSheet.Cells[current_rownum_left, 9].RowHeight = 13;
+                        current_rownum_left++;
+                    }
+                    else
+                    {
+                        oSheet.Cells[current_rownum_left, 9].RowHeight = 24;
+                    }
+
                     //------------------------------QR_CARD_LEFT------------------------------//
                 }
             }
@@ -1789,7 +1807,7 @@ namespace ShopOnline.Controllers
         {
             if (model.Select_Size == 0)
             {
-                ;
+                Excel_Export_Large_Template(model.Select_Phong_Ban, model.Select_Group);
             }
             else
             {
