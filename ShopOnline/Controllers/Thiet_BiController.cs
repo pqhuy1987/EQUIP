@@ -745,8 +745,6 @@ namespace ShopOnline.Controllers
                         obj.Phong_Ban           = collection.SelectedProject.Phong_Ban;
                         obj.Vi_Tri              = collection.SelectedProject.Vi_Tri;
 
-
-
                         if (uploadfile == null)
                         {
                             string _FileName = "NoImage.jpg";
@@ -756,7 +754,8 @@ namespace ShopOnline.Controllers
                         }
                         else
                         {
-                            string _FileName = Path.GetFileName(uploadfile.FileName);
+                            //string _FileName = Path.GetFileName(uploadfile.FileName);
+                            string _FileName = string.Concat(Path.GetFileNameWithoutExtension(uploadfile.FileName), DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss"), Path.GetExtension(uploadfile.FileName));
                             string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                             uploadfile.SaveAs(_path);
                             obj.Hinh_Anh = _FileName;
@@ -910,7 +909,8 @@ namespace ShopOnline.Controllers
                     }
                     else
                     {
-                        string _FileName = Path.GetFileName(uploadfile.FileName);
+                        //string _FileName = Path.GetFileName(uploadfile.FileName);
+                        string _FileName = string.Concat(Path.GetFileNameWithoutExtension(uploadfile.FileName), DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss"), Path.GetExtension(uploadfile.FileName));
                         string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                         uploadfile.SaveAs(_path);
                         Exsiting_Project.Hinh_Anh = _FileName;
