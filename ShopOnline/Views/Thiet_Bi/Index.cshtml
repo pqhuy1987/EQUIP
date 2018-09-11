@@ -29,12 +29,19 @@
              <button type="submit" onclick="window.open('/Thiet_Bi/Create', 'windowName', 'width=400, height=700, left=24, top=24, scrollbars, resizable')" style=" margin-left:0px; margin-bottom:10px" class="btn btn-primary"><b>+ TẠO MỚI THÔNG TIN</b></button>
         </div>
     </div>
-    <div class="col-lg-1">
+    <div class="col-lg-2">
         <!-- /.panel-heading -->
-        <div class="panel-body-2">
-            <div id="example-placeholder">
+            <div class="form-group">
+                @using (Ajax.BeginForm("Interop_Index_Main", "Thiet_Bi", new AjaxOptions
+               {
+                   HttpMethod = "Post",
+                   InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
+               }))
+                {
+                    @Html.DropDownListFor(model => Model.Select_Phong_Ban, Model.Phong_Ban_All, new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
+                    @Html.DropDownListFor(model => Model.Select_Group, Model.Code_Group_All, new { @class = "form-control", @onchange = "$(this.form).submit();", @style = " margin-top:10px" })
+                }
             </div>
-        </div>
     </div>
 </div>
 

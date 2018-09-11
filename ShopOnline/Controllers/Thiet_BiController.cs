@@ -28,10 +28,15 @@ namespace ShopOnline.Controllers
             {
                 //--------Add Dropdown for Type-------------------//
                 ProjectViewModel model      = new ProjectViewModel();
-                model.Thiet_Bi_Table        = Load_ThietBi();
+
+                model.Select_Phong_Ban      = db.CS_tbPhong_Ban.FirstOrDefault().ID;
+                model.Select_Group          = db.Code_Group.FirstOrDefault().ID;
+
+                model.Thiet_Bi_Table        = Load_LLTC_Excel_Report_By_Condition(model.Select_Phong_Ban, model.Select_Group);
+
                 model.CS_tbPhong_Ban        = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
-                model.Phong_Ban_All = new List<SelectListItem>();
-                var items = new List<SelectListItem>();
+                model.Phong_Ban_All         = new List<SelectListItem>();
+                var items                   = new List<SelectListItem>();
 
                 foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
@@ -43,6 +48,22 @@ namespace ShopOnline.Controllers
                 }
 
                 model.Phong_Ban_All = items;
+
+                //--------Add Dropdown for Code_Group-------------------//
+                model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                model.Code_Group_All = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
+                foreach (var Code_Group_Main in model.Code_Group)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = Code_Group_Main.ID.ToString(),
+                        Text = Code_Group_Main.Code,
+                    });
+                }
+                model.Code_Group_All = items_2;
+                //--------Add Dropdown for Code_Group-------------------//
+
                 return View(model);
                 //--------Add Dropdown for Type-------------------//               
             }
@@ -53,17 +74,16 @@ namespace ShopOnline.Controllers
             using (OnlineShopDbContext db = new OnlineShopDbContext())
             {
                 //--------Add Dropdown for Type-------------------//
-                ProjectViewModel model = new ProjectViewModel();
+                ProjectViewModel model      = new ProjectViewModel();
 
-                model.Select_Phong_Ban = db.CS_tbPhong_Ban.FirstOrDefault().ID;
-                model.Select_Group = db.Code_Group.FirstOrDefault().ID;
+                model.Select_Phong_Ban      = db.CS_tbPhong_Ban.FirstOrDefault().ID;
+                model.Select_Group          = db.Code_Group.FirstOrDefault().ID;
 
-                model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(model.Select_Phong_Ban, model.Select_Group);
+                model.Thiet_Bi_Table        = Load_LLTC_Excel_Report_By_Condition(model.Select_Phong_Ban, model.Select_Group);
                 
-
-                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
-                model.Phong_Ban_All = new List<SelectListItem>();
-                var items = new List<SelectListItem>();
+                model.CS_tbPhong_Ban        = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All         = new List<SelectListItem>();
+                var items                   = new List<SelectListItem>();
 
                 foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                 {
@@ -1799,6 +1819,52 @@ namespace ShopOnline.Controllers
             }
 
             return View("Index_2", model);
+
+        }
+
+        [HttpPost]
+        public ActionResult Interop_Index_Main(ProjectViewModel GetIndex)
+        {
+
+            ProjectViewModel model = new ProjectViewModel();
+
+            model = GetIndex;
+
+            using (OnlineShopDbContext db = new OnlineShopDbContext())
+            {
+                model.Thiet_Bi_Table = Load_LLTC_Excel_Report_By_Condition(GetIndex.Select_Phong_Ban, GetIndex.Select_Group);
+                //--------Add Dropdown for Code_Group-------------------//
+                model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                model.Code_Group_All = new List<SelectListItem>();
+                var items = new List<SelectListItem>();
+                foreach (var Code_Group_Main in model.Code_Group)
+                {
+                    items.Add(new SelectListItem()
+                    {
+                        Value = Code_Group_Main.ID.ToString(),
+                        Text = Code_Group_Main.Code,
+                    });
+                }
+                model.Code_Group_All = items;
+                //--------Add Dropdown for Code_Group-------------------//
+
+                //--------Add Dropdown for Phong_Ban-------------------//
+                model.CS_tbPhong_Ban = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+                model.Phong_Ban_All = new List<SelectListItem>();
+                var items_2 = new List<SelectListItem>();
+                foreach (var Phong_ban_Main in model.CS_tbPhong_Ban)
+                {
+                    items_2.Add(new SelectListItem()
+                    {
+                        Value = Phong_ban_Main.ID.ToString(),
+                        Text = Phong_ban_Main.Type
+                    });
+                }
+                model.Phong_Ban_All = items_2;
+                //--------Add Dropdown for Phong_Ban-------------------//
+            }
+
+            return View("Index", model);
 
         }
 
