@@ -28,8 +28,8 @@ namespace Models
 
         public string DisplayMode                                           { get; set; }
         public int Select_Size                                              { get; set; }
-        public int Select_Phong_Ban                                              { get; set; }
-        public int Select_Group                                              { get; set; }
+        public int Select_Phong_Ban                                         { get; set; }
+        public int Select_Group                                             { get; set; }
 
         public List<CS_tbPhong_Ban>             CS_tbPhong_Ban              { get; set; }
         public List<Code_Group>                 Code_Group                  { get; set; }

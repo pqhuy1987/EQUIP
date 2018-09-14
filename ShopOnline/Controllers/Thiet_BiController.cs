@@ -737,13 +737,28 @@ namespace ShopOnline.Controllers
                 {
                     items_2.Add(new SelectListItem()
                     {
-                        Value = CS_ViTri.CS_ViTri,
+                        Value = CS_ViTri.ID.ToString(),
                         Text = CS_ViTri.CS_ViTri,
                     });
                 }
 
                 model.Phong_Ban_All = items;
                 model.Vi_Tri_All = items_2;
+
+                //--------Add Dropdown for Code_Group-------------------//
+                model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                model.Code_Group_All = new List<SelectListItem>();
+                var items_3 = new List<SelectListItem>();
+                foreach (var Code_Group_Main in model.Code_Group)
+                {
+                    items_3.Add(new SelectListItem()
+                    {
+                        Value = Code_Group_Main.ID.ToString(),
+                        Text = Code_Group_Main.Code,
+                    });
+                }
+                model.Code_Group_All = items_3;
+                //--------Add Dropdown for Code_Group-------------------//
 
                 return View(model);
                 //--------Add Dropdown for Type-------------------//
@@ -768,13 +783,10 @@ namespace ShopOnline.Controllers
                         if (uploadfile == null)
                         {
                             string _FileName = "NoImage.jpg";
-                            //string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
-                            //uploadfile.SaveAs(_path);
                             obj.Hinh_Anh = _FileName;
                         }
                         else
                         {
-                            //string _FileName = Path.GetFileName(uploadfile.FileName);
                             string _FileName = string.Concat(Path.GetFileNameWithoutExtension(uploadfile.FileName), DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss"), Path.GetExtension(uploadfile.FileName));
                             string _path = Path.Combine(Server.MapPath("~/Assets/images"), _FileName);
                             uploadfile.SaveAs(_path);
