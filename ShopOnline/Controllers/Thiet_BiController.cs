@@ -35,6 +35,7 @@ namespace ShopOnline.Controllers
                 model.Thiet_Bi_Table        = Load_LLTC_Excel_Report_By_Condition(model.Select_Phong_Ban, model.Select_Group);
 
                 model.CS_tbPhong_Ban        = db.CS_tbPhong_Ban.OrderBy(m => m.ID).ToList();
+
                 model.Phong_Ban_All         = new List<SelectListItem>();
                 var items                   = new List<SelectListItem>();
 
@@ -63,6 +64,21 @@ namespace ShopOnline.Controllers
                 }
                 model.Code_Group_All = items_2;
                 //--------Add Dropdown for Code_Group-------------------//
+
+                //--------Add Dropdown for Vi_Tri-------------------//
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
+                model.Vi_Tri_All = new List<SelectListItem>();
+                var items_3 = new List<SelectListItem>();
+                foreach (var CS_ViTri in model.CS_tbViTri)
+                {
+                    items_3.Add(new SelectListItem()
+                    {
+                        Value = CS_ViTri.ID.ToString(),
+                        Text = CS_ViTri.CS_ViTri,
+                    });
+                }
+                model.Vi_Tri_All = items_3;
+                //--------Add Dropdown for Vi_Tri-------------------//
 
                 return View(model);
                 //--------Add Dropdown for Type-------------------//               

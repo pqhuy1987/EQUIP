@@ -367,6 +367,7 @@
     <Content Include="Assets\admin\bootstrap-select\js\i18n\defaults-zh_CN.js" />
     <Content Include="Assets\admin\bootstrap-select\js\i18n\defaults-zh_TW.js" />
     <Content Include="Assets\admin\bootstrap-select\test.html" />
+    <Content Include="Assets\admin\js\controller\userController.js" />
     <Content Include="Assets\files\ajax-loader-2.gif" />
     <Content Include="Assets\files\font-awesome.min.css" />
     <Content Include="Assets\files\img-login.jpg" />
