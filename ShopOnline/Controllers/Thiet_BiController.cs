@@ -1967,5 +1967,14 @@ namespace ShopOnline.Controllers
             return result;
         }
 
+        [HttpPost]
+        public ActionResult getCicitesAction(int provinceId)
+        {
+             //var cities = db.cities.Where(a => a.provinceId == provinceId).Select(a => "<option value='" + a.cityId + "'>" + a.cityName + "'</option>'";
+            var cities = 0;
+
+             return Content(String.Join("", cities));
+        }
+
     }
 }

@@ -4,10 +4,19 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript">
-    function example_ajax_request() {
-        $('#example-placeholder').html('<p><img src="Assets/files/ajax-loader-2.gif" width="220" height="19" /></p>');
-    }
+<script>
+    $(document).ready(function () {
+        $("#SelectGroupCode").change(function () {
+            $.ajax({
+                url: '@Url.Action("getCicitesAction", "Thiet_Bi")',
+                type: "POST",
+                data: { provinceId: 1 },
+                success: function (data) {
+
+                }
+            })
+        });
+    });
 </script>
 <style>
     #dataTables-example td {
@@ -145,11 +154,24 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label">TÊN THIẾT BỊ / DỤNG CỤ:</label>
+                        <label class="col-md-4 control-label">VỊ TRÍ:</label>
                         <div class="col-md-6">
                             @Html.DropDownListFor(model => Model.SelectedProject.Vi_Tri, Model.Vi_Tri_All, new { @class = "form-control" })
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">GROUP CHÍNH:</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Nhom, Model.Code_Group_All, new { @class = "form-control", @id = "SelectGroupCode" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">GROUP CHI TIẾT:</label>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Nhom, Model.Code_Group_All, new { @class = "form-control", @id = "SelectCodeChiTiet" })
+                        </div>
+                    </div>
+                    <button type="button" id="test" class="test_2">TEST</button>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" id="btn-taomoi" class="btn btn-primary" value="TẠO" />
@@ -159,5 +181,4 @@
         </div>      
     }
 </div>
-
-
+ 
