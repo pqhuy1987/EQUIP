@@ -127,6 +127,21 @@ namespace ShopOnline.Controllers
                 model.Code_Group_All = items_2;
                 //--------Add Dropdown for Code_Group-------------------//
 
+                //--------Add Dropdown for Vi_Tri-------------------//
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
+                model.Vi_Tri_All = new List<SelectListItem>();
+                var items_3 = new List<SelectListItem>();
+                foreach (var CS_ViTri in model.CS_tbViTri)
+                {
+                    items_3.Add(new SelectListItem()
+                    {
+                        Value = CS_ViTri.ID.ToString(),
+                        Text = CS_ViTri.CS_ViTri,
+                    });
+                }
+                model.Vi_Tri_All = items_3;
+                //--------Add Dropdown for Vi_Tri-------------------//
+
                 return View(model);
                 //--------Add Dropdown for Type-------------------//               
             }
@@ -765,14 +780,6 @@ namespace ShopOnline.Controllers
                 model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
                 model.Code_Group_All = new List<SelectListItem>();
                 var items_3 = new List<SelectListItem>();
-                foreach (var Code_Group_Main in model.Code_Group)
-                {
-                    items_3.Add(new SelectListItem()
-                    {
-                        Value = Code_Group_Main.ID.ToString(),
-                        Text = Code_Group_Main.Code,
-                    });
-                }
                 model.Code_Group_All = items_3;
                 //--------Add Dropdown for Code_Group-------------------//
 
@@ -810,6 +817,10 @@ namespace ShopOnline.Controllers
                         }
 
                         obj.Ma_Thiet_Bi = collection.SelectedProject.Ma_Thiet_Bi;
+                        obj.Ma_Nhom = collection.SelectedProject.Ma_Nhom;
+                        obj.Ma_Chi_Tiet = collection.SelectedProject.Ma_Chi_Tiet;
+                        obj.Ghi_Chu_1 = collection.SelectedProject.Ghi_Chu_1;
+                        obj.Ghi_Chu_2 = collection.SelectedProject.Ghi_Chu_2;
                         db.Thiet_Bis.Add(obj);
                         db.SaveChanges();
 
@@ -822,12 +833,13 @@ namespace ShopOnline.Controllers
                         model.Vi_Tri_All = new List<SelectListItem>();
                         var items = new List<SelectListItem>();
                         var items_2 = new List<SelectListItem>();
+                        var items_3 = new List<SelectListItem>();
 
                         foreach (var CS_tbPhong_Ban in model.CS_tbPhong_Ban)
                         {
                             items.Add(new SelectListItem()
                             {
-                                Value = CS_tbPhong_Ban.Type,
+                                Value = CS_tbPhong_Ban.ID.ToString(),
                                 Text = CS_tbPhong_Ban.Type,
                             });
                         }
@@ -843,7 +855,20 @@ namespace ShopOnline.Controllers
                         }
                         model.Vi_Tri_All = items_2;
 
-                        return RedirectToAction("Create", model);
+                        model.Code_Group = db.Code_Group.OrderBy(m => m.ID).ToList();
+                        model.Code_Group_All = new List<SelectListItem>();
+                        foreach (var Code_Group_Main in model.Code_Group)
+                        {
+                            items_3.Add(new SelectListItem()
+                            {
+                                Value = Code_Group_Main.ID.ToString(),
+                                Text = Code_Group_Main.Code,
+                            });
+                        }
+
+                        model.Code_Group_All = items_3;
+
+                        return RedirectToAction("Index", model);
                         //--------Add Dropdown for Type-------------------//
                     }
             }
@@ -1890,6 +1915,21 @@ namespace ShopOnline.Controllers
                 }
                 model.Phong_Ban_All = items_2;
                 //--------Add Dropdown for Phong_Ban-------------------//
+
+                //--------Add Dropdown for Vi_Tri-------------------//
+                model.CS_tbViTri = db.CS_tbViTri.OrderBy(m => m.ID).ToList();
+                model.Vi_Tri_All = new List<SelectListItem>();
+                var items_3 = new List<SelectListItem>();
+                foreach (var CS_ViTri in model.CS_tbViTri)
+                {
+                    items_3.Add(new SelectListItem()
+                    {
+                        Value = CS_ViTri.ID.ToString(),
+                        Text = CS_ViTri.CS_ViTri,
+                    });
+                }
+                model.Vi_Tri_All = items_3;
+                //--------Add Dropdown for Vi_Tri-------------------//
             }
 
             return View("Index", model);
@@ -1968,12 +2008,30 @@ namespace ShopOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult getCicitesAction(int provinceId)
+        public JsonResult getCicitesAction(int provinceId)
         {
-             //var cities = db.cities.Where(a => a.provinceId == provinceId).Select(a => "<option value='" + a.cityId + "'>" + a.cityName + "'</option>'";
-            var cities = 0;
+            OnlineShopDbContext db = new OnlineShopDbContext();
+            List<Code_Equip> Code_Equip_List = db.Code_Equip.Where(id => id.ID_Code == provinceId).ToList();
+            Code_Equip First_Code = db.Code_Equip.Where(id => id.ID_Code == provinceId).FirstOrDefault();
+            List<Thiet_Bi> Thiet_Bi_List = db.Thiet_Bis.Where(id => id.Ma_Chi_Tiet == First_Code.ID).OrderByDescending(id => id.ID).ToList();
 
-             return Content(String.Join("", cities));
+            return Json(new
+            {
+                Code_Equip_List = Code_Equip_List,
+                Thiet_Bi_List = Thiet_Bi_List
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult getCicitesAction_2(int provinceId_2)
+        {
+            OnlineShopDbContext db = new OnlineShopDbContext();
+            List<Thiet_Bi> Thiet_Bi_List = db.Thiet_Bis.Where(id => id.Ma_Chi_Tiet == provinceId_2).OrderByDescending(id => id.ID).ToList();
+
+            return Json(new
+            {
+                Thiet_Bi_List = Thiet_Bi_List
+            }, JsonRequestBehavior.AllowGet);
         }
 
     }

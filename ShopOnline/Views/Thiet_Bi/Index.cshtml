@@ -9,10 +9,34 @@
         $("#SelectGroupCode").change(function () {
             $.ajax({
                 url: '@Url.Action("getCicitesAction", "Thiet_Bi")',
+                data: { provinceId: $("#SelectGroupCode").val() },
+                dataType: "json",
                 type: "POST",
-                data: { provinceId: 1 },
                 success: function (data) {
+                    $("#SelectCodeChiTiet").empty();
+                    $.each(data.Code_Equip_List, function (index, row) {
+                        $("#SelectCodeChiTiet").append("<option value='" + row.ID + "'>" + row.Equip +"</option>")
+                    });
+                    $("#companyList").empty();
+                    $.each(data.Thiet_Bi_List, function (index, row) {
+                        $("#companyList").append("<option value='" + row.Ma_Thiet_Bi + "'></option>");
+                    });
 
+                }
+            })
+        });
+
+        $("#SelectCodeChiTiet").change(function () {
+            $.ajax({
+                url: '@Url.Action("getCicitesAction_2", "Thiet_Bi")',
+                data: {provinceId_2: $("#SelectCodeChiTiet").val() },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    $("#companyList").empty();
+                    $.each(data.Thiet_Bi_List, function (index, row) {
+                        $("#companyList").append("<option value='" + row.Ma_Thiet_Bi + "'></option>");
+                    });
                 }
             })
         });
@@ -130,24 +154,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label">TÊN THIẾT BỊ / DỤNG CỤ:</label>
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">MÃ THIẾT BỊ:</label>
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(model => Model.SelectedProject.Ma_Thiet_Bi, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">ĐƠN GIÁ:</label>
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(model => Model.SelectedProject.Don_Gia, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-md-4 control-label">PHÒNG BAN:</label>
                         <div class="col-md-6">
                             @Html.DropDownListFor(model => Model.SelectedProject.Phong_Ban, Model.Phong_Ban_All, new { @class = "form-control" })
@@ -162,16 +168,47 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">GROUP CHÍNH:</label>
                         <div class="col-md-6">
-                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Nhom, Model.Code_Group_All, new { @class = "form-control", @id = "SelectGroupCode" })
+                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Nhom ,Model.Code_Group_All,"--- CHỌN GROUP CHÍNH ---", new { @class = "form-control", @id = "SelectGroupCode" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label">GROUP CHI TIẾT:</label>
                         <div class="col-md-6">
-                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Nhom, Model.Code_Group_All, new { @class = "form-control", @id = "SelectCodeChiTiet" })
+                            @Html.DropDownListFor(model => Model.SelectedProject.Ma_Chi_Tiet, new SelectList(" "), new { @class = "form-control", @id = "SelectCodeChiTiet" })
                         </div>
                     </div>
-                    <button type="button" id="test" class="test_2">TEST</button>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">MÃ THIẾT BỊ:</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => Model.SelectedProject.Ma_Thiet_Bi, new { @class = "form-control", @list = "companyList" })
+                            <datalist id="companyList">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">TÊN THIẾT BỊ / DỤNG CỤ:</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => Model.SelectedProject.Ten_Thiet_Bi, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">ĐƠN GIÁ:</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => Model.SelectedProject.Don_Gia, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">GHI CHÚ 1:</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_1, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">GHI CHÚ 2:</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => Model.SelectedProject.Ghi_Chu_2, new { @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" id="btn-taomoi" class="btn btn-primary" value="TẠO" />
